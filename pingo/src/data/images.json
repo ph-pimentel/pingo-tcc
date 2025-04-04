@@ -1,0 +1,23 @@
+[
+    {
+      "id": 1,
+      "src": "/img/Carrossel/image1.jpg",
+      "alt": "Imagem 1"
+    },
+    {
+      "id": 2,
+      "src": "/img/Carrossel/image2.jpeg",
+      "alt": "Imagem 2"
+    },
+    {
+      "id": 3,
+      "src": "/img/Carrossel/image3.jpg",
+      "alt": "Imagem 3"
+    },
+    {
+      "id": 4,
+      "src": "/img/Carrossel/image4.jpg",
+      "alt": "Imagem 4"
+    }
+  ]
+  
