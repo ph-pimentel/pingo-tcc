@@ -1,0 +1,25 @@
+.home{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(180px, auto); 
+    /*Define o espaco ocupado minimo dos elementos e o max */
+}
+
+.box{
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid black;
+    
+}
+
+.box1{
+    grid-row: span 3; /*Quanto caixas de altura ele vai ter */
+}
+.box5{
+    grid-row: span 2;
+    grid-column: span 2; /* Caixas de largura*/
+}
+.box6{
+    grid-row: span 2; 
+}

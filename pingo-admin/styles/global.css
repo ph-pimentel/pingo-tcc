@@ -1,0 +1,51 @@
+@import url('./variables.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.main {
+    font-family: var(--font-primary);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    overflow-x: hidden; 
+   
+}
+
+.menuContainer {
+    padding: 10px;
+    border-right: 2px solid var(--tertiary-color);
+   
+}
+
+.contentContainer {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto; /* Caso o conteúdo ultrapasse a altura da tela */
+    
+    
+}
+
+/* Mui Users Config */
+.MuiDataGrid-toolbarContainer{
+    flex-direction: row-reverse;
+}
+

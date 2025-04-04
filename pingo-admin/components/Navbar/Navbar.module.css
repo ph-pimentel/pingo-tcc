@@ -1,0 +1,84 @@
+@import url('../../styles/variables.css');
+.navbar{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    box-shadow: 0px -2px 7px black;
+    user-select: none;
+
+}
+.logo{
+display: flex;
+align-items: center;
+cursor: pointer;
+}
+.icons{
+ display: flex;
+align-items: center;
+gap: 30px;
+}
+.notification{
+    position: relative;
+}
+.notification span{
+    background-color: red;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    right: -13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.user {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+    .user img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    }
+
+.icon{
+    cursor: pointer ;
+}
+
+.dropdown {
+    position: absolute;
+    right: 70px;
+    top: 70px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    width: 100px;
+    padding: 5px;
+    display: flex;
+}
+.logoutBtn{
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 10px;
+    cursor: pointer;
+    color: red;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.logoutBtn span{
+    font-size: 15px;
+}
+
+.logoutBtn img{
+    width: 20px;
+    height: 20px; 
+}

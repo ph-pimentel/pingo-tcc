@@ -1,0 +1,10 @@
+@import url(../../styles/variables.css);
+
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    background-color: var(--tertiary-color);
+    color: white;
+}
