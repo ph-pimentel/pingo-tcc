@@ -1,3 +1,427 @@
-html{
-scroll-behavior:smooth;
+@import url('../../styles/fonts/Poppins.css');
+
+/*___ROOTS___*/
+:root{
+    --primary-font: 'Poppins';
+    --primary-color: #4E94FF;
+    --secondary-color: #333333;
+    --terceary-color: #297EFF;
+
+    /* Tamanhos de Container */
+    --sobre-container-width: 70%;
+    --banner-container-width: 60%;
+    --instructions-container-width: 80%;
+
+    /* Tamanhos de Imagem */
+    --sobre-image-width: 600px;
+    --banner-image-width: 300px;
+
+    /* Cards */
+    --card-min-width: 240px;
+    --card-height: 240px;
+    --card-max-width: 250px;
+
+    /* Botão */
+    --btn-font-size: 30px;
+    --btn-padding: 20px 100px;
 }
+
+/*___HTML___*/
+html{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*___MAIN CONTAINER___*/
+.main_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 1920px;
+    height: auto;
+    background-color: transparent;
+    margin-top: 100px;
+}
+
+/*___SOBRE___*/
+.sobre_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    max-width: var(--sobre-container-width);
+    flex: 1;
+    margin-bottom: 40px;
+}
+
+.sobre_item{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    max-width: 450px;
+    height: auto;
+    text-align: center;
+    flex:1;
+}
+
+.sobre_item2 img{
+    display: flex;
+    max-width: var(--sobre-image-width);
+    height: auto;
+}
+
+.sobre_text_title,.sobre_text_subtitle,.sobre_text{
+    font-family: var(--primary-font);
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+}
+
+.sobre_text_title{
+    color: var(--primary-color);
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.sobre_text_subtitle{
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.sobre_text{
+    text-align: left;
+    color: rgb(75, 75, 75);
+    font-size: 16px;
+    font-weight: 500;
+    height: auto;
+}
+
+/*___PASSO A PASSO___*/
+.instructions_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-width: 100%;
+    max-width: 100%;
+    padding: 50px;
+    gap: 20px;
+    background-color: var(--secondary-color);
+}
+
+.instructions_title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-width: 50%;
+}
+
+.instructions_title h1,.instructions_title h2{
+    font-family: var(--primary-font);
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.instructions_title h1{
+    color: white;
+}
+
+.instructions_title h2{
+    color: var(--primary-color);
+}
+
+/*___CARDS___*/
+.instructions_card_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: var(--instructions-container-width);
+    margin-top: 30px;
+    gap: 25px;
+}
+
+.instructions_card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 25px;
+    gap: 10px;
+    min-width: var(--card-min-width);
+    height: var(--card-height);
+    max-width: var(--card-max-width);
+    border-radius: 20px;
+    background-color: var(--terceary-color);
+}
+
+.instructions_card h1,.instructions_card h2{
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+}
+
+.instructions_card h2{
+    font-size: 16px;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.instructions_card img{
+    width: 70px;
+    height: auto;
+}
+
+.instructions_card_image img{
+    width: 115px;
+    height: auto;
+}
+
+/*___BANNER___*/
+.banner_main_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    background: linear-gradient(to right, var(--primary-color), #003D99);
+}
+
+.banner_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: var(--banner-container-width);
+    height: auto;
+}
+
+.banner_content_container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    min-height: 300px;
+    padding: 30px;
+}
+
+.banner_content_container img{
+    width: var(--banner-image-width);
+    height: auto;
+}
+
+.banner_content_container h1,.banner_content_container h2{
+    font-family: var(--primary-font);
+    color: white;
+}
+
+.banner_content_container h1{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.banner_content_container h2{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.banner_btn{
+    font-family: var(--primary-font);
+    font-weight: 700;
+    font-size: var(--btn-font-size);
+    padding: var(--btn-padding);
+    border-radius: 500px;
+    text-decoration: none;
+    background-color: #252525;
+    color: white;
+    white-space: nowrap;
+
+    transition: all 0.2s ease-out;
+}
+
+
+.banner_btn:hover{
+    background-color: #1b1b1b;
+}
+
+
+/*__FAQ__*/
+
+.faq_main_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40%;
+    height: auto;
+
+    margin-top: 50px;
+
+    font-family: var(--primary-font);
+}
+
+.faq_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 10px;
+    
+    width: 100%;
+    height: auto;
+}
+
+
+/*Titulo e Subtitulo*/
+
+.faq_title,.faq_subtitle{
+    font-family: var(--primary-font);
+    color: black;
+}
+
+.faq_title{
+    font-size: 40px;
+}
+
+.faq_subtitle{
+    font-size: 30px;
+}
+
+
+/*--PERGUNTAS--*/
+.faq_text_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    text-align: left;
+
+    width: 100%;
+}
+
+.faq_text_title{
+    display: flex;
+    align-items: center;
+
+
+    font-weight: 400;
+    color: #4d4d4d;
+    font-size: 13px;
+}
+
+.faq_text_title img{
+    width: 40px;
+    height: auto;
+    
+    transform: rotate(0deg);
+    margin-left: 20px;
+    
+    background-color: #dddddd;
+    padding: 10px;
+    border-radius: 300px;
+
+    cursor: pointer;
+
+}
+
+.faq_text_text p{
+    font-weight: 400;
+    color: black;
+    font-size: 25px;
+}
+
+
+
+
+
+
+
+
+/*___RESPONSIVIDADE___*/
+@media screen and (max-width: 1550px) {
+    :root {
+        --sobre-container-width: 80%;
+        --banner-container-width: 70%;
+        --instructions-container-width: 90%;
+        --sobre-image-width: 450px;
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    :root {
+        --sobre-image-width: 400px;
+        --banner-image-width: 250px;
+
+        --card-min-width: 200px;
+        --card-min-height: auto;
+
+        --btn-padding: 20px 80px;
+        --btn-font-size: 25px;
+    }
+
+    .banner_content_container img {
+        width: 250px;
+        justify-content: center;
+    }
+
+    .banner_content_container{
+        display: flex;
+        align-items: center;
+        min-height: 275px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    :root {
+        --sobre-image-width: 400px;
+      
+        --banner-container-width: 90%;
+        --card-min-width: 250px;
+        --card-min-height: auto;
+      
+        --btn-padding: 10px 70px;
+        --btn-font-size: 30px;
+    }
+
+    .sobre_container {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .instructions_card_container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .banner_content_container{
+        display: flex;
+        align-items: center;
+        min-height: 310px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --sobre-container-width: 90%;
+        --instructions-container-width: 100%;
+        
+        --card-min-width: 250px;
+        --card-min-height: auto;
+        
+        --banner-image-width: 300px;
+        --btn-padding: 17px 60px;
+        --btn-font-size: 22px;
+    }
+}
+

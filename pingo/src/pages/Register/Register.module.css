@@ -1,3 +1,5 @@
+@import url('../../styles/fonts/Poppins.css');
+
 :root {
     /* Cores */
     --primary-color: #72a9fb;
@@ -9,7 +11,7 @@
     --forgot-password-color: #72a9fb;
 
     /* Fontes */
-    --font-primary: 'Poppins', sans-serif;
+    --font-primary: 'Poppins';
     --font-size-small: 16px;
     --font-size-medium: 18px;
     --font-size-large: 30px;

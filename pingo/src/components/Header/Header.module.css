@@ -1,6 +1,8 @@
+@import url('../../styles/fonts/Poppins.css');
 :root{
     /*-- Cores --*/
     --primary-color: #297EFF;
+    --primary-font: 'Poppins'
     --background-color: #651a1a;
     --hover-icons: rgb(220, 220, 220);
 
@@ -220,6 +222,7 @@ html,body{
 
 /*--Profile--*/
 .right_profile_container{
+    font-family: var(--primary-font);
     position: relative;
     display: flex;
     align-items: center;

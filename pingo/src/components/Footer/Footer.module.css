@@ -1,4 +1,4 @@
-@import url('../../syles/fonts/Poppins.css');
+@import url('../../styles/fonts/Poppins.css');
 
 :root{
 
@@ -29,6 +29,8 @@
 
     background-color: #313131;
     color: white;
+
+    font-family: var(--text-font-family);
 }
 
 .items{

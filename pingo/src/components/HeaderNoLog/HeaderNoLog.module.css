@@ -1,9 +1,9 @@
-@import url('../../syles/fonts/Poppins.css');
-
+@import url('../../styles/fonts/Poppins.css');
 
 :root{
     /*-- Cores --*/
     --primary-color: #297EFF;
+    --primary-font: 'Poppins'
     
 }
 
@@ -41,6 +41,8 @@ html,body{
 
     white-space: nowrap;
     z-index: 9999;
+
+    font-family: var(--primary-font);
 }
 
 .container{
@@ -138,6 +140,7 @@ html,body{
 
 /*--Buttons--*/
 .btn_login,.btn_register{
+
     font-size: 1vw;
     font-weight: 600;
 
