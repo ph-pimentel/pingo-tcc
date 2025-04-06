@@ -4,10 +4,17 @@ import styles from "./Informacoes.module.css";
 import { useState } from "react";
 
 function Informacoes() {
-    const [isVisible, setIsVisible] = useState(false);
+    const [faqAbertos, setFaqAbertos] = useState({
+        1: false,
+        2: false,
+        3: false
+    });
 
-    const toggleParagraph = () => {
-        setIsVisible(!isVisible);
+    const toggleFaq = (numero) => {
+        setFaqAbertos((prev) => ({
+            ...prev,
+            [numero]: !prev[numero],
+        }));
     };
 
     return (
@@ -33,9 +40,10 @@ function Informacoes() {
 
                         <div className={styles.sobre_item2}>
                             <img src="../../img/Sobre/sobre/Esportes.png" alt="Esportes" />
+                            <div id="passoapasso"/>
                         </div>
-                    </div>
 
+                    </div>
                     {/*___PASSO A PASSO___*/}
                     <div className={styles.instructions_container}>
                         <div className={styles.instructions_title}>
@@ -88,57 +96,67 @@ function Informacoes() {
                         </div>
                     </div>
 
+
+
                     {/*___FAQ___*/}
-                    <div className={styles.faq_main_container}>
+                    <div className={styles.faq_main_container} id="perguntas">
                         <div className={styles.faq_container}>
+                            <div>
                             <div className={styles.faq_title}>FAQ</div>
                             <div className={styles.faq_subtitle}>Perguntas Frequentes</div>
+                            </div>
+
+
 
                             <div className={styles.faq_text_container}>
                                 <div className={styles.faq_text_title}>
                                     <h1>"Como Funciona o Pagamento das Quadras?"</h1>
-                                    <img
-                                        src="../../img/Sobre/faq/seta.png"
-                                        onClick={toggleParagraph}
-                                        alt="Seta para expandir"
-                                    />
+                                    <button onClick={() => toggleFaq(1)}>
+                                        <img
+                                            src="../../img/Sobre/faq/seta.png"
+                                            className={`${styles.seta} ${faqAbertos[1] ? styles.setaAberta : styles.setaFechada}`}
+                                            alt="Seta para expandir"
+                                        />
+                                    </button>
+                                </div>
+                                {faqAbertos[1] && (
+                                    <div className={`${styles.faq_text_wrapper} ${faqAbertos[1] ? styles.open : ""}`}>
+                                       
+                                        <p className={`${styles.faq_text_text}`}>
+                                        A plataforma intermedia os pagamentos entre o usuário e o 
+                                        proprietário da quadra, garantindo segurança e organização no 
+                                        processo. Após a confirmação do agendamento, o valor é repassado
+                                         ao responsável pela quadra.
+                                        </p>
+                                    </div>
+                                )}
+                                 <div className={`${styles.linha}`}/>
                                 </div>
 
-                                {isVisible && (
-                                    <p className={styles.faq_text_text}>
-                                        O pagamento das quadras privadas deve ser feito
-                                        através do nosso serviço, que intermedia o pagamento
-                                        ao proprietário, já descontando as respectivas tarifas.
-                                        Ao chegar, confirme seu agendamento. Nossa função, a partir
-                                        disso, é divulgar a locação dos horários das quadras.
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className={styles.faq_text_container}>
+                                <div className={styles.faq_text_container}>
                                 <div className={styles.faq_text_title}>
-                                    <h1>"Como Funciona o Pagamento das Quadras?"</h1>
-                                    <img
-                                        src="../../img/Sobre/faq/seta.png"
-                                        onClick={toggleParagraph}
-                                        alt="Seta para expandir"
-                                    />
+                                    <h1>"Eu Agendo um Horário na Quadra Pública?"</h1>
+                                    <button onClick={() => toggleFaq(2)}>
+                                        <img
+                                            src="../../img/Sobre/faq/seta.png"
+                                            className={`${styles.seta} ${faqAbertos[2] ? styles.setaAberta : styles.setaFechada}`}
+                                            alt="Seta para expandir"
+                                        />
+                                    </button>
                                 </div>
-
-
-{}
-                                
-                                {isVisible && (
-                                    <p className={styles.faq_text_text}>
-                                        O pagamento das quadras privadas deve ser feito
-                                        através do nosso serviço, que intermedia o pagamento
-                                        ao proprietário, já descontando as respectivas tarifas.
-                                        Ao chegar, confirme seu agendamento. Nossa função, a partir
-                                        disso, é divulgar a locação dos horários das quadras.
-                                    </p>
+                                {faqAbertos[2] && (
+                                    <div className={`${styles.faq_text_wrapper} ${faqAbertos[2] ? styles.open : ""}`}>
+                                       
+                                        <p className={`${styles.faq_text_text}`}>
+                                        Não. Apenas divulgamos informações sobre essas quadras para que os 
+                                        moradores da região possam conhecê-las, incentivando a prática de
+                                         esportes e promovendo o bem-estar da comunidade. Não realizamos 
+                                         agendamentos, pois elas são de uso público.
+                                        </p>
+                                    </div>
                                 )}
-                            </div>
-
+                                 <div className={`${styles.linha}`}/>
+                                </div>
 
                         </div>
                     </div>
