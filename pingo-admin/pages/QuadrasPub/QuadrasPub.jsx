@@ -45,8 +45,12 @@ const columns = [
   
 
 const QuadrasPub = () => {
+    
     const [open,setOpen] = useState(false)
     const [quadras, setQuadras ] = useState([])
+    const handleQuadraDeleteda = (id) => { //Deletar a Quadra
+        setQuadras((prev) => prev.filter((q) => q.id !== id));
+    }
 
     // Uso do useEffect para buscar dados quando o componente for carregado
     useEffect(() => {
@@ -81,7 +85,7 @@ const QuadrasPub = () => {
                     <h1>Quadras Publicas</h1>
                     <button className={styles.button} onClick={()=>setOpen(true)}>Adicionar Quadra</button>
                 </div>
-                <DataTable slug="quadraspub" columns={columns} rows={quadras}/>
+                <DataTable slug="quadraspub" columns={columns} rows={quadras} onDeleted={handleQuadraDeleteda}/>
                 {open && <AddQuadra slug="quadra" columns={columns} setOpen={setOpen}/>}
             </div>
     )

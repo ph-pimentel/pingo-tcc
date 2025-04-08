@@ -48,6 +48,18 @@ app.post('/quadraspub', (req, res) => {
     )
 })
 
+//Rota para deletar uma quadra de acordo com o ID
+app.delete('/quadraspub/delete/:id', (req, res) => {
+    const  {id}  = req.params;
+    db.query('DELETE FROM Quadra WHERE ID_Quadra = ?', [id], (err, result) =>{
+        if (err) {
+            console.error('Erro ao deletar quadra:', err);
+            return res.status(500).json({ error: 'Erro ao deletar quadra'});
+        }
+        res.json({ message: 'Quadra deletada com sucesso' });
+    });
+});
+
 //Inicia o servidor
 app.listen(port, () => {
     console.log(`Servidor rodando na rota ${port}`)

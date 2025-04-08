@@ -24,3 +24,13 @@ export const createQuadrasPub = async (NomeQuadra, EnderecoQuadra, Bairro, Cidad
         console.error('Erro ao criar reserva:', error);
     }
 };
+
+export const deleteQuadraPub = async (id) => {
+    try {
+        const response = await axios.delete(`${API_URL}/quadraspub/delete/${id}`);
+        return response.data;
+    }catch (error) {
+        console.error('Erro ao deletar quadra:', error);
+        throw error;
+    }
+};
