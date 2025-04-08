@@ -1,8 +1,8 @@
 import AddQuadra from '../../components/AddQuadra/AddQuadra';
 import DataTable from '../../components/DataTable/DataTable'
-import { quadraspub } from '../../data';
 import styles from './QuadrasPub.module.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 
 const columns = [
     { 
@@ -11,53 +11,77 @@ const columns = [
     width: 90 
     },
     {
-    field: 'photo', headerName: 'Photo', width:120,
+    field: 'Foto', headerName: 'Foto', width:120,
         renderCell: (params)=>{
             return <img className={styles.img}src={params.row.img || "../src/assets/icons/menu/perfil.png"} alt=""/>
         },
     },
     {
-      field: 'name',
-      type: 'string',
-      headerName: 'Name',
+      field: 'NomeQuadra',
+      headerName: 'Nome',
       width: 150,
     }, 
     {
-        field: 'cidade',
-        type: "string",
+        field: 'Cidade',
         headerName: 'Cidade',
         width: 150,
     },
     {
-        field: 'bairro',
-        type: "string",
+        field: 'Bairro',
         headerName: 'Bairro',
         width: 150,
     },
     {
-        field: "endereco",
+        field: "EnderecoQuadra",
         headerName: 'Endereço',
         width: 200,
-        type: "string",
     },
     {
-        field: 'createdAt',
-        headerName: 'Created At',
-        width: 150,
-    },
-    
+      field: "DataCriacao",
+      headerName: 'Criado Em',
+      width: 200,
+  },
   ];
   
 
 const QuadrasPub = () => {
     const [open,setOpen] = useState(false)
+    const [quadras, setQuadras ] = useState([])
+
+    // Uso do useEffect para buscar dados quando o componente for carregado
+    useEffect(() => {
+        const fetchQuadras = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/quadraspub'); //Armazena os dados da Api
+                const data = await response.json(); //Armazena os dados retirados da api e converte para JSON
+
+          // Mapea os dados e confirma o tipo que vai receber
+          const quadrasComId = data.map((quadra) => ({
+            id: quadra.ID_Quadra, // id: = field da biblioteca ; quadra.ID_Quadra = do DB
+            NomeQuadra: quadra.NomeQuadra,
+            EnderecoQuadra: quadra.EnderecoQuadra,
+            Cidade: quadra.Cidade,
+            Bairro: quadra.Bairro,
+            Foto: quadra.Foto,
+            DataCriacao: new Date(quadra.DataCriacao).toLocaleDateString('pt-BR'), // Formato BR
+          }));
+
+         setQuadras(quadrasComId); // Atualiza os dados, agora com a formatação JSON
+   
+        } catch (error) {
+      console.error('Erro ao buscar as quadras:', error);
+    }
+  };
+
+  fetchQuadras();
+}, []); //o array vazio, faz com que a requisição exercute apenas uma vez
     return (
             <div className={styles.quadrasPub}>
                 <div className={styles.info}>
                     <h1>Quadras Publicas</h1>
                     <button className={styles.button} onClick={()=>setOpen(true)}>Adicionar Quadra</button>
                 </div>
-                <DataTable slug="quadraspub" columns={columns} rows={quadraspub}/>
+                <DataTable slug="quadraspub" columns={columns} rows={quadras}/>
                 {open && <AddQuadra slug="quadra" columns={columns} setOpen={setOpen}/>}
             </div>
     )

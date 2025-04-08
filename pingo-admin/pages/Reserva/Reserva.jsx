@@ -9,7 +9,7 @@ const columns = [
     width: 90 
     },
     {
-    field: 'photo', headerName: 'Photo Usuario', width:120,
+    field: 'photo', headerName: 'Foto Usuario', width:120,
         renderCell: (params)=>{
             return <img className={styles.img}src={params.row.img || "../src/assets/icons/menu/perfil.png"} alt=""/>
         },
@@ -40,7 +40,7 @@ const columns = [
     {
         field: 'date',
         headerName: 'Data Reserva',
-        width: 90,
+        width: 120,
     },   
   ];
   

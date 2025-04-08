@@ -1,6 +1,6 @@
 .single {
     display: flex; 
-    height: 90vh;
+    height: 80vh;
 }
 
 .view {
@@ -51,7 +51,7 @@
     position: relative;
     width: 1px;
     padding-top: 50px;
-    background-color: rgb(4, 255, 88);
+    background-color: #297EFF;
 }
 
 .activities li::after{
@@ -62,17 +62,23 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #f45b69;
+    background-color: #297EFF;
     transform: translateX(-50%);
 }
 .activities div{
     min-width: 480px;
     padding: 15px;
-    background-color: hsla(0, 78%, 48%, 0.301);
+    background-color: #0000001e;
 }
 .activities p{
     margin-bottom: 5px;
 }
 .activities time{
     font-size: 12px;
+}
+.principalInfo button{
+    padding: 5px;
+    border-radius: 3px;
+    background-color: var(--tertiary-color);
+    color: white;
 }

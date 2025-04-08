@@ -2,9 +2,9 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import styles from "./PizzaChartBox.module.css";
 
 const data = [
-    { name: "Usuarios",value: 500, color: "yellow"},
+    { name: "Usuarios",value: 500, color: "#297EFF"},
     { name: "Proprietarios",value: 100, color: "green"},
-    { name: "Admins",value: 15, color: "red"}
+    { name: "Admins",value: 15, color: "yellow"}
 ]
 
 import React from 'react'
@@ -12,7 +12,7 @@ import React from 'react'
 const PizzaChartBox = () => {
   return (
     <div className={styles.pizzaChartBox}>
-        <h1>Total Users</h1>
+        <h1>Total Usuários</h1>
         <div className={styles.chart}>
         <ResponsiveContainer width="99%" height={300}>
         <PieChart>

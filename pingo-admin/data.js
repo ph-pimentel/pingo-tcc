@@ -45,7 +45,7 @@ export const menu = [
     listItems: [
       {
         id: 1,
-        title: "Quadras Publicas",
+        title: "Quadras Públicas",
         url: "/quadraspub",
         icon: "../src/assets/icons/menu/quadras.png",
         alt: "quadras",
@@ -126,9 +126,9 @@ export const topDealUsers = [
 ];
 
 export const chartBoxQuadra = {
-  color: "#8884d8",
+  color: "#297EFF",
   icon: "../src/assets/icons/menu/quadras.png",
-  title: "Total Quadras",
+  title: "Total Quadras Públicas",
   number: "11.238",
   dataKey: "quadras",
   percentage: 45,
@@ -137,11 +137,12 @@ export const chartBoxQuadra = {
     { name: "Fev", quadras: 700 },
     { name: "Mar", quadras: 600 },
   ],
+  url: "/quadraspub"
 };
 export const chartBoxClientes = {
-  color: "#8884d8",
-  icon: "../src/assets/icons/menu/proprietario.png",
-  title: "Total Clientes",
+  color: "#297EFF",
+  icon: "../src/assets/icons/menu/usuarios.png",
+  title: "Total Usuários",
   number: "1.050",
   dataKey: "clientes",
   percentage: 20,
@@ -150,9 +151,10 @@ export const chartBoxClientes = {
     { name: "Fev", clientes: 39 },
     { name: "Mar", clientes: 70 },
   ],
+  url: "/users"
 };
 export const chartBoxQuadrasReq = {
-  color: "#8884d8",
+  color: "#297EFF",
   icon: "../src/assets/icons/menu/quadras.png",
   title: "Total Pendencias Quadras",
   number: "200",
@@ -168,7 +170,7 @@ export const chartBoxQuadrasReq = {
 export const barChartBoxLucro = {
   icon: "../src/assets/icons/menu/reservas.png",
   title: "Renda",
-  color: "#8884d8",
+  color: "#297EFF",
   dataKey: "lucro",
   chartData: [
     { name: "Jan", lucro: 300 },
@@ -553,7 +555,6 @@ export const singleQuadraPriv = {
   title: "Quadra peixoto",
   info: {
     Nome: "João Silva",
-    Idade: "30 anos",
     Cidade: "São Paulo",
     Profissão: "Desenvolvedor",
     Endereço: "Rua João Zé",
@@ -563,6 +564,28 @@ export const singleQuadraPriv = {
     Regras_Gerais: "Proibido a entrada da zona segura",
     Contato: "11 92332-2323",
     Proprietário: "Leonardo"
+},
+  activities: [
+    { time: "08:00", text: "Acordou e tomou café da manhã" },
+    { time: "09:30", text: "Começou a trabalhar no projeto React" },
+    { time: "12:00", text: "Almoçou com amigos" },
+    { time: "15:00", text: "Reunião com equipe" },
+    { time: "18:30", text: "Saiu para correr no parque" }
+  ]
+};
+
+export const singleQuadraPub = {
+  id: 1,
+  img: "https://altipisos.com.br/wp-content/uploads/2023/01/vantagens-da-quadra-poliesportiva.png",
+  title: "Quadra Andarilho",
+  info: {
+    Nome: "João Silva",
+    Idade: "30 anos",
+    Cidade: "São Paulo",
+    Profissão: "Desenvolvedor",
+    Endereço: "Rua João Zé",
+    Região: "Zona Norte",
+    Descrição: "O Sapo não lava o pé",
 },
   activities: [
     { time: "08:00", text: "Acordou e tomou café da manhã" },

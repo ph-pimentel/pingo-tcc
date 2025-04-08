@@ -1,4 +1,5 @@
 
+import AddQuadra from '../../components/AddQuadra/AddQuadra';
 import DataTable from '../../components/DataTable/DataTable'
 import { quadraspriv } from '../../data';
 import styles from './Proprietario.module.css'
@@ -73,17 +74,15 @@ const columns = [
   ];
 
 const Proprietario = () => {
+  const [open,setOpen] = useState(false)
   return (
     <div className={styles.quadrasPub}>
         <div className={styles.info}>
           <h1>Quadras do Proprietario</h1>
-          <button className={styles.button}>Adicionar Quadra</button>
+          <button className={styles.button} onClick={()=>setOpen(true)}>Adicionar Quadra</button>
         </div>
-      <DataTable 
-      slug="quadraspub" 
-      columns={columns} 
-      rows={quadraspriv} 
-      />
+      <DataTable slug="quadraspub" columns={columns} rows={quadraspriv} />
+      {open && <AddQuadra slug="quadra" columns={columns} setOpen={setOpen}/>}
     </div>
   )
 }

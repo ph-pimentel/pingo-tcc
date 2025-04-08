@@ -2,10 +2,8 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import styles from './DataTable.module.css'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { userRows } from '../../data'
 
-
-const DataTable = ({columns, rows, slug, rowHeight}) => {
+const DataTable = ({columns, rows, slug}) => {
   const handleDelete = (id) =>{
     //delete the item
     console.log(id + " foi deletado!")
@@ -36,7 +34,7 @@ const DataTable = ({columns, rows, slug, rowHeight}) => {
     <div className={styles.dataTable}>
         <DataGrid
         className={styles.dataGrid}
-        rows={ rows || userRows}
+        rows={rows}
         columns={updatedColumns}
         getRowHeight={() => 'auto'} // Faz a altura se ajustar ao conteúdo
         sx={{

@@ -7,13 +7,13 @@
 .loginContainer{
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    width: 50%;
-    height: 50%;
+    width: 30%;
+    height: 40%;
 }
 .loginContainer h1{
    border-bottom: 1px solid hsla(0, 0%, 0%, 0.37);
    text-align: center;
-   margin-bottom: 10%;
+   margin-bottom: 6%;
    padding: 20px;
 }
 .inputGroup{
@@ -23,14 +23,18 @@
   align-items: center;
 }
 .inputGroup input{
-    text-align: center;
-    width: 100%;
+    text-align: left;
+    width: 30%;
     padding: 2px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     padding: 15px;
+    border-radius: 5px;
+    border: 1px solid black;
 }
 .inputGroup button{
-    width: 30%;
+    width: 15%;
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: transparent;
 }

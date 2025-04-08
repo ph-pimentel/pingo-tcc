@@ -9,12 +9,12 @@ const SinglePage = ({img, title, info, activities}) => {
             <div className={styles.principalInfo}>
               <img src={img} alt="" />
               <h1>{title}</h1>
-              <button>Update</button>
+              <button>Atualizar Quadra</button>
             </div>
             <div className={styles.details}>
               {Object.entries(info).map((item) => (
                 <div className={styles.item} key={item[0]}>
-                <span className={styles.itemTitle}>{item[0]}</span>
+                <span className={styles.itemTitle}>{item[0]}:</span>
                 <span className={styles.itemValue}>{item[1]}</span>
               </div>
               ))}

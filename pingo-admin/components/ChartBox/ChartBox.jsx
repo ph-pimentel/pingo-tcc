@@ -4,7 +4,7 @@ import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
 import PropTypes from 'prop-types';
 
 
-const ChartBox = ({ color, icon, title, dataKey, number, percentage, chartData}) => {
+const ChartBox = ({ color, icon, title, dataKey, number, percentage, chartData, url}) => {
   return (
     
     <div className={styles.chartBox}>
@@ -14,7 +14,7 @@ const ChartBox = ({ color, icon, title, dataKey, number, percentage, chartData})
             <span>{title}</span>
         </div>
         <h1>{number}</h1>
-        <Link to='/' style={{color: color}}>Ver mais</Link>
+        <Link to={url} style={{color: color}}>Ver mais</Link>
        </div>
        <div className={styles.chartInfo}>
             <div className={styles.chart}>
@@ -52,6 +52,7 @@ ChartBox.propTypes = {
   number: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   percentage: PropTypes.number.isRequired,
   chartData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 

@@ -12,9 +12,7 @@ const ProprietarioLogin = () => {
         <div className={styles.loginContainer}>
             <h1>Login Proprietario</h1>
             <div className={styles.inputGroup}>
-                <div className={styles.input}>
                 <input placeholder='ID do Proprietario'></input>
-                </div>
                 <button onClick={irParaProprietario}>Entrar</button>
             </div>
         </div>

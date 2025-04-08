@@ -12,9 +12,8 @@ const BarChartBox = ({title, icon, chartData, dataKey, color}) => {
             <BarChart width={150} height={40} data={chartData}>
             <XAxis dataKey="name" />
                 <Tooltip
-                    contentStyle={{ background: "#2a3447", borderRadius: "5px" }}
+                    contentStyle={{ background: "white", borderRadius: "5px"}}
                     labelStyle={{ display: "none"}}
-                    cursor={{fill:"none"}}
                 />
             <Bar dataKey={dataKey} fill={color} />
             </BarChart>

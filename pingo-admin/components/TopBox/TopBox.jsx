@@ -14,7 +14,7 @@ const TopBox = () => {
                     <span className={styles.email}>{user.email}</span>           
                 </div>
             </div>
-            <span className={styles.amount}>${user.amount}</span>
+            <span className={styles.amount}>R${user.amount}</span>
            </div>
           ))}
         </div>
