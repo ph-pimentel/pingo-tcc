@@ -169,7 +169,9 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
     width: 100%;
+
     margin-top: 15px;
 }
 
@@ -179,6 +181,7 @@ html, body {
     justify-content: left;
     align-items: center;
     width: 100%;
+    gap: 20px;
 }
 
 .rememberMeLabel {
@@ -189,6 +192,7 @@ html, body {
     font-size: var(--font-size-small);
     color: var(--text-color);
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .rememberMeCheckbox {
@@ -230,7 +234,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--secondary-color);
+    background-color: #4E94FF;
     color: var(--background-color);
     border: solid 1px var(--border-color);
     border-radius: var(--border-radius);

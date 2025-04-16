@@ -13,6 +13,7 @@
     gap: 1rem; 
     
     z-index: 2;
+    font-family: 'Poppins';
 }
 
 .button1, .button2, .button3 {

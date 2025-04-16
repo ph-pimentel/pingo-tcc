@@ -1,6 +1,6 @@
 
 import Layout from "../../components/Layout/index";
-import QuadraCard from "../../components/CourtCard/index";
+import QuadraCard from "../../components/QuadraCard/index";
 import Filter from "../../components/Filter";
 
 

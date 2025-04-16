@@ -2,7 +2,7 @@ import { focusInput } from "../../scripts/script";
 import styles from "./filter.module.css";
 import { useState } from "react";
 
-function Filter({ children }) {
+function Filter() {
     const [showForm, setShowForm] = useState(false);
     const [isFilterActive, setIsFilterActive] = useState(false);
 
