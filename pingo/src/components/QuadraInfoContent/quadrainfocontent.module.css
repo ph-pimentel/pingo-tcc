@@ -1,0 +1,267 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    /*__Backgrounds*/
+    --bg-color:#3D3D3D; 
+
+    /*__Text*/
+    /*--Size*/
+    --text-title-size: 27px;
+    --text-subtitle-size: 21px;
+    --text-size: 16px;
+    /*--Weight*/
+    --text-title-weigth: 600;
+    --text-subtitle-weight: 500;
+    --text-weight: 300;
+    /*--Colors*/
+    --text-main-color:#E3E3E3;
+    --text-secondary-color: #BBBBBB;
+
+    /*__Borders*/
+    --medium-border-radius: 10px;
+    --small-border-radius: 4px;
+
+    /*__Colors*/
+    --primary-color: #297EFF;
+    --secondary-color: #F65858;
+
+    /*__Font*/
+    --primary-font: "Poppins";
+}
+
+.main_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    box-sizing:border-box;
+    width: 100%;
+}
+
+.content_container{
+    display: flex;
+    flex-direction: column;
+    padding: 40px 40px;
+    padding-bottom: 60px;
+    width: clamp(600px, 80%, 1300px);
+    height: auto;
+    
+    border-radius: var(--medium-border-radius);
+    
+    background-color: var(--bg-color);
+    
+    margin-top: 200px;
+}
+
+
+.main_content{
+    display: flex;
+    flex-wrap: wrap;
+    
+    padding-bottom: 1vw;
+    flex: 1;
+
+    border-bottom: 1px solid var(--text-secondary-color);
+    gap: clamp(0px, 3vw, 40px);
+}
+
+/*--Imagem da Quadra--*/
+.img_container{
+    width: clamp(300px, 100%, 500px);
+    flex: 1 1 600px;
+    height: auto;    
+}
+
+.img_container img{
+    width: 100%;
+    height: auto;
+    border-radius: var(--small-border-radius);
+    object-fit: cover;
+}
+
+
+
+/*-------------------------*/
+/*   Informações Quadra   */
+.quadra_info_container{
+    display: flex;
+    flex-direction:column;
+    align-items: left;
+    gap: 25px;
+    
+    flex: 1;
+    max-width: 400px;
+    
+    padding-top: clamp(20px, 50%, 40px);
+    padding-bottom: 5px;
+    
+    font-family:var(--primary-font);
+    color: var(--text-main-color);
+
+}
+
+.quadra_info_title{
+    display: flex;
+}
+
+.quadra_info_title h1{
+    font-size: var(--text-title-size);
+    font-weight: var(--text-title-weigth);
+}
+
+.quadra_info_subtitle{
+    display: flex;
+    align-items: flex-start;
+    justify-content: left;
+    flex-direction: column;
+    font-size:clamp(19px, 0.7vw,  var(--text-subtitle-size));
+    
+}
+
+.quadra_info_subtitle h1{
+    font-size: 110%;
+    font-weight: var(--text-subtitle-weight);
+    margin: 0;
+    white-space: nowrap;
+}
+
+.quadra_info_subtitle h2{
+    font-size: 85%;
+    font-weight: var(--text-weight);
+    text-align: left;
+    margin: 0;
+}
+
+.quadra_info_subtitle p{
+    font-size:var(--text-size);
+    font-weight: var(--text-weight);
+    word-wrap:break-word;
+}
+
+/*--Button See Hours--*/
+.btn_see_hours{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position:relative;
+    box-sizing: border-box;
+    gap: 15px;
+    
+    width: 100%;
+    
+    margin-top: auto;
+    white-space: nowrap;
+
+    flex: 0;
+    
+    padding: clamp(14px, 1vw, 20px) clamp(20px, 1vw, 40px);
+    border-radius: var(--small-border-radius);
+    border: none;
+    
+    font-size: 23px;
+    font-weight: var(--text-subtitle-weight);
+    
+    color: white;
+    background-color: var(--primary-color);
+    
+    cursor: pointer;
+
+    transition: all 0.150s ease-out;
+}
+
+.btn_see_hours::after{
+    content: '';
+    position: absolute;
+    background-color: transparent;
+    
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    pointer-events: none;
+}
+.btn_see_hours:hover{
+    background-color: calc(var);
+}
+
+.btn_see_hours img{
+    margin: 0;
+    max-width: 25px;
+}
+
+
+
+
+
+/*--------------------*/
+/*    Description    */
+.description_container{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 1vh;
+    max-width: 100%;
+    margin-top: 0.8vh;
+    
+}
+
+/*--Buttons--*/
+.description_content_container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: clamp(10px, 1vw, 20px);
+
+    font-family: 'Poppins';
+}
+
+.description_content_container button{
+    padding: clamp(5px, 0.5vw, 10px) clamp(15px, 1vw, 30px);
+    
+    font-family: var(--primary-font);
+    font-weight: var(--text-title-weigth);
+    font-size: clamp(20px, 1vw, 22px);
+
+    color: var(--text-secondary-color);
+
+    background-color: transparent;
+    border: 1px solid var(--text-main-color);    
+    border-radius: 0.5vh;
+
+    transition: all 0.2s ease-out;
+}
+
+.description_content_container button:focus{
+    background-color: black;
+    border: none;
+    scale: calc(1.02);
+    color: var(--text-main-color);
+}
+
+/*-- Description Text -- */
+
+.description_text{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    border-bottom: 1px solid var(--text-secondary-color);
+    padding-bottom: 1vw;
+
+}
+
+.description_text span{
+    font-size: var(--text-size);
+    color: var(--text-secondary-color);
+}
+
+
+

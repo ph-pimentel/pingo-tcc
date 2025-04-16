@@ -111,7 +111,7 @@ html{
     max-width: 100%;
     padding: 50px;
     gap: 20px;
-    background-color: var(--secondary-color);
+    background-color: #333333;
 }
 
 .instructions_title{
@@ -140,6 +140,7 @@ html{
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     width: var(--instructions-container-width);
     margin-top: 30px;
     gap: 25px;
@@ -212,6 +213,7 @@ html{
     text-align: center;
     min-height: 300px;
     padding: 30px;
+    
 }
 
 .banner_content_container img{

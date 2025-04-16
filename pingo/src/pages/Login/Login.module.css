@@ -11,7 +11,7 @@
 
     /* Fontes */
     --font-primary: 'Poppins', sans-serif;
-    --font-size-small: 16px;
+    --font-size-small: 14px;
     --font-size-medium: 18px;
     --font-size-large: 30px;
 
@@ -33,6 +33,7 @@ html, body {
     padding: 0;
     background-color: white;
     user-select: none;
+    font-family: 'Poppins';
 }
 
 /*___Container Principal___*/
@@ -164,6 +165,7 @@ html, body {
     justify-content: left;
     align-items: center;
     width: 100%;
+    gap: 10px;
 }
 
 .rememberMeLabel {
@@ -174,6 +176,7 @@ html, body {
     font-size: var(--font-size-small);
     color: var(--text-color);
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .rememberMeCheckbox {
@@ -215,6 +218,8 @@ html, body {
     width: 50%;
     text-decoration: none;
     color: var(--forgot-password-color);
+    font-size: var(--font-size-small);
+    white-space: nowrap;
 }
 
 /*___Botão Continuar___*/
@@ -222,9 +227,9 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--secondary-color);
+
+    background-color: #4E94FF;
     color: var(--background-color);
-    border: solid 1px var(--border-color);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-default);
     border: none;
@@ -239,7 +244,7 @@ html, body {
 }
 
 .continueButton:hover {
-    background-color: #0057d9;
+    background-color: #3d86f3;
 }
 
 /*___Mover para Registro___*/
@@ -253,7 +258,7 @@ html, body {
 
 .registerLink {
     text-decoration: none;
-    color: var(--secondary-color);
+    color: #4E94FF;
 }
 
 /*___Formas de Login___*/
