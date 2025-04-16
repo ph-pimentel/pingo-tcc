@@ -48,6 +48,35 @@ app.post('/quadraspub', (req, res) => {
     )
 })
 
+//Rota para atualizar uma quadra pública existente
+app.put('/quadraspub/att/:id', (req, res) => {
+    const {id} = req.params;
+    const { NomeQuadra, EnderecoQuadra, Bairro, Cidade } = req.body;
+
+    db.query(
+        'UPDATE Quadra SET NomeQuadra = ?, EnderecoQuadra = ?, Bairro = ?, Cidade = ? WHERE ID_Quadra = ?',
+            [NomeQuadra, EnderecoQuadra, Bairro, Cidade, id],
+            (err, result) => {
+                if (err) {
+                    console.error('Erro ao atualizar quadra:', err);
+                    return res.status(500).json({ error: 'Quadra não encontrada'});
+                }
+                if (result.affectedRows === 0) {
+                    return res.status(404).json({ error: 'Quadra não encontrada'});
+                }
+
+                res.json({
+                    ID_Quadra: id,
+                    NomeQuadra,
+                    EnderecoQuadra,
+                    Bairro,
+                    Cidade,
+                    message: 'Quadra atualizada com sucesso'
+                });
+            }
+    );
+});
+
 //Rota para deletar uma quadra de acordo com o ID
 app.delete('/quadraspub/delete/:id', (req, res) => {
     const  {id}  = req.params;
@@ -59,6 +88,41 @@ app.delete('/quadraspub/delete/:id', (req, res) => {
         res.json({ message: 'Quadra deletada com sucesso' });
     });
 });
+
+//-> Single Page Quadra Pub
+app.get('/quadraspub/:id', (req, res) => {
+    const {id} = req.params;
+    db.query('SELECT * FROM Quadra WHERE ID_Quadra = ?', [id], (err, results) =>{
+        if (err) {
+            console.error('Erro ao obter quadra:', err);
+            return res.status(500).send('Erro ao obter quadra')
+        }
+        res.json({results});
+    });
+});
+
+//Rota que vai conter os dados dos usuarios
+app.get("/users", (req, res) => {
+    db.query("SELECT * FROM Usuario", (err, results) => {
+      if (err) {
+        console.error("Erro ao obter usuarios:", err);
+        return res.status(500).send("Erro ao obter usuarios");
+      }
+      res.json(results);
+    });
+  });
+
+// ---> Rota para deletar um usuario de acordo com o ID
+app.delete("/users/delete/:id", (req, res) => {
+    const { id } = req.params;
+    db.query("DELETE FROM Usuario WHERE ID_Usuario = ?", [id], (err, result) => {
+      if (err) {
+        console.error("Erro ao deletar usuario:", err);
+        return res.status(500).json({ error: "Erro ao deletar usuario" });
+      }
+      res.json({ message: "Usuario deletada com sucesso" });
+    });
+  });
 
 //Inicia o servidor
 app.listen(port, () => {

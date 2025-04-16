@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { createQuadrasPub } from '../../api'
-import styles from './AddQuadra.module.css'
+import styles from './AttQuadra.module.css'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 
 const AddQuadra = ({columns, slug, setOpen, onSubmit, initialData}) => {
     const [formData, setFormData] = useState({})
     const navigate = useNavigate();
+
     useEffect(() => {
         if (initialData) {
             setFormData(initialData);
@@ -22,18 +22,14 @@ const AddQuadra = ({columns, slug, setOpen, onSubmit, initialData}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Dados", formData)
         try {
-            await createQuadrasPub(
-                formData.NomeQuadra,
-                formData.EnderecoQuadra,
-                formData.Bairro,
-                formData.Cidade
-            );
+            if (onSubmit) {
+                await onSubmit(formData); //Usa a função passada pelo prop
+            }
             setOpen(false);
             navigate(0); //Recarrega a Pagina Atual
         }catch (error) {
-            console.error('Erro ao criar quadra:', error)
+            console.error('Erro ao processar formulario:', error)
         }
     }
   return (
@@ -42,7 +38,7 @@ const AddQuadra = ({columns, slug, setOpen, onSubmit, initialData}) => {
             <span className={styles.close} onClick={()=>setOpen(false)}>
             X
             </span>
-            <h1>Adicionar {slug}</h1>
+            <h1>Editar {slug}</h1>
             <form onSubmit={handleSubmit}>
                 {columns
                 .filter((item) => item.field !== "id" 
@@ -72,5 +68,7 @@ AddQuadra.PropTypes = {
   columns: PropTypes.array.isRequired,
   setOpen: PropTypes.func.isRequired,
   slug: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func,
+  initialData: PropTypes.object,
 }
 export default AddQuadra

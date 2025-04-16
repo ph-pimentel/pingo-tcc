@@ -2,16 +2,15 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import styles from './DataTable.module.css'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { deleteQuadraPub } from '../../api'
 
-const DataTable = ({columns, rows, slug, onDeleted}) => {
-  const handleDelete = async (id, NomeQuadra) =>{
-    if(confirm(`Tem certeza que deseja deletar a quadra "${NomeQuadra}"?`)) {
+const DataTable = ({columns, rows, slug, onDeleted, deleteFunction, entityNameKey}) => {
+  const handleDelete = async (id, entityNameKey) =>{
+    if(confirm(`Tem certeza que deseja deletar ${entityNameKey ? 'o(a) ' + entityNameKey : 'este item'}`)) {
       try {
-        await deleteQuadraPub(id); //Utiliza o parametro da API
+        await deleteFunction(id); //Utiliza o parametro da API
         onDeleted(id); //Atualiza a lista apos o delete
       }catch (error) {
-        alert('Erro ao deletar quadra.');
+        alert(`Erro ao deletar ${entityNameKey || 'item'}.`);
       }
     }
   };
@@ -24,10 +23,10 @@ const DataTable = ({columns, rows, slug, onDeleted}) => {
     renderCell:(params)=>{
      return( 
         <div className={styles.action}>
-          <Link to={`/${slug}/${params.row.id}`}>
+          <Link to={`/quadraspub/${params.row.id}`}>
             <img src="../src/assets/table/action.svg" alt="" />
           </Link>
-          <div className={styles.delete} onClick={() => handleDelete(params.row.id, params.row.NomeQuadra)}>
+          <div className={styles.delete} onClick={() => handleDelete(params.row.id, params.row[entityNameKey])}>
             <img src="../src/assets/table/delete.svg" alt="" />
           </div>
           </div>

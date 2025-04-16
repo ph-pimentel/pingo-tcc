@@ -1,11 +1,11 @@
-import SinglePage from '../../components/SinglePage/SinglePage'
+import SinglePageQuadraPub from '../../components/SinglePageQuadraPub/SinglePageQuadraPub'
 import { singleQuadraPub } from '../../data'
 import styles from './SingleQuadraPub.module.css'
 
 const SingleQuadraPub = () => {
   return (
     <div>
-      <SinglePage {...singleQuadraPub}/>
+      <SinglePageQuadraPub {...singleQuadraPub}/>
 
       </div>
   )

@@ -34,3 +34,48 @@ export const deleteQuadraPub = async (id) => {
         throw error;
     }
 };
+
+export const updateQuadrasPub = async (id, NomeQuadra, EnderecoQuadra, Bairro, Cidade) => {
+    try{
+        const response = await axios.put(`${API_URL}/quadraspub/att/${id}`, {
+            NomeQuadra,
+            EnderecoQuadra,
+            Bairro,
+            Cidade
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao atualizar quadra:', error);
+        throw error;
+    }
+}
+
+export const getSingleQuadrasPub = async (id) => {
+    try {
+        const response = await axios.get(`${API_URL}/quadraspub/${id}`)
+        return response.data;
+    }catch (error) {
+        console.error('Erro ao obter a quadra:', error)
+        throw error;
+    };
+};
+
+export const getUsuarios = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/users`); //Response vai ter dentro dele os dados da API
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao obter quadras:", error);
+    }
+  };
+  
+  export const deleteUsuario = async (id) => {
+    try {
+      const response = await axios.delete(`${API_URL}/users/delete/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao deletar quadra:", error);
+      throw error;
+    }
+  };
+  
