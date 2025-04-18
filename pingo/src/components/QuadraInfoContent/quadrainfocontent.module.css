@@ -45,15 +45,20 @@
 .content_container{
     display: flex;
     flex-direction: column;
-    padding: 40px 40px;
-    padding-bottom: 60px;
+
     width: clamp(600px, 80%, 1300px);
     height: auto;
+    
+
+    padding: 0px 50px;
+    padding-bottom: 40px;
+    padding-top: 55px;
+    
     
     border-radius: var(--medium-border-radius);
     
     background-color: var(--bg-color);
-    
+    box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.412);
     margin-top: 200px;
 }
 
@@ -62,17 +67,17 @@
     display: flex;
     flex-wrap: wrap;
     
-    padding-bottom: 1vw;
+    padding-bottom: clamp(20px, 1vw, 25px);
     flex: 1;
 
     border-bottom: 1px solid var(--text-secondary-color);
-    gap: clamp(0px, 3vw, 40px);
+    gap: clamp(0px, 1.2vw, 40px);
 }
 
 /*--Imagem da Quadra--*/
 .img_container{
     width: clamp(300px, 100%, 500px);
-    flex: 1 1 600px;
+    flex: 1 1 700px;
     height: auto;    
 }
 
@@ -94,9 +99,9 @@
     gap: 25px;
     
     flex: 1;
-    max-width: 400px;
+    max-width: 100%;
     
-    padding-top: clamp(20px, 50%, 40px);
+    padding-top: clamp(10px, 0.6vw, 30px);
     padding-bottom: 5px;
     
     font-family:var(--primary-font);
@@ -142,6 +147,12 @@
     word-wrap:break-word;
 }
 
+
+
+
+
+
+
 /*--Button See Hours--*/
 .btn_see_hours{
     display: flex;
@@ -152,18 +163,17 @@
     box-sizing: border-box;
     gap: 15px;
     
-    width: 100%;
     
     margin-top: auto;
     white-space: nowrap;
 
     flex: 0;
     
-    padding: clamp(14px, 1vw, 20px) clamp(20px, 1vw, 40px);
+    padding: clamp(17px, 0.8vw, 20px) clamp(20px, 1vw, 40px);
     border-radius: var(--small-border-radius);
     border: none;
     
-    font-size: 23px;
+    font-size: clamp(18px, 1.3vw, 24px);
     font-weight: var(--text-subtitle-weight);
     
     color: white;
@@ -174,26 +184,15 @@
     transition: all 0.150s ease-out;
 }
 
-.btn_see_hours::after{
-    content: '';
-    position: absolute;
-    background-color: transparent;
-    
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-
-    pointer-events: none;
-}
 .btn_see_hours:hover{
-    background-color: calc(var);
+    background-color: #0057da;
 }
 
 .btn_see_hours img{
     margin: 0;
-    max-width: 25px;
+    max-width: clamp(20px, 1.5vw, 25px);
 }
+
 
 
 
@@ -223,11 +222,11 @@
 }
 
 .description_content_container button{
-    padding: clamp(5px, 0.5vw, 10px) clamp(15px, 1vw, 30px);
+    padding: clamp(5px, 0.5vw, 10px) clamp(15px, 1vw, 40px);
     
     font-family: var(--primary-font);
     font-weight: var(--text-title-weigth);
-    font-size: clamp(20px, 1vw, 22px);
+    font-size: clamp(16px, 1vw, 20px);
 
     color: var(--text-secondary-color);
 
@@ -264,4 +263,65 @@
 }
 
 
+/*--------------------*/
+/*   Outher Courts   */
+
+.other_courts_container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    gap: 10px;
+    width: 100%;
+
+    padding: clamp(15px, 1vw, 30px);
+}
+
+
+/*--Title--*/
+.other_courts_title{
+    font-size: clamp(16px, 1vw, 20px);
+    color: var(--text-main-color);
+}
+
+.other_courts_title h1{
+    font-size: 110%;
+    font-weight: var(--text-title-weigth);
+}
+
+/*--Mini Court Cards--*/
+
+.court_cards_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(9px, 1vw, 12px );
+    width: 100%;
+}
+
+.court_card{
+    display: flex;
+    flex-direction: column;
+
+    width: clamp(105px, 18vw, 270px);
+    
+    gap: 4px;
+    padding-top: 10px;
+
+    background-color: transparent;
+    text-decoration: none;
+
+    font-size: clamp(12px, 1.3vw, 20px);
+    color: var(--text-main-color);
+}
+.court_card img{
+    width: 100%;
+    border-radius: clamp(7px, 0.5vw, 12px);
+}
+.court_card h1{
+    font-size: 100%; 
+    font-weight: var(--text-subtitle-weight);
+}
 
