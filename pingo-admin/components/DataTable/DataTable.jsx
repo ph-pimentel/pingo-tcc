@@ -3,7 +3,7 @@ import styles from './DataTable.module.css'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const DataTable = ({columns, rows, slug, onDeleted, deleteFunction, entityNameKey}) => {
+const DataTable = ({columns, rows, slug, path,  onDeleted, deleteFunction, entityNameKey}) => {
   const handleDelete = async (id, entityNameKey) =>{
     if(confirm(`Tem certeza que deseja deletar ${entityNameKey ? 'o(a) ' + entityNameKey : 'este item'}`)) {
       try {
@@ -23,7 +23,7 @@ const DataTable = ({columns, rows, slug, onDeleted, deleteFunction, entityNameKe
     renderCell:(params)=>{
      return( 
         <div className={styles.action}>
-          <Link to={`/quadraspub/${params.row.id}`}>
+          <Link to={`/${path}/${params.row.id}`}>
             <img src="../src/assets/table/action.svg" alt="" />
           </Link>
           <div className={styles.delete} onClick={() => handleDelete(params.row.id, params.row[entityNameKey])}>

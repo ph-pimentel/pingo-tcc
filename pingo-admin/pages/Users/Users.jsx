@@ -41,7 +41,7 @@ const columns = [
 
 const Users = () => {
         const [user, setUsuarios ] = useState([])
-        //Att Deleta do Banco
+        //Delete pelo Banco de Dados
         const deleteUsuario = async (id) => {
             try {
               const response = await fetch(`http://localhost:5000/users/delete/${id}`, {
@@ -94,7 +94,8 @@ const Users = () => {
             </div>
             <DataTable slug="users" 
             columns={columns} 
-            rows={user} 
+            rows={user}
+            path={'users'}
             entityNameKey={"NomeUsuario"}
             deleteFunction={deleteUsuario} onDeleted={(id) => {
                 setUsuarios((prev) => prev.filter(q => q.id !== id));

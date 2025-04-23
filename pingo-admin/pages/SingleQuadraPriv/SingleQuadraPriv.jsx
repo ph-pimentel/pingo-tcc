@@ -1,8 +1,10 @@
+import SinglePageQuadraPriv from '../../components/SinglePageQuadraPriv/SinglePageQuadraPriv'
+import { singleQuadraPub } from '../../data'
 import styles from './SingleQuadraPriv.module.css'
 const SingleQuadraPriv = () => {
   return (
     <div>
-      <p>Fazer</p>
+      <SinglePageQuadraPriv {...singleQuadraPub}/>
     </div>
   )
 }

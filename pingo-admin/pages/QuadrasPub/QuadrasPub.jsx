@@ -105,6 +105,7 @@ const QuadrasPub = () => {
                 slug="quadraspub" 
                 columns={columns}
                 rows={quadras} 
+                path= "quadraspub"
                 deleteFunction={deleteQuadraPub} onDeleted={(id) => {
                     setQuadras((prev) => prev.filter(q => q.id !== id));
                 }}/>

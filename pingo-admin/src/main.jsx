@@ -17,6 +17,7 @@ import QuadrasPriv from '../pages/QuadrasPriv/QuadrasPriv.jsx'
 import Reserva from '../pages/Reserva/Reserva.jsx'
 import SingleQuadraPub from '../pages/SingleQuadraPub/SingleQuadraPub.jsx'
 import SingleQuadraPriv from '../pages/SingleQuadraPriv/SingleQuadraPriv.jsx'
+import SingleUser from '../pages/SingleUser/SingleUser.jsx'
 
 const Layout = () => {
   return (
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "/quadraspriv/:id",
         element: <SingleQuadraPriv/>
+      },
+      {
+        path: "/users/:id",
+        element: <SingleUser/>
       }
     ]
   }

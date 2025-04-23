@@ -50,7 +50,7 @@ create table Usuario(
     Email varchar(150) unique  not null,
     Senha varchar(225) not null,
     Google_ID varchar(255) unique null,
-    TipoUsuario varchar(20) not null check (TipoUsuario in ('proprietario', 'funcionario do proprietario', 'admin', 'usuario comum')),
+    TipoUsuario varchar(20) not null check (TipoUsuario in ('Proprietario', 'Funcionario do proprietario', 'Admin', 'Usuario comum')),
     DataCriacao date default current_date,
     primary key (ID_Usuario) 
 );
@@ -198,8 +198,8 @@ select * from FotosQuadra;
 INSERT INTO Quadra (NomeQuadra, EnderecoQuadra, Contato, Descricao, Cidade, Bairro, Foto)
 VALUES ('Quadra Poliesportiva Central', 'Rua das Flores, 123', '11987654321', 'Ótima quadra para diversos esportes.', 'São Paulo', 'Centro', 'https://imgs.search.brave.com/DuB4bxRlPzbodjf4rNh74NsBcK44stdvfyrsNE_FGl0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tYWNl/aW9hbGdvdmJyLmRo/b3N0LmNsb3VkL3Vw/bG9hZHMvaW1hZ2Vu/cy9fODQ1eEFVVE9f/Y3JvcF9jZW50ZXIt/Y2VudGVyX25vbmUv/QVRMRVRBLUdVU1RB/Vk8tSEFBS0lOLmpw/ZWc');
 
-INSERT INTO Quadra (NomeQuadra, EnderecoQuadra, Contato, Descricao, Cidade, Bairro, Foto)
-VALUES ('Campo de Futebol Society Bom de Bola', 'Avenida Brasil, 456', '21991234567', 'Excelente campo de grama sintética.', 'Rio de Janeiro', 'Copacabana', '../src/assets/image/quadra_1.jpg');
+INSERT INTO Quadra (NomeQuadra, EnderecoQuadra, Contato, Descricao, Cidade, Bairro, Foto, TipoQuadra)
+VALUES ('Campo de Futebol Society Bom de Bola', 'Avenida Brasil, 456', '21991234567', 'Excelente campo de grama sintética.', 'Rio de Janeiro', 'Copacabana', '../src/assets/image/quadra_1.jpg', 1);
 
 INSERT INTO Usuario (NomeUsuario, Senha, TipoUsuario, Email, FotoUsuario)
-VALUES ('Carlos Souza', 'carlos123', 'admin', 'carlos@email.com', 'https://imgs.search.brave.com/wJsJXGzhl7D8UwAdYAixwwvLdge3UA2ngaAdA_VgD1M/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtZ3JhdGlz/L3BlcmZpbC1kZS1q/b3ZlbS1ib25pdG8t/ZS1lbGVnYW50ZS1v/bGhhbmRvLXBhcmEt/YS1lc3F1ZXJkYV8x/NzY0MjAtMTk2NDMu/anBnP3NlbXQ9YWlz/X2h5YnJpZA');
+VALUES ('Carlos Souza', 'carlos123', 'Admin', 'carlos@email.com', 'https://imgs.search.brave.com/wJsJXGzhl7D8UwAdYAixwwvLdge3UA2ngaAdA_VgD1M/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtZ3JhdGlz/L3BlcmZpbC1kZS1q/b3ZlbS1ib25pdG8t/ZS1lbGVnYW50ZS1v/bGhhbmRvLXBhcmEt/YS1lc3F1ZXJkYV8x/NzY0MjAtMTk2NDMu/anBnP3NlbXQ9YWlz/X2h5YnJpZA');

@@ -1,6 +1,8 @@
+import { deleteQuadraPriv } from '../../api';
 import DataTable from '../../components/DataTable/DataTable'
-import { quadraspriv} from '../../data';
 import styles from './QuadrasPriv.module.css'
+import { useEffect, useState } from 'react';
+
 
 const columns = [
     { 
@@ -9,63 +11,104 @@ const columns = [
     width: 90 
     },
     {
-    field: 'photo', headerName: 'Photo', width:120,
+    field: 'Foto', headerName: 'Foto', width:120,
         renderCell: (params)=>{
-            return <img className={styles.img}src={params.row.img || "../src/assets/icons/menu/perfil.png"} alt=""/>
+            return <img className={styles.img}src={params.row.Foto || "../src/assets/icons/menu/perfil.png"} alt=""/>
         },
     },
     {
-      field: 'name',
-      type: 'string',
-      headerName: 'Name',
+      field: 'NomeQuadra',
+      headerName: 'Nome',
       width: 150,
     }, 
     {
-        field: 'cidade',
-        type: "string",
+        field: 'Cidade',
         headerName: 'Cidade',
         width: 150,
     },
     {
-        field: 'bairro',
-        type: "string",
+        field: 'Bairro',
         headerName: 'Bairro',
         width: 150,
     },
     {
-        field: "endereco",
+        field: "EnderecoQuadra",
         headerName: 'Endereço',
         width: 200,
-        type: "string",
     },
     {
-        field: 'createdAt',
-        headerName: 'Criado Em',
-        width: 150,
-    },
-    {
-        field: 'idprop',
-        headerName: 'ID Proprietario',
-        width: 90,
-    },
-    {
-        field: 'nameProp',
-        headerName: 'Nome do Proprietario',
-        width: 150,
-    },
-    
+      field: "DataCriacao",
+      headerName: 'Criado Em',
+      width: 200,
+  },
   ];
   
 
-const QuadrasPriv = () => {
+const QuadrasPub = () => {
+    const [quadras, setQuadras ] = useState([])
+
+    const deleteQuadraPriv = async (id) => {
+        try {
+          const response = await fetch(`http://localhost:5000/quadraspriv/delete/${id}`, {
+            method: 'DELETE',
+          });
+      
+          if (!response.ok) {
+            throw new Error('Erro ao deletar a quadra');
+          }
+      
+          // Se deu certo, remove da interface
+          setQuadras((prev) => prev.filter((q) => q.id !== id));
+        } catch (error) {
+          console.error('Erro ao deletar:', error);
+          alert('Erro ao deletar a quadra. Verifique o console para mais detalhes.');
+        }
+      }
+
+
+    // Uso do useEffect para buscar dados quando o componente for carregado
+    useEffect(() => {
+        const fetchQuadras = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/quadraspriv'); //Armazena os dados da Api
+                const data = await response.json(); //Armazena os dados retirados da api e converte para JSON
+
+          // Mapea os dados e confirma o tipo que vai receber
+          const quadras = data.map((quadra) => ({
+            id: quadra.ID_Quadra, // id: = field da biblioteca ; quadra.ID_Quadra = do DB
+            NomeQuadra: quadra.NomeQuadra,
+            EnderecoQuadra: quadra.EnderecoQuadra,
+            Cidade: quadra.Cidade,
+            Bairro: quadra.Bairro,
+            Foto: quadra.Foto,
+            DataCriacao: new Date(quadra.DataCriacao).toLocaleDateString('pt-BR'), // Formato BR
+          }));
+
+         setQuadras(quadras); // Atualiza os dados, agora com a formatação JSON
+   
+        } catch (error) {
+      console.error('Erro ao buscar as quadras:', error);
+    }
+  };
+
+  fetchQuadras();
+}, []); //o array vazio, faz com que a requisição exercute apenas uma vez
+
     return (
             <div className={styles.quadrasPub}>
                 <div className={styles.info}>
                     <h1>Quadras Privadas</h1>
                 </div>
-                <DataTable slug="quadraspriv" columns={columns} rows={quadraspriv}/>
+                <DataTable 
+                slug="quadraspriv" 
+                columns={columns}
+                rows={quadras} 
+                path= "quadraspriv"
+                deleteFunction={deleteQuadraPriv} onDeleted={(id) => {
+                    setQuadras((prev) => prev.filter(q => q.id !== id));
+                }}/>
             </div>
     )
 }
 
-export default QuadrasPriv
+export default QuadrasPub
