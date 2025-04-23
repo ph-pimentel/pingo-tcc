@@ -14,7 +14,7 @@
     --text-subtitle-size: 21px;
     --text-size: 16px;
     /*--Weight*/
-    --text-title-weigth: 600;
+    --text-title-weight: 600;
     --text-subtitle-weight: 500;
     --text-weight: 300;
     /*--Colors*/
@@ -116,7 +116,7 @@
 
 .quadra_info_title h1{
     font-size: var(--text-title-size);
-    font-weight: var(--text-title-weigth);
+    font-weight: var(--text-title-weight);
 }
 
 .quadra_info_subtitle{
@@ -226,7 +226,7 @@
     padding: clamp(5px, 0.5vw, 10px) clamp(15px, 1vw, 40px);
     
     font-family: var(--primary-font);
-    font-weight: var(--text-title-weigth);
+    font-weight: var(--text-title-weight);
     font-size: clamp(16px, 1vw, 20px);
     
 
@@ -291,7 +291,7 @@
 
 .other_courts_title h1{
     font-size: 110%;
-    font-weight: var(--text-title-weigth);
+    font-weight: var(--text-title-weight);
 }
 
 /*--Mini Court Cards--*/

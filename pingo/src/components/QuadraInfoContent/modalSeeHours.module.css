@@ -79,4 +79,60 @@
 }
 
 
+.date_container{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: clamp(30px, 2vw, 50px);
+
+}
+
+.mount_container{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    gap: clamp( 15px, 1vw, 20px);
+}
+
+.btn_mounth_select{
+    background: none;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+}
+.btn_mounth_select img{
+    width: clamp(20px, 2vw, 30px);
+    
+}
+
+
+.btn_day_select{
+
+    background: none;
+    text-decoration: none;
+    
+    width: clamp(40px, 3vw, 60px);
+
+    padding: 5px;
+    
+    font-size: clamp(10px, 0.8vw, 19px);
+    font-weight: var(--text-title-weight);
+    
+    color: var(--text-secondary-color);
+    border: 1px solid white;
+
+
+    
+}
+
+.day_buttons_container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(10px, 0.7vw, 15px);
+}
+
 
