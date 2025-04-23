@@ -1,0 +1,82 @@
+.modal_main_container{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    
+    padding: 0px 40px;
+    padding-bottom: 40px;
+    padding-top: 30px;
+    
+    background-color: var(--bg-color);
+    border-radius: var(--medium-border-radius);
+    
+    flex: 1;
+    z-index: 999;
+}
+
+.modal_leave_button{
+    background: none;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    
+    font-family: var(--primary-font);
+    
+    color: var(--text-secondary-color);
+    
+    font-size: clamp(35px, 1vw, 45px);
+    font-weight: 400;
+    
+    cursor: pointer;
+    transition: all 0.15s ease-out;
+}
+
+.modal_leave_button img{
+    width: clamp(30px, 2vw, 40px);
+    height: auto;
+
+    padding: 3px;
+    border-radius: 10px;
+}
+
+
+.hours_container{
+    display: flex;
+    justify-content: center;
+    
+    width: 100%;
+    height: auto;
+
+}
+
+.see_hours_title_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+
+    font-size: var(--text-subtitle-size);
+    color: var(--text-main-color);
+    
+}
+
+.see_hours_title_container h1{
+    font-size: clamp(70%, 2vw, 100%);
+    font-weight: var(--text-title-weigth);
+}
+
+.see_hours_title_container h2{
+    white-space: nowrap;
+    font-size: clamp(70%, 2vw, 90%);
+    font-weight: var(--text-subtitle-weigth);
+}
+
+
+

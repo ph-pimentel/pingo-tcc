@@ -1,6 +1,8 @@
 import styles from "./quadrainfocontent.module.css";
 import { useState } from "react";
 
+import ModalSeeHours from "./modalSeeHours";
+
 function QuadraInfoContent(){
 
     {/*__Descrição__*/}
@@ -12,7 +14,8 @@ function QuadraInfoContent(){
     
     const [textoAtivo, setTextoAtivo] = useState(textos.descricao);
 
-
+    {/*Ver Horários*/}
+    const [modalSeeHours,setModalSeeHours] = useState(false);
 
     return(
         <div className={styles.main_container}>
@@ -20,6 +23,8 @@ function QuadraInfoContent(){
 
          <div className={styles.content_container}>
 
+        <ModalSeeHours isVisible={modalSeeHours} onClose={() => setModalSeeHours(false)}/>
+        
             {/*   Imagem e Detalhes da Quadra   */}
             <div className={styles.main_content}>
 
@@ -45,7 +50,7 @@ function QuadraInfoContent(){
                         </div>
 
         
-                     <button className={styles.btn_see_hours}>
+                     <button className={styles.btn_see_hours} onClick={() => setModalSeeHours(true)}>
                             <img src="../img/QuadraInfo/clock.png"/>    
                             Horários Disponíveis
                             </button>
@@ -105,7 +110,7 @@ function QuadraInfoContent(){
 
         </div>
 
-
+    
 
         </div>
 
