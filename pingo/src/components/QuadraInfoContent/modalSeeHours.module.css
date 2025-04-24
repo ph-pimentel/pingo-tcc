@@ -17,7 +17,7 @@
     border-radius: var(--medium-border-radius);
     
     flex: 1;
-    z-index: 999;
+    z-index: 99;
 }
 
 .modal_leave_button{
@@ -54,7 +54,8 @@
     height: auto;
 
 }
-
+/*------------------------------------*/
+/* Main Container Titulo e Calendario*/
 .see_hours_title_container{
     display: flex;
     align-items: center;
@@ -64,9 +65,7 @@
 
     font-size: var(--text-subtitle-size);
     color: var(--text-main-color);
-    
 }
-
 .see_hours_title_container h1{
     font-size: clamp(70%, 2vw, 100%);
     font-weight: var(--text-title-weigth);
@@ -79,6 +78,8 @@
 }
 
 
+
+/*   Data e Seleção de dias   */
 .date_container{
     display: flex;
     align-items: center;
@@ -88,51 +89,90 @@
     gap: clamp(30px, 2vw, 50px);
 
 }
-
+/* mês e ano */
 .mount_container{
     display: flex;
+    justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative;
+
     white-space: nowrap;
+
+    margin: 0 auto;    
+
+    width: 320px;
     gap: clamp( 15px, 1vw, 20px);
 }
 
-.btn_mounth_select{
+.mout_container span{
+    text-align: center;
+    flex-grow: 1;
+}
+
+
+/* Setas */
+.btn_mounth_select,.btn_mount_select2{
     background: none;
     text-decoration: none;
     background-color: transparent;
     border: none;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    cursor: pointer;
+}
+
+.btn_mount_select2{
+    left: 0
+}
+
+.btn_mounth_select{
+    right: 0;
 }
 .btn_mounth_select img{
     width: clamp(20px, 2vw, 30px);
     
 }
+.btn_mount_select2 img{
+    transform: rotate(180deg);
+    width: clamp(20px, 2vw, 30px);
+}
 
+
+/*  Calendario  */
 
 .btn_day_select{
-
     background: none;
     text-decoration: none;
     
-    width: clamp(40px, 3vw, 60px);
+    width: clamp(30px, 3vw, 50px);
+    height: clamp(30px, 3vw, 50px);
 
     padding: 5px;
     
-    font-size: clamp(10px, 0.8vw, 19px);
-    font-weight: var(--text-title-weight);
+    font-size: clamp(8px, 0.8vw, 17px);
+    font-weight: 700;
     
     color: var(--text-secondary-color);
-    border: 1px solid white;
-
-
-    
+    border: 1px solid var(--text-secondary-color);
+    border-radius: clamp(5px, 0.5vw, 9px);
 }
+
+/* Botão focado */
+.selected {
+    background-color: var(--secondary-color);
+    color: var(--bg-color);
+    border: none;
+  }
 
 .day_buttons_container{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+
+    width: 70%;
     gap: clamp(10px, 0.7vw, 15px);
 }
-
-

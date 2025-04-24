@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import styles from './modalSeeHours.module.css';
 
-function DiasContainer({ mes, ano, onDiaSelecionado, dataAtual }) {
+function DiasContainer({ mes, ano, onDiaSelecionado, dataAtual, diaSelecionado, setDiaSelecionado }) {
   const diasNoMes = new Date(ano, mes + 1, 0).getDate();
-  const [diaSelecionado, setDiaSelecionado] = useState(null);
 
   const selecionarDia = (dia) => {
     const dataSelecionada = new Date(ano, mes, dia);
@@ -22,7 +21,11 @@ function DiasContainer({ mes, ano, onDiaSelecionado, dataAtual }) {
 
         if (dataSelecionada >= new Date(dataAtual.getFullYear(), dataAtual.getMonth(), dataAtual.getDate())) {
           return (
-            <button className={styles.btn_day_select} key={i} onClick={() => selecionarDia(dia)}>
+            <button
+              className={`${styles.btn_day_select} ${diaSelecionado === dia ? styles.selected : ''}`}
+              key={i}
+              onClick={() => selecionarDia(dia)}
+            >
               {dia} <br /> {diaSemana}
             </button>
           );
@@ -37,12 +40,14 @@ function Calendario({ onDiaSelecionado }) {
   const dataAtual = new Date();
   const [mesAtual, setMesAtual] = useState(dataAtual.getMonth());
   const [anoAtual, setAnoAtual] = useState(dataAtual.getFullYear());
+  const [diaSelecionado, setDiaSelecionado] = useState(null);
 
   const mudarMes = (incremento) => {
     const novaData = new Date(anoAtual, mesAtual + incremento, 1);
     if (novaData >= new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1)) {
       setMesAtual(novaData.getMonth());
       setAnoAtual(novaData.getFullYear());
+      setDiaSelecionado(null);
     }
   };
 
@@ -50,7 +55,7 @@ function Calendario({ onDiaSelecionado }) {
     <div className={styles.date_container}>
       <div className={styles.mount_container}>
         {!(mesAtual === dataAtual.getMonth() && anoAtual === dataAtual.getFullYear()) && (
-          <button onClick={() => mudarMes(-1)} className={styles.btn_mounth_select}>
+          <button onClick={() => mudarMes(-1)} className={styles.btn_mount_select2}>
             <img src="../img/QuadraInfo/seta.png" alt="Anterior" />
           </button>
         )}
@@ -60,7 +65,15 @@ function Calendario({ onDiaSelecionado }) {
         </button>
       </div>
   
-      <DiasContainer className={styles.day_buttons_container} mes={mesAtual} ano={anoAtual} onDiaSelecionado={onDiaSelecionado} dataAtual={dataAtual} />
+      <DiasContainer
+        className={styles.day_buttons_container}
+        mes={mesAtual}
+        ano={anoAtual}
+        onDiaSelecionado={onDiaSelecionado}
+        dataAtual={dataAtual}
+        diaSelecionado={diaSelecionado}
+        setDiaSelecionado={setDiaSelecionado}
+      />
     </div>
   );
 }
