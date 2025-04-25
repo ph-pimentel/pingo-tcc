@@ -167,9 +167,12 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade='fim-de-semana' } )
             <h1>Quadra 1</h1>
           </div>
           <div className={styles.quadra_info_sport}>
-            Esportes
             
-            <div className={styles.quadra_info_container}>
+          <div className={styles.quadra_info_title}>
+            <h2>Esportes</h2>
+          </div>
+            
+            <div className={styles.quadra_info_sports_container}>
                    <div className={styles.item_sport}>
                     <img src="../img/CourtCard/footballball.png" />
                     <h2>Futebol</h2>

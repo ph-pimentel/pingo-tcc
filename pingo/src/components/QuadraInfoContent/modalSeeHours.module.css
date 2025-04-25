@@ -190,10 +190,10 @@
     align-items: center;
     justify-content: flex-start;
     
-   width: 100%;
-   flex-wrap: nowrap;
+    width: 100%;
+
     
-    gap: 0px;
+    gap: clamp(20px, 1.5vw, 30px);
     padding: clamp(10px, 1vw, 20px) 20px;
 
     border: 2px solid var(--border-color);
@@ -204,7 +204,6 @@
 /* Imagem */
 .quadra_img_container{
     display: flex;
-    width: 90%;
 }
 .quadra_img_container img{
     width: clamp(400px, 30vw, 50px);
@@ -218,14 +217,15 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    width: 100%;
-
+    flex: 0;
+    flex-grow:1;
 
 }
 
 .quadra_info_title,.quadra_info_sport{
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     text-align: left;
     
     color: var(--text-main-color);
@@ -235,29 +235,36 @@
 
 /*  Esportes da Quadra  */
 
-.quadra_info_container{
+.quadra_info_sports_container{
     display: flex;
-    gap: clamp(15px, 1vw, 20px);
+    gap: clamp(15px, 2vw, 30px);
 }
 .quadra_info_title h1{
-    font-weight: 600;
+    font-weight: var(--text-title-weight);
     font-size: var(--text-title-size);
-    
 }
 
+.quadra_info_title h2{
+    font-weight: var(--text-subtitle-weight);
+    font-size: var(--text-subtitle-size);
+}
+
+/* Esportes */
 .item_sport {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    
-    width: 100%;
 
-    gap: 5px;
-    margin-left: 4px;
+    gap: 3px;
 }
-
 
 .item_sport img {
     max-width: 20px;
     max-height: auto;
+}
+
+.item_sport h2{
+    font-weight: var(--text-subtitle-weight);
+    font-size: var(--text-size);
+
 }
