@@ -1,0 +1,60 @@
+import { useState, useEffect } from "react";
+import Layout from "../../components/Layout/index";
+import QuadraCard from "../../components/CourtCard/index";
+import Filter from "../../components/Filter";
+import { listarQuadras } from "../../api";
+
+function Home() {
+    const [quadras, setQuadras] = useState([]);
+    const [carregando, setCarregando] = useState(true);
+
+    useEffect(() => {
+        async function carregarQuadrasIniciais() {
+            try {
+                const dados = await listarQuadras();
+                setQuadras(dados);
+            } catch (error) {
+                console.error("Erro ao carregar quadras:", error);
+            } finally {
+                setCarregando(false);
+            }
+        }
+        carregarQuadrasIniciais();
+    }, []);
+
+    const handleFiltrar = async (filtros) => {
+        setCarregando(true);
+        try {
+            const dados = await listarQuadras(filtros);
+            setQuadras(dados);
+        } catch (error) {
+            console.error("Erro ao filtrar:", error);
+        } finally {
+            setCarregando(false);
+        }
+    };
+
+    if (carregando) {
+        return (
+            <Layout>
+                <Filter onFilter={handleFiltrar} />
+                <div className="carregando">Carregando quadras...</div>
+            </Layout>
+        );
+    }
+
+    return (
+        <Layout>
+            <Filter onFilter={handleFiltrar} />
+
+            {quadras.map(quadra => (
+                <QuadraCard
+                    key={quadra.ID_Quadra}
+                    quadra={quadra}
+                />
+            ))}
+        </Layout>
+    );
+}
+
+export default Home;

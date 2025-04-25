@@ -1,0 +1,63 @@
+@import url('../../styles/fonts/Poppins.css');
+
+
+.buttons_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    
+    margin-top: 250px;
+    padding: 2rem;
+    gap: 1rem; 
+    
+    z-index: 2;
+}
+
+.button1, .button2, .button3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    min-width: 350px; 
+    min-height: 60px;
+    font-weight:650;
+
+    padding: 15px 30px;
+    border-radius: 14px;
+    font-size: 16px;
+
+    cursor: pointer;
+    text-decoration: none;
+
+    z-index: 3;
+
+    cursor:pointer;
+
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+
+    transition: all 0.2s ease-out;
+}
+
+.button1{
+    background-color: white;
+    color: black;
+}
+
+.button2{
+    background-color: black;
+    color: white;
+}
+.button3{
+    background-color: #4E94FF;
+    color: white;
+}
+
+.button1:hover,.button2:hover,.button3:hover{
+    scale: calc(1.012);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3)
+}
+
+

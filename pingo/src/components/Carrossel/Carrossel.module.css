@@ -1,0 +1,86 @@
+/* Estilo do fundo */
+.Background {
+    width: 100%;
+    background-image: url('/public/img/BackGround/Home.png');
+    background-size: cover; /* Garante que a imagem cubra toda a área */
+    background-position: center center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+    background-attachment: fixed; /* A imagem fica fixa enquanto o conteúdo rola */
+    height: 100vh; /* O fundo cobre toda a altura da tela */
+    position: relative; /* Ajusta o fundo para o fluxo do conteúdo */
+    z-index: -1; /* Garante que o fundo fique atrás do conteúdo */
+  }
+  
+  /* Estilo do container do carrossel */
+  .carrosselContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    position: relative;
+    top: 50px; /* Ajuste a posição conforme necessário */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    height: auto;
+    margin-top: 500px; /* Distância do topo, ajustável */
+  }
+  
+  /* Estilo do carrossel */
+  .carrosselDisplay {
+    width: 1300px;
+    height: 525px;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative; /* Remove 'fixed' para que o carrossel role com a página */
+  }
+  
+  /* Estilo das imagens do carrossel */
+  .carrosselImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Botões de navegação do carrossel */
+  .btnLeft, .btnRight {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    border: 2px solid rgb(202, 202, 202);
+    background-color: rgb(255, 255, 255);
+    color: black;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+  }
+  
+  .btnLeft {
+    left: -60px;
+  }
+  
+  .btnRight {
+    right: -60px;
+  }
+  
+  .btnLeft:hover, .btnRight:hover {
+    border-color: rgb(95, 95, 95);
+    background-color: rgb(255, 255, 255);
+  }
+  
