@@ -122,8 +122,8 @@ function Calendario({ onDiaSelecionado, disponibilidade }) {
  Colocar dias indisponiveis que o proprietario selecionou aqui
 */}
 const diasIndisponiveis = [
-  { dia: 24, mes: 4, ano: 2025 },
-  { dia: 25, mes: 4, ano: 2025 },
+  { dia: 22, mes: 4, ano: 2025 },
+  { dia: 23, mes: 4, ano: 2025 },
   { dia: 27, mes: 5, ano: 2025 },
 ];
 {/* Aviso Backend 
@@ -131,7 +131,7 @@ const diasIndisponiveis = [
   opções: 'todos', 'dias-uteis', 'fim-de-semana'  
 */}
   
-function ModalSeeHours({ isVisible, onClose, disponibilidade='dias-uteis' } )  {
+function ModalSeeHours({ isVisible, onClose, disponibilidade='fim-de-semana' } )  {
   if (!isVisible) return null;
 
   return (
@@ -142,6 +142,7 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade='dias-uteis' } )  {
         </button>
       </div>
 
+    {/*  Calendario  */}
       <div className={styles.hours_container}>
         <div className={styles.see_hours_title_container}>
           <h1>Agende seu Horário</h1>
@@ -150,6 +151,42 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade='dias-uteis' } )  {
             disponibilidade={disponibilidade} 
           />
         </div>
+      </div>
+
+
+      <div className={styles.quadra_main_container}>
+        
+        <div className={styles.quadra_img_container}>
+          <img src="../img/Carrossel/image1.jpg"/>
+        </div>
+
+
+        <div className={styles.quadra_info_main_container}>
+
+          <div className={styles.quadra_info_title}>
+            <h1>Quadra 1</h1>
+          </div>
+          <div className={styles.quadra_info_sport}>
+            Esportes
+            
+            <div className={styles.quadra_info_container}>
+                   <div className={styles.item_sport}>
+                    <img src="../img/CourtCard/footballball.png" />
+                    <h2>Futebol</h2>
+                   </div>
+                    <div className={styles.item_sport}>
+                     <img src="../img/CourtCard/basketball.png" />
+                     <h2>Basquete</h2>
+                   </div>
+                  <div className={styles.item_sport}>
+                     <img src="../img/CourtCard/volleyball.png" />
+                     <h2>Vôlei</h2>
+                 </div>
+            </div>
+         </div>
+
+
+      </div>
       </div>
     </div>
   );
