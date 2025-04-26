@@ -1,0 +1,333 @@
+
+
+.modal_main_container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    
+    padding: 0px 40px;
+    padding-bottom: 40px;
+    padding-top: 30px;
+
+    gap: 30px;
+    
+    background-color: var(--bg-color);
+    border-radius: var(--medium-border-radius);
+    
+    flex: 1;
+    z-index: 99;
+}
+
+.modal_leave_button{
+    background: none;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    
+    font-family: var(--primary-font);
+    
+    color: var(--text-secondary-color);
+    
+    font-size: clamp(35px, 1vw, 45px);
+    font-weight: 400;
+    
+    cursor: pointer;
+    transition: all 0.15s ease-out;
+}
+
+.modal_leave_button img{
+    width: clamp(30px, 2vw, 40px);
+    height: auto;
+
+    padding: 3px;
+    border-radius: 10px;
+}
+
+
+.hours_container{
+    display: flex;
+    justify-content: center;
+    
+    width: 100%;
+    height: auto;
+
+}
+/*------------------------------------*/
+/* Main Container Titulo e Calendario*/
+.see_hours_title_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+
+    font-size: var(--text-subtitle-size);
+    color: var(--text-main-color);
+}
+.see_hours_title_container h1{
+    font-size: clamp(70%, 2vw, 100%);
+    font-weight: var(--text-title-weigth);
+}
+
+.see_hours_title_container h2{
+    white-space: nowrap;
+    font-size: clamp(70%, 2vw, 90%);
+    font-weight: var(--text-subtitle-weigth);
+}
+
+
+
+/*   Data e Seleção de dias   */
+.date_container{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: clamp(30px, 2vw, 50px);
+
+}
+/* mês e ano */
+.mount_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+
+    white-space: nowrap;
+
+    margin: 0 auto;    
+
+    width: 320px;
+    gap: clamp( 15px, 1vw, 20px);
+}
+
+.mout_container span{
+    text-align: center;
+    flex-grow: 1;
+}
+
+
+/* Setas */
+.btn_mounth_select,.btn_mount_select2{
+    background: none;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    cursor: pointer;
+}
+
+.btn_mount_select2{
+    left: 0
+}
+
+.btn_mounth_select{
+    right: 0;
+}
+.btn_mounth_select img{
+    width: clamp(20px, 2vw, 30px);
+    
+}
+.btn_mount_select2 img{
+    transform: rotate(180deg);
+    width: clamp(20px, 2vw, 30px);
+}
+
+
+/*  Calendario  */
+
+.btn_day_select{
+    background: none;
+    text-decoration: none;
+    
+    width: clamp(35px, 3vw, 50px);
+    height: clamp(35px, 3vw, 50px);
+
+    padding: 5px;
+    
+    font-size: clamp(10px, 0.8vw, 17px);
+    font-weight: 700;
+    
+    color: var(--text-secondary-color);
+    border: 2px solid var(--text-secondary-color);
+    border-radius: clamp(5px, 0.5vw, 9px);
+}
+
+/* Botão focado */
+.selected {
+    background-color: var(--secondary-color);
+    color: var(--bg-color);
+    border: none;
+  }
+
+.day_buttons_container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    width: 70%;
+    gap: clamp(10px, 0.7vw, 15px);
+}
+
+
+/*------------------*/
+/*   Quadra Card   */
+
+.quadra_main_container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: fit-content;
+    flex-wrap: wrap;
+
+    gap: clamp(20px, 1.5vw, 30px);
+    padding: clamp(10px, 1vw, 20px) 20px;
+
+    border: 2px solid var(--border-color);
+    border-radius: clamp(10px, 1vw, 20px);
+}
+
+
+/* Imagem */
+.quadra_img_container{
+    display: flex;
+    flex: 1 1 300px;
+}
+.quadra_img_container img{
+    width: clamp(400px, 30vw, 700px);
+    flex: 1;
+    border-radius: 10px;
+    
+}
+
+/* Informações */
+.quadra_info_main_container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    gap: clamp(12px, 1vw, 20px);
+
+    flex: 0;
+
+}
+
+.quadra_info_title,.quadra_info_sport{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    
+    color: var(--text-main-color);
+    white-space: nowrap;
+}
+
+
+/*  Esportes da Quadra  */
+
+.quadra_info_sports_container{
+    display: flex;
+    gap: clamp(15px, 2vw, 30px);
+    margin: 0 0;
+}
+.quadra_info_title h1{
+    font-weight: var(--text-title-weight);
+    font-size: var(--text-title-size);
+}
+
+.quadra_info_title h2{
+    font-weight: var(--text-subtitle-weight);
+    font-size: var(--text-subtitle-size);
+    margin: 0;
+}
+
+/* Esportes */
+.item_sport {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 3px;
+}
+
+.item_sport img {
+    max-width: 20px;
+    max-height: auto;
+}
+
+.item_sport h2{
+    font-weight: var(--text-subtitle-weight);
+    font-size: var(--text-size);
+
+}
+
+
+/*-------------------------*/
+/*   Horários Alugaveis   */
+.hours_main_container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: clamp(10px 0.7vw, 20px) clamp(10px 0.7vw, 20px);
+}
+
+
+.hours_card_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    gap: 4px;
+    
+    padding: clamp(5px, 0.8vw, 8px) clamp(5px, 0.6vw, 10px);    
+    
+    border: solid 2px var(--border-color);
+    border-radius: clamp(5px, 0.5vw, 10px);
+    
+    cursor: pointer;
+}
+
+.hours_card_container input[type="checkbox"]{
+    -webkit-appearance: none; /* Remove a aparência padrão no Chrome/Safari */
+    -moz-appearance: none; /* Remove a aparência padrão no Firefox */
+    appearance: none; /* Remove a aparência padrão em outros browsers */
+
+    width: 20px;
+    height: 20px;
+    background-color: transparent; /* Remove o fundo do checkbox */
+    border: 2px solid var(--border-color); /* Altera a borda para ser visível */
+    border-radius: 5px; /* Faz bordas arredondadas */
+    cursor: pointer; /* Torna o cursor uma mãozinha ao passar por cima */
+    transition: all 0.3s ease; /* Transição suave para as mudanças */
+}
+
+.hours_card_container input:checked::after{
+    content: '✓';
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+
+.hours_card_container:has(input:checked){
+    border: solid 2px var(--primary-color);
+}
+
+.hours_text_container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
