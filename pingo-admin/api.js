@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {jwtDecode} from 'jwt-decode'
 
 const API_URL = 'http://localhost:5000';
 
@@ -159,3 +160,37 @@ export const getSingleUsuario = async (id) => {
     }
 }
   
+    export const loginUsuario = async (credenciais) => {
+        try{
+            const response = await axios.post(`${API_URL}/login`, credenciais);
+
+
+            //Bem-sucedido armazena no localStorage
+            if (response.data.token) {
+                localStorage.setItem('token', response.data.token); //Salvando no localStorage
+            }
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao fazer login:', error);
+            throw error;
+        }
+    };
+
+    export const obterUsuario = () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                const decoded = jwtDecode(token);
+                return decoded;
+            } catch (e) {
+                console.error("Erro ao decodificar o token:", e);
+            }
+        }
+        return null;
+    };
+
+//Logout
+export const logout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+}

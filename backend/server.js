@@ -1,246 +1,294 @@
-const express = require('express');
-const cors = require('cors');
-const mysql = require('mysql2');
+const express = require("express");
+const cors = require("cors");
+const mysql = require("mysql2");
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const port = 5000;
 
 //Middleware que permite Cors e tratamento de Json
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
 
 //Conexão Mysql
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
-    database: 'PINGO',
+  host: "localhost",
+  user: "root",
+  password: "1234",
+  database: "PINGO",
 });
 
 db.connect((err) => {
-    if (err) throw err;
-    console.log('Conectado ao banco de dados!')
+  if (err) throw err;
+  console.log("Conectado ao banco de dados!");
 });
 
 /// --> Sessão Quadras Pub
 
 //Rota que vai conter os dados das quadras
-app.get('/quadraspub', (req, res) => {
-    db.query('SELECT * FROM Quadra WHERE TipoQuadra = ?', [0], (err, results) => {
-        if (err) {
-            console.error('Erro ao obter quadras:', err)
-            return res.status(500).send('Erro ao obter quadras')
-          }
-          res.json(results);
-    });
-    
-})
-
+app.get("/quadraspub", (req, res) => {
+  db.query("SELECT * FROM Quadra WHERE TipoQuadra = ?", [0], (err, results) => {
+    if (err) {
+      console.error("Erro ao obter quadras:", err);
+      return res.status(500).send("Erro ao obter quadras");
+    }
+    res.json(results);
+  });
+});
 
 // Rota para criar uma nova quadra publica
-app.post('/quadraspub', (req, res) => {
-    const { NomeQuadra, EnderecoQuadra, Bairro, Cidade} = req.body;
-    db.query(
-        'INSERT INTO Quadra (NomeQuadra, EnderecoQuadra, Bairro, Cidade) VALUES (?,?,?,?)',
-        [NomeQuadra, EnderecoQuadra, Bairro, Cidade],
-        (err, result) => {
-            if (err) throw err;
-            res.json({ ID_Quadra : result.insertId,NomeQuadra, EnderecoQuadra, Bairro, Cidade });
-        }
-    )
-})
+app.post("/quadraspub", (req, res) => {
+  const { NomeQuadra, EnderecoQuadra, Bairro, Cidade } = req.body;
+  db.query(
+    "INSERT INTO Quadra (NomeQuadra, EnderecoQuadra, Bairro, Cidade) VALUES (?,?,?,?)",
+    [NomeQuadra, EnderecoQuadra, Bairro, Cidade],
+    (err, result) => {
+      if (err) throw err;
+      res.json({
+        ID_Quadra: result.insertId,
+        NomeQuadra,
+        EnderecoQuadra,
+        Bairro,
+        Cidade,
+      });
+    }
+  );
+});
 
 //Rota para atualizar uma quadra pública existente
-app.put('/quadraspub/att/:id', (req, res) => {
-    const {id} = req.params;
-    const { NomeQuadra, EnderecoQuadra, Bairro, Cidade } = req.body;
+app.put("/quadraspub/att/:id", (req, res) => {
+  const { id } = req.params;
+  const { NomeQuadra, EnderecoQuadra, Bairro, Cidade } = req.body;
 
-    db.query(
-        'UPDATE Quadra SET NomeQuadra = ?, EnderecoQuadra = ?, Bairro = ?, Cidade = ? WHERE ID_Quadra = ?',
-            [NomeQuadra, EnderecoQuadra, Bairro, Cidade, id],
-            (err, result) => {
-                if (err) {
-                    console.error('Erro ao atualizar quadra:', err);
-                    return res.status(500).json({ error: 'Quadra não encontrada'});
-                }
-                if (result.affectedRows === 0) {
-                    return res.status(404).json({ error: 'Quadra não encontrada'});
-                }
+  db.query(
+    "UPDATE Quadra SET NomeQuadra = ?, EnderecoQuadra = ?, Bairro = ?, Cidade = ? WHERE ID_Quadra = ?",
+    [NomeQuadra, EnderecoQuadra, Bairro, Cidade, id],
+    (err, result) => {
+      if (err) {
+        console.error("Erro ao atualizar quadra:", err);
+        return res.status(500).json({ error: "Quadra não encontrada" });
+      }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: "Quadra não encontrada" });
+      }
 
-                res.json({
-                    ID_Quadra: id,
-                    NomeQuadra,
-                    EnderecoQuadra,
-                    Bairro,
-                    Cidade,
-                    message: 'Quadra atualizada com sucesso'
-                });
-            }
-    );
+      res.json({
+        ID_Quadra: id,
+        NomeQuadra,
+        EnderecoQuadra,
+        Bairro,
+        Cidade,
+        message: "Quadra atualizada com sucesso",
+      });
+    }
+  );
 });
 
 //Rota para deletar uma quadra de acordo com o ID
-app.delete('/quadraspub/delete/:id', (req, res) => {
-    const  {id}  = req.params;
-    db.query('DELETE FROM Quadra WHERE ID_Quadra = ?', [id], (err, result) =>{
-        if (err) {
-            console.error('Erro ao deletar quadra:', err);
-            return res.status(500).json({ error: 'Erro ao deletar quadra'});
-        }
-        res.json({ message: 'Quadra deletada com sucesso' });
-    });
+app.delete("/quadraspub/delete/:id", (req, res) => {
+  const { id } = req.params;
+  db.query("DELETE FROM Quadra WHERE ID_Quadra = ?", [id], (err, result) => {
+    if (err) {
+      console.error("Erro ao deletar quadra:", err);
+      return res.status(500).json({ error: "Erro ao deletar quadra" });
+    }
+    res.json({ message: "Quadra deletada com sucesso" });
+  });
 });
 
 //-> Single Page Quadra Pub
-app.get('/quadraspub/:id', (req, res) => {
-    const {id} = req.params;
-    db.query('SELECT * FROM Quadra WHERE ID_Quadra = ?', [id], (err, results) =>{
-        if (err) {
-            console.error('Erro ao obter quadra:', err);
-            return res.status(500).send('Erro ao obter quadra')
-        }
-        res.json({results});
-    });
+app.get("/quadraspub/:id", (req, res) => {
+  const { id } = req.params;
+  db.query("SELECT * FROM Quadra WHERE ID_Quadra = ?", [id], (err, results) => {
+    if (err) {
+      console.error("Erro ao obter quadra:", err);
+      return res.status(500).send("Erro ao obter quadra");
+    }
+    res.json({ results });
+  });
 });
-
 
 /// --> Sessão Quadras Privadas BackEnd
 
 //Rota que vai conter os dados das quadras privadas
-app.get('/quadraspriv', (req, res) => {
-    db.query('SELECT * FROM Quadra WHERE TipoQuadra = ?', [1], (err, results) => {
-        if (err) {
-            console.error('Erro ao obter quadras:', err)
-            return res.status(500).send('Erro ao obter quadras')
-          }
-          res.json(results);
-    });
-    
-})
+app.get("/quadraspriv", (req, res) => {
+  db.query("SELECT * FROM Quadra WHERE TipoQuadra = ?", [1], (err, results) => {
+    if (err) {
+      console.error("Erro ao obter quadras:", err);
+      return res.status(500).send("Erro ao obter quadras");
+    }
+    res.json(results);
+  });
+});
 
 //Rota para deletar uma quadra de acordo com o ID
-app.delete('/quadraspriv/delete/:id', (req, res) => {
-    const  {id}  = req.params;
-    db.query('DELETE FROM Quadra WHERE ID_Quadra = ?', [id], (err, result) =>{
-        if (err) {
-            console.error('Erro ao deletar quadra:', err);
-            return res.status(500).json({ error: 'Erro ao deletar quadra'});
-        }
-        res.json({ message: 'Quadra deletada com sucesso' });
-    });
+app.delete("/quadraspriv/delete/:id", (req, res) => {
+  const { id } = req.params;
+  db.query("DELETE FROM Quadra WHERE ID_Quadra = ?", [id], (err, result) => {
+    if (err) {
+      console.error("Erro ao deletar quadra:", err);
+      return res.status(500).json({ error: "Erro ao deletar quadra" });
+    }
+    res.json({ message: "Quadra deletada com sucesso" });
+  });
 });
 
 // Single Page Quadra Privada
-app.get('/quadraspriv/:id', (req, res) => {
-    const {id} = req.params;
-    db.query('SELECT * FROM Quadra WHERE ID_Quadra = ?', [id], (err, results) =>{
-        if (err) {
-            console.error('Erro ao obter quadra:', err);
-            return res.status(500).send('Erro ao obter quadra')
-        }
-        res.json({results});
-    });
+app.get("/quadraspriv/:id", (req, res) => {
+  const { id } = req.params;
+  db.query("SELECT * FROM Quadra WHERE ID_Quadra = ?", [id], (err, results) => {
+    if (err) {
+      console.error("Erro ao obter quadra:", err);
+      return res.status(500).send("Erro ao obter quadra");
+    }
+    res.json({ results });
+  });
 });
 
 //Rota para atualizar uma quadra pública existente
-app.put('/quadraspriv/att/:id', (req, res) => {
-    const {id} = req.params;
-    const { NomeQuadra, EnderecoQuadra, Bairro, Cidade } = req.body;
+app.put("/quadraspriv/att/:id", (req, res) => {
+  const { id } = req.params;
+  const { NomeQuadra, EnderecoQuadra, Bairro, Cidade } = req.body;
 
-    db.query(
-        'UPDATE Quadra SET NomeQuadra = ?, EnderecoQuadra = ?, Bairro = ?, Cidade = ? WHERE ID_Quadra = ?',
-            [NomeQuadra, EnderecoQuadra, Bairro, Cidade, id],
-            (err, result) => {
-                if (err) {
-                    console.error('Erro ao atualizar quadra:', err);
-                    return res.status(500).json({ error: 'Quadra não encontrada'});
-                }
-                if (result.affectedRows === 0) {
-                    return res.status(404).json({ error: 'Quadra não encontrada'});
-                }
+  db.query(
+    "UPDATE Quadra SET NomeQuadra = ?, EnderecoQuadra = ?, Bairro = ?, Cidade = ? WHERE ID_Quadra = ?",
+    [NomeQuadra, EnderecoQuadra, Bairro, Cidade, id],
+    (err, result) => {
+      if (err) {
+        console.error("Erro ao atualizar quadra:", err);
+        return res.status(500).json({ error: "Quadra não encontrada" });
+      }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: "Quadra não encontrada" });
+      }
 
-                res.json({
-                    ID_Quadra: id,
-                    NomeQuadra,
-                    EnderecoQuadra,
-                    Bairro,
-                    Cidade,
-                    message: 'Quadra atualizada com sucesso'
-                });
-            }
-    );
+      res.json({
+        ID_Quadra: id,
+        NomeQuadra,
+        EnderecoQuadra,
+        Bairro,
+        Cidade,
+        message: "Quadra atualizada com sucesso",
+      });
+    }
+  );
 });
-
-
 
 /// --> Sessão Usuarios BackEnd
 
 //Rota que vai conter os dados dos usuarios
 app.get("/users", (req, res) => {
-    db.query("SELECT * FROM Usuario", (err, results) => {
-      if (err) {
-        console.error("Erro ao obter usuarios:", err);
-        return res.status(500).send("Erro ao obter usuarios");
-      }
-      res.json(results);
-    });
+  db.query("SELECT * FROM Usuario", (err, results) => {
+    if (err) {
+      console.error("Erro ao obter usuarios:", err);
+      return res.status(500).send("Erro ao obter usuarios");
+    }
+    res.json(results);
   });
+});
 
 // ---> Rota para deletar um usuario de acordo com o ID
 app.delete("/users/delete/:id", (req, res) => {
-    const { id } = req.params;
-    db.query("DELETE FROM Usuario WHERE ID_Usuario = ?", [id], (err, result) => {
-      if (err) {
-        console.error("Erro ao deletar usuario:", err);
-        return res.status(500).json({ error: "Erro ao deletar usuario" });
-      }
-      res.json({ message: "Usuario deletada com sucesso" });
-    });
+  const { id } = req.params;
+  db.query("DELETE FROM Usuario WHERE ID_Usuario = ?", [id], (err, result) => {
+    if (err) {
+      console.error("Erro ao deletar usuario:", err);
+      return res.status(500).json({ error: "Erro ao deletar usuario" });
+    }
+    res.json({ message: "Usuario deletada com sucesso" });
   });
+});
 
-
-  // Single Page Quadra Privada
-app.get('/user/:id', (req, res) => {
-    const {id} = req.params;
-    db.query('SELECT * FROM Usuario WHERE ID_Usuario = ?', [id], (err, results) =>{
-        if (err) {
-            console.error('Erro ao obter usuario:', err);
-            return res.status(500).send('Erro ao obter quadra')
-        }
-        res.json({results});
-    });
+// Single Page Quadra Privada
+app.get("/user/:id", (req, res) => {
+  const { id } = req.params;
+  db.query(
+    "SELECT * FROM Usuario WHERE ID_Usuario = ?",
+    [id],
+    (err, results) => {
+      if (err) {
+        console.error("Erro ao obter usuario:", err);
+        return res.status(500).send("Erro ao obter quadra");
+      }
+      res.json({ results });
+    }
+  );
 });
 
 //Rota para atualizar um usuario existente
-app.put('/user/att/:id', (req, res) => {
-    const {id} = req.params;
-    const { NomeUsuario, Email, TipoUsuario } = req.body;
+app.put("/user/att/:id", (req, res) => {
+  const { id } = req.params;
+  const { NomeUsuario, Email, TipoUsuario } = req.body;
+  db.query(
+    "UPDATE Usuario SET NomeUsuario = ?, Email = ?, TipoUsuario = ? WHERE ID_Usuario = ?",
+    [NomeUsuario, Email, TipoUsuario, id],
+    (err, result) => {
+      if (err) {
+        console.error("Erro ao atualizar usuario:", err);
+        return res.status(500).json({ error: "Usuario não encontrada" });
+      }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: "Usuario não encontrada" });
+      }
 
-    db.query(
-        'UPDATE Usuario SET NomeUsuario = ?, Email = ?, TipoUsuario = ? WHERE ID_Usuario = ?',
-            [NomeUsuario, Email, TipoUsuario, id],
-            (err, result) => {
-                if (err) {
-                    console.error('Erro ao atualizar usuario:', err);
-                    return res.status(500).json({ error: 'Usuario não encontrada'});
-                }
-                if (result.affectedRows === 0) {
-                    return res.status(404).json({ error: 'Usuario não encontrada'});
-                }
-
-                res.json({
-                    ID_Usuario: id,
-                    NomeUsuario,
-                    Email,
-                    TipoUsuario,
-                    message: 'Usuario atualizada com sucesso'
-                });
-            }
-    );
+      res.json({
+        ID_Usuario: id,
+        NomeUsuario,
+        Email,
+        TipoUsuario,
+        message: "Usuario atualizada com sucesso",
+      });
+    }
+  );
 });
 
+app.post("/login", (req, res) => {
+  const { Email, Senha, manterConectado } = req.body;
+
+  if (!Email || !Senha) {
+    return res.status(400).json({ error: "Email e senha são obrigatórios" });
+  }
+
+  //Consulta do db para encontrar o usuario em questao
+  db.query(
+    "SELECT * FROM Usuario WHERE Email = ? AND Senha = ? AND TipoUsuario IN ('proprietario', 'admin')",
+    [Email, Senha],
+    (err, results) => {
+      if (err) {
+        console.error("Erro ao fazer login:", err);
+        return res.status(500).json({ error: "Erro ao fazer login" });
+      }
+
+      if (results.length === 0) {
+        return res.status(401).json({ error: "Credenciais inválidas" });
+      }
+
+      const usuario = results[0];
+
+      const tempoExpiracao = manterConectado ? '720h' : '1h';
+      
+      //Gera uma sessão JWT
+      const token = jwt.sign(
+        {
+          ID_Usuario: usuario.ID_Usuario,
+          Nome: usuario.NomeUsuario,
+          Email: usuario.Email,
+          TipoUsuario: usuario.TipoUsuario,
+          Foto: usuario.FotoUsuario
+        },
+        'pingo123', //chave JWT
+        {expiresIn: tempoExpiracao}
+      );
+  
+  res.json({
+    message: "Login bem-sucedido",
+    token: token
+  });
+}
+);
+});
 
 //Inicia o servidor
 app.listen(port, () => {
-    console.log(`Servidor rodando na rota ${port}`)
-})
+  console.log(`Servidor rodando na rota ${port}`);
+});

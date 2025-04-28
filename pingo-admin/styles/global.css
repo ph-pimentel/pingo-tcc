@@ -15,7 +15,7 @@ a {
 
 .main {
     font-family: var(--font-primary);
-    background-color: var(--background-color);
+    background-color: var( --primary-color);
     color: var(--text-color);
     display: flex;
     flex-direction: column;

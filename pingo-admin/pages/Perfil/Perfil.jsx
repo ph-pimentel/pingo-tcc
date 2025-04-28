@@ -1,6 +1,7 @@
 import styles from './Perfil.module.css'
-
+import { obterUsuario } from "../../api";
 const Perfil = () => {
+  const usuario = obterUsuario()
   return (  
     
     <div className={styles.profilePage}>
@@ -8,21 +9,12 @@ const Perfil = () => {
       <div className={styles.profileContainer}>
     {/* Primeira Seção da Esquerda*/}
     <div className={styles.profileHeader}>
-      <img className={styles.profileImage} src="https://p2.trrsf.com/image/fget/cf/774/0/images.terra.com/2024/06/25/1838205454-h6qiiv3bcnfabit5e5pqj6rutq.png" alt="" />
+      <img className={styles.profileImage} src={usuario.Foto} alt="" />
        <div className={styles.userImage}>
           <button className={styles.buttonImage}>Change Image</button>
         </div>
         <div className={styles.senhas}>
-          <div className={styles.oldSenha}>
-            <span className={styles.text}>Senha Antiga</span>
-            <br/>
-            <input className={styles.input}></input>
-        </div>
-        <div className={styles.newSenha}>
-            <span className={styles.text}>Senha Nova</span>
-            <br/>
-            <input className={styles.input}></input>
-        </div>
+          <h2>Mudar Informações</h2>
       </div>
       <button className={styles.buttonPassword}>Change Password</button>
     </div>
@@ -33,14 +25,10 @@ const Perfil = () => {
         <span className={styles.info}>Informações do Usuario</span>
         <div className={styles.infoProfile}>
           <div className={styles.inputGroup}>
-            <span>Primeiro Nome</span>
-            <input></input>
-            <span>Nickname</span>
-            <input></input>
+            <span>Nome Usuário</span>
+            <input type="text" value={usuario.Nome} disabled />
           </div>
           <div className={styles.inputGroup}>
-            <span>Segundo Nome</span>
-            <input></input>
           </div>
         </div>
 
@@ -49,13 +37,13 @@ const Perfil = () => {
         <div className={styles.infoProfile}>
           <div className={styles.inputGroup}>
             <span>Email</span>
-            <input></input>
-            <span>Telefone</span>
-            <input></input>
+            <input type="text" value={usuario.Email} disabled/>
+            <span>Senha</span>
+            <input type="text" value={usuario.ID_Usuario} disabled/>
           </div>
           <div className={styles.inputGroup}>
-            <span>Tipo de Usuario</span>
-            <input ></input>
+          <span>Tipo de Usuario</span>
+          <input type="text" value={usuario.TipoUsuario} disabled/>
           </div>
         </div>
         

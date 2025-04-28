@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, Outlet, RouterProvider} from 'react-router-dom'
+import { createBrowserRouter, Navigate, Outlet, RouterProvider} from 'react-router-dom'
+import { ProtectedRoute } from '../components/ProtectedRoute/ProtectedRoute.jsx'
 
 import '../styles/global.css'
 import Home from '../pages/Home/Home.jsx'
@@ -18,6 +19,9 @@ import Reserva from '../pages/Reserva/Reserva.jsx'
 import SingleQuadraPub from '../pages/SingleQuadraPub/SingleQuadraPub.jsx'
 import SingleQuadraPriv from '../pages/SingleQuadraPriv/SingleQuadraPriv.jsx'
 import SingleUser from '../pages/SingleUser/SingleUser.jsx'
+import Login from '../pages/Login/Login.jsx'
+import Unauthorized from '../pages/Unauthorized/Unauthorized.jsx'
+import AuthRedirect from '../components/AuthRedirect/AuthRedirect.jsx'
 
 const Layout = () => {
   return (
@@ -41,10 +45,31 @@ const router = createBrowserRouter([
   {
     path: "/",
     errorElement: <ErrorPage />, //Pagina de Erro
-    element:<Layout/>,
-    children: [ 
+    children: [
+      //Paginas Públicas que não contém o Layout do Admin
       {
         path: "/",
+        element:(
+          <AuthRedirect>
+          <Login/>
+          </AuthRedirect>
+        ) 
+      },
+      {
+        path: "/unauthorized",
+        element: <Unauthorized/>
+      },
+    {
+      // Paginas Privadas, só acessadas se fizer login com Layout
+      //Através do allowedRoles posso gerenciar quem entra em qual página
+    element:(
+        <ProtectedRoute allowedRoles={['Admin', 'Proprietario']}>
+          <Layout />
+        </ProtectedRoute>
+      ),
+    children: [ 
+      {
+        path: "/home",
         element: <Home/>,
       },
       {
@@ -89,6 +114,7 @@ const router = createBrowserRouter([
       }
     ]
   }
+]}
 ])
 
 createRoot(document.getElementById('root')).render(
