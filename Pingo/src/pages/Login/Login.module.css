@@ -1,0 +1,305 @@
+@import url('../../styles/fonts/Poppins.css');
+:root {
+    /* Cores */
+    --primary-color: #72a9fb;
+    --secondary-color: #4E94FF;
+    --text-color: black;
+    --background-color: white;
+    --border-color: black;
+    --placeholder-color: #949494;
+    --forgot-password-color: #72a9fb;
+
+    /* Fontes */
+    --font-primary: 'Poppins', sans-serif;
+    --font-size-small: 16px;
+    --font-size-medium: 18px;
+    --font-size-large: 30px;
+
+    /* Espaçamentos */
+    --padding-default: 15px;
+    --margin-top-default: 25px;
+
+    /* Bordas e sombras */
+    --border-radius: 10px;
+    --border-thickness: 0.5px;
+    --box-shadow-default: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    --box-shadow-strong: 0px 3px 5px rgba(0, 0, 0, 0.45);
+    --box-shadow-super-strong: 0px 5px 8px rgba(0, 0, 0, 0.50);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    user-select: none;
+}
+
+/*___Container Principal___*/
+.loginContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background: var(--background-color);
+    background: url('../../../public/img/BackGround/BackgroundLogin.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/*--Ícone--*/
+.loginIcon {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    max-width: 140px;
+    max-height: 140px;
+    margin-bottom: 10px;
+}
+
+/*___Título___*/
+.loginTitle {
+    font-family: var(--font-primary);
+    font-weight: unset;
+    font-size: var(--font-size-large);
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+/*___Formulário de Login___*/
+.loginForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--background-color);
+    padding: 30px 90px;
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-super-strong);
+}
+
+/*--Input de Email--*/
+.emailInput {
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 57px;
+    padding: var(--padding-default);
+    font-size: var(--font-size-small);
+    margin-top: var(--margin-top-default);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-default);
+    border: solid var(--border-thickness) var(--border-color);
+}
+
+.loginForm input::placeholder {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: var(--placeholder-color);
+}
+
+.loginForm input:focus {
+    border: 1px solid var(--primary-color);
+    outline: 2px solid var(--primary-color);
+}
+
+/*--Input de Senha--*/
+.passwordInputContainer {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    padding: var(--padding-default);
+    font-size: var(--font-size-small);
+    margin-top: var(--margin-top-default);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-default);
+    border: solid var(--border-thickness) var(--border-color);
+    background-color: white;
+    cursor: text;
+}
+
+.passwordInputContainer:focus-within {
+    border: 1px solid var(--primary-color);
+    outline: 2px solid var(--primary-color);
+}
+
+.passwordInputContainer input {
+    flex: 1;
+    height: 25px;
+    border: none;
+    outline: none;
+    font-size: inherit;
+    background: white;
+    padding-right: 10px;
+}
+
+.passwordInputContainer input:focus {
+    border: none;
+    outline: none;
+}
+
+.passwordInputContainer img {
+    max-width: 20px;
+    max-height: 20px;
+    cursor: pointer;
+}
+
+/*___Manter Conectado e Esqueceu a Senha___*/
+.optionsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 15px;
+}
+
+/*--Checkbox--*/
+.rememberMeContainer {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+}
+
+.rememberMeLabel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    font-size: var(--font-size-small);
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.rememberMeCheckbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background-color: var(--background-color);
+    appearance: none;
+    border: 1.5px solid var(--border-color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.rememberMeCheckbox::after {
+    content: "✓";
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    font-family: sans-serif;
+    color: transparent;
+    transition: color 0.2s ease-in-out;
+}
+
+.rememberMeCheckbox:checked {
+    background-color: var(--primary-color);
+    border: 1.5px solid var(--primary-color);
+    width: 20px;
+    height: 20px;
+}
+
+.rememberMeCheckbox:checked::after {
+    color: var(--background-color);
+}
+
+/*--Esqueceu a Senha--*/
+.forgotPasswordLink {
+    width: 50%;
+    text-decoration: none;
+    color: var(--forgot-password-color);
+}
+
+/*___Botão Continuar___*/
+.continueButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    border: solid 1px var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-default);
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    height: 60px;
+    padding: var(--padding-default);
+    font-size: var(--font-size-small);
+    margin-top: var(--margin-top-default);
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.continueButton:hover {
+    background-color: #0057d9;
+}
+
+/*___Mover para Registro___*/
+.registerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 20px 20px;
+}
+
+.registerLink {
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+/*___Formas de Login___*/
+.alternativeLoginContainer {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.alternativeLoginContainer hr {
+    flex-grow: 1;
+    border-top: solid 1px #ccc;
+    margin: 0 15px;
+}
+
+.alternativeLoginContainer span {
+    color: var(--placeholder-color);
+    margin-bottom: 5px;
+}
+
+/*___Login com Google___*/
+.googleLoginButton {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 20px;
+    width: 100%;
+    height: 60px;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: unset;
+    background-color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-strong);
+    transition: all 0.2s ease;
+}
+
+.googleLoginButton:hover {
+    background-color: rgb(237, 237, 237);
+}
+
+.googleLoginButton img {
+    margin-left: 15px;
+    max-width: 25px;
+    max-height: 25px;
+}

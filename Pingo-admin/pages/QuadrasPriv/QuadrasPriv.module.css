@@ -1,0 +1,21 @@
+@import url(../../styles/variables.css);
+.img{
+    width: 100px;
+    height: 70px;
+    border-radius: 10%;
+    object-fit: cover;
+}
+
+.info{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.button{
+    padding: 5px;
+    border-radius: 3px;
+    background-color: var(--tertiary-color);
+    color: white;
+}

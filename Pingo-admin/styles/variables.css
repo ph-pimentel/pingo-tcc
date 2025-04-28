@@ -1,0 +1,28 @@
+:root {
+        /* Cores */
+        --primary-color: #F0F0F0;
+        --secondary-color: #E96969;
+        --tertiary-color: #3D3D3D;
+        --text-color: black;
+        --background-color: #E9E9E9;
+        --border-color: black;
+        --placeholder-color: #949494;
+        --forgot-password-color: #72a9fb;
+    
+        /* Fontes */
+        --font-size-small: 16px;
+        --font-size-medium: 18px;
+        --font-size-large: 30px;
+    
+        /* Espaçamentos */
+        --padding-default: 15px;
+        --margin-top-default: 25px;
+    
+        /* Bordas e sombras */
+        --border-radius: 10px;
+        --border-thickness: 0.5px;
+        --box-shadow-default: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        --box-shadow-strong: 0px 3px 5px rgba(0, 0, 0, 0.45);
+        --box-shadow-super-strong: 0px 5px 8px rgba( 0, 0, 0, 0.50)
+    
+}

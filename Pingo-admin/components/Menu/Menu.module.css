@@ -1,0 +1,27 @@
+@import url(../../styles/variables.css);
+
+.menu{
+    user-select: none; /*Desabilita o usuario copiar img */
+}
+.item{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+.title{
+     font-weight: 200;
+     color: var(--tertiary-color);
+}
+
+.listItem{
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     padding: 10px;
+     border-radius: 5px;
+     
+}
+.listItem:hover{
+    background-color: var(--tertiary-color);
+}
