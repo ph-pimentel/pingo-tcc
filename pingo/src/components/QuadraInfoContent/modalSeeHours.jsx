@@ -208,7 +208,7 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade='todos' }) {
     const dadosAgendamento = {
       data: {
         dia: diaSelecionado,
-        mes: mesSelecionado + 1, // Ajuste para meses 1-12
+        mes: mesSelecionado + 1, 
         ano: anoSelecionado
       },
       horarios: horariosSelecionados,
@@ -216,7 +216,6 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade='todos' }) {
     };
 
     console.log('Dados para agendamento:', dadosAgendamento);
-    // Aqui você enviaria para o backend ou para o próximo passo do processo
   };
 
   // Calcula os horários visíveis na página atual
@@ -302,10 +301,10 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade='todos' }) {
                   </label>
                 ))
               ) : (
-                <p>Nenhum horário disponível para este dia</p>
+                <p className={styles.text_notification}>Nenhum horário disponível para este dia</p>
               )
             ) : (
-              <p>Selecione uma data para ver os horários disponíveis</p>
+              <p className={styles.text_notification}>Selecione uma data para ver os horários disponíveis</p>
             )}
 
             <button 

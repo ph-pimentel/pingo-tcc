@@ -1,4 +1,4 @@
-/* Variáveis globais para consistência (ajuste conforme suas variáveis existentes) */
+
 :root {
     --spacing-sm: clamp(0.2rem, 1vw, 1rem);
     --spacing-md: clamp(1rem, 2vw, 1.5rem);
@@ -17,7 +17,7 @@
     align-items: center;
     flex-direction: column;
     position: absolute;
-    inset: 0; /* Substitui top: 0, left: 0, etc. */
+    inset: 0;
     padding: var(--spacing-md) clamp(1rem, 4vw, 2.5rem);
     gap: var(--spacing-lg);
     background-color: var(--bg-color);
@@ -33,10 +33,12 @@
     border: none;
     outline: none;
     text-decoration: none;
+
     font-family: var(--primary-font);
     color: var(--text-secondary-color);
     font-size: clamp(1.5rem, 2.5vw, 2rem);
     font-weight: 400;
+
     cursor: pointer;
     transition: all 0.15s ease-out;
   }
@@ -106,7 +108,7 @@
     flex-grow: 1;
   }
   
-  /* Setas de Navegação */
+  /* Setas de Navegação de Mês */
   .btn_mounth_select,
   .btn_mount_select2 {
     background: none;
@@ -172,9 +174,9 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    flex-wrap: wrap; /* Permite quebra em telas pequenas */
+    flex-wrap: wrap; 
     width: 100%;
-    max-width: 75rem; /* Ajuste proporcional */
+    max-width: 75rem; 
     gap: var(--spacing-md);
     padding: var(--spacing-sm) clamp(0.8rem, 1.5vw, 1.2rem);
     border: clamp(1px, 0.2vw, 2px) solid var(--border-color);
@@ -185,14 +187,14 @@
   .quadra_img_container {
     display: flex;
     flex: 1;
-    min-width: 0; /* Evita overflow */
+    min-width: 0;
   }
   
   .quadra_img_container img {
     width: 100%;
-    max-width: clamp(300px, 30vw, 600px);
+    max-width: clamp(550px, 30vw, 660px);
     border-radius: var(--border-radius-sm);
-    object-fit: cover; /* Mantém proporções */
+    object-fit: cover; 
   }
   
   /* Informações da Quadra */
@@ -225,12 +227,12 @@
   
   .quadra_info_title h1 {
     font-weight: var(--text-title-weight);
-    font-size: var(--font-size-lg);
+    font-size: clamp(10px, 2vw, 30px);
   }
   
   .quadra_info_title h2 {
     font-weight: var(--text-subtitle-weight);
-    font-size: var(--font-size-md);
+    font-size: clamp(10px, 1.5vw, 24px);
     margin: 0;
   }
   
@@ -249,7 +251,7 @@
   
   .item_sport h2 {
     font-weight: var(--text-subtitle-weight);
-    font-size: var(--font-size-sm);
+    font-size: clamp(10px, 0.8vw, 20px);
   }
   
   /* Horários Alugáveis */
@@ -259,10 +261,8 @@
     justify-content: center;
     width: 100%;
     padding: var(--spacing-sm);
-    gap: var(--spacing-sm);
+    gap: clamp(3px, 0.3vw, 7px);
     flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
   }
   
   .hours_main_container::-webkit-scrollbar {
@@ -272,33 +272,40 @@
   .hours_card_container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-shrink: 0;
+    min-width: fit-content;
     white-space: nowrap;
+    
     gap: var(--spacing-sm);
     padding: var(--spacing-sm) clamp(0.4rem, 1vw, 0.6rem);
+    
     border: clamp(1px, 0.2vw, 2px) solid var(--border-color);
     border-radius: var(--border-radius-sm);
+    
     cursor: pointer;
     transition: all 0.3s ease;
-    min-width: fit-content;
   }
   
   .hours_card_container input[type="checkbox"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    width: clamp(0.8rem, 2vw, 1.2rem);
-    height: clamp(0.8rem, 2vw, 1.2rem);
-    min-width: clamp(0.8rem, 2vw, 1.2rem);
-    min-height: clamp(0.8rem, 2vw, 1.2rem);
+    
+    position: relative;
+    margin: 0;
+
+    width: clamp(6px, 1vw, 1.2rem);
+    height: clamp(6px, 1vw, 1.2rem);
+    min-width: clamp(6px, 1vw, 1.2rem);
+    min-height: clamp(6px, 1vw, 1.2rem);
+
     background-color: transparent;
     border: clamp(1px, 0.2vw, 2px) solid var(--border-color);
     border-radius: clamp(2px, 0.3vw, 4px);
-    margin: 0;
+    
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
   }
   
   .hours_card_container input[type="checkbox"]:checked {
@@ -309,7 +316,7 @@
   .hours_card_container input[type="checkbox"]:checked::after {
     content: '✓';
     color: white;
-    font-size: clamp(0.5rem, 1.5vw, 0.8rem);
+    font-size: clamp(5px, 0.9vw, 10px);
     font-weight: bold;
     position: absolute;
     top: 50%;
@@ -325,21 +332,23 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    gap: clamp(1px, 0.2vw, 3px);
+    gap: clamp(1px, 0.2vw, 2px);
   }
   
   .hours_text_container h2 {
-    font-size: clamp(0.5rem, 1vw, 0.8rem);
+    font-size: clamp(8px, 0.7vw, 13px);
     line-height: 1.2;
   }
 
   /* Setas de Navegação de Horários */
   .button_next_hours {
-    width: 30px;
+    width: clamp(10px, 1.5vw, 30px);
     height: auto;
     border: none;
     background: none;
     cursor: pointer;
+
+    flex-shrink: 0;
   }
   
   .next_hours,
@@ -352,6 +361,13 @@
     transform: rotate(180deg);
   }
 
+/* Mensagem de Seleção de Dia para ver Horários */
+.text_notification{
+    text-align: center;
+    color: var(--text-main-color);
+    font-size: clamp(10px, 1vw, 15px);
+    margin-bottom: 2px;
+}
 
 
 
@@ -363,12 +379,12 @@
     justify-content: center;
     text-align: center;
 
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-sm);
     border: none;
     border-radius: var(--border-radius-sm);
     background-color: var(--primary-color);
 
-    font-size: var(--font-size-md);
+    font-size: clamp(8px, 1vw, 19px);
     color: var(--text-main-color);
     
     font-family: var(--primary-font);
