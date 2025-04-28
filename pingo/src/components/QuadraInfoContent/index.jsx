@@ -11,6 +11,13 @@ function QuadraInfoContent(){
         contato: <span>contatoproprietario@gmail.com <br/>Telefone 123-012039-19</span>,
         regras: <span>Não mijar na quadra de luz acesa</span>
       };
+
+
+    const hiddenAll = document.querySelector('.main_container') 
+    function hiddenMain(){
+        hiddenAll.style.display = 'none';
+    }
+
     
     const [textoAtivo, setTextoAtivo] = useState(textos.descricao);
 
@@ -22,8 +29,8 @@ function QuadraInfoContent(){
                 
 
          <div className={styles.content_container}>
-
         <ModalSeeHours isVisible={modalSeeHours} onClose={() => setModalSeeHours(false)}/>
+
         
             {/*   Imagem e Detalhes da Quadra   */}
             <div className={styles.main_content}>
@@ -50,10 +57,10 @@ function QuadraInfoContent(){
                         </div>
 
         
-                     <button className={styles.btn_see_hours} onClick={() => setModalSeeHours(true)}>
-                            <img src="../img/QuadraInfo/clock.png"/>    
-                            Horários Disponíveis
-                            </button>
+                        <button className={styles.btn_see_hours} onClick={() => setModalSeeHours(true)}>
+                                <img src="../img/QuadraInfo/clock.png"/>    
+                                Horários Disponíveis
+                                </button>
                 </div>
 
             </div>

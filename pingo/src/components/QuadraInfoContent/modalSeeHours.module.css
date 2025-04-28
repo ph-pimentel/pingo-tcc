@@ -1,270 +1,384 @@
-
-
-.modal_main_container{
+/* Variáveis globais para consistência (ajuste conforme suas variáveis existentes) */
+:root {
+    --spacing-sm: clamp(0.2rem, 1vw, 1rem);
+    --spacing-md: clamp(1rem, 2vw, 1.5rem);
+    --spacing-lg: clamp(1.5rem, 3vw, 2rem);
+    --border-radius-sm: clamp(5px, 0.5vw, 10px);
+    --border-radius-md: clamp(8px, 0.8vw, 15px);
+    --font-size-sm: clamp(0.8rem, 1.5vw, 1rem);
+    --font-size-md: clamp(1rem, 2vw, 1.2rem);
+    --font-size-lg: clamp(1.2rem, 2.5vw, 1.5rem);
+  }
+  
+  /* Modal Principal */
+  .modal_main_container {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     flex-direction: column;
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    
-    padding: 0px 40px;
-    padding-bottom: 40px;
-    padding-top: 30px;
-
-    gap: 30px;
-    
+    inset: 0; /* Substitui top: 0, left: 0, etc. */
+    padding: var(--spacing-md) clamp(1rem, 4vw, 2.5rem);
+    gap: var(--spacing-lg);
     background-color: var(--bg-color);
     border-radius: var(--medium-border-radius);
-    
     flex: 1;
     z-index: 99;
-}
-
-.modal_leave_button{
+    overflow-y: auto; /* Permite rolagem em telas pequenas */
+  }
+  
+  /* Botão de Fechar */
+  .modal_leave_button {
     background: none;
     border: none;
     outline: none;
     text-decoration: none;
-    
     font-family: var(--primary-font);
-    
     color: var(--text-secondary-color);
-    
-    font-size: clamp(35px, 1vw, 45px);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
     font-weight: 400;
-    
     cursor: pointer;
     transition: all 0.15s ease-out;
-}
-
-.modal_leave_button img{
-    width: clamp(30px, 2vw, 40px);
+  }
+  
+  .modal_leave_button img {
+    width: clamp(1.2rem, 2vw, 1.8rem);
     height: auto;
-
-    padding: 3px;
-    border-radius: 10px;
-}
-
-
-.hours_container{
+    padding: clamp(2px, 0.2vw, 4px);
+    border-radius: var(--border-radius-sm);
+  }
+  
+  /* Contêiner de Horários */
+  .hours_container {
     display: flex;
     justify-content: center;
-    
     width: 100%;
     height: auto;
-
-}
-/*------------------------------------*/
-/* Main Container Titulo e Calendario*/
-.see_hours_title_container{
+  }
+  
+  /* Título e Calendário */
+  .see_hours_title_container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 20px;
-
-    font-size: var(--text-subtitle-size);
+    gap: var(--spacing-md);
+    font-size: var(--font-size-md);
     color: var(--text-main-color);
-}
-.see_hours_title_container h1{
-    font-size: clamp(70%, 2vw, 100%);
-    font-weight: var(--text-title-weigth);
-}
-
-.see_hours_title_container h2{
+  }
+  
+  .see_hours_title_container h1 {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: var(--text-title-weight);
+  }
+  
+  .see_hours_title_container h2 {
     white-space: nowrap;
-    font-size: clamp(70%, 2vw, 90%);
-    font-weight: var(--text-subtitle-weigth);
-}
-
-
-
-/*   Data e Seleção de dias   */
-.date_container{
+    font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+    font-weight: var(--text-subtitle-weight);
+  }
+  
+  /* Contêiner de Data */
+  .date_container {
     display: flex;
     align-items: center;
     text-align: center;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: clamp(30px, 2vw, 50px);
-
-}
-/* mês e ano */
-.mount_container{
+    gap: var(--spacing-lg);
+  }
+  
+  /* Mês e Ano */
+  .mount_container {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     position: relative;
-
     white-space: nowrap;
-
-    margin: 0 auto;    
-
-    width: 320px;
-    gap: clamp( 15px, 1vw, 20px);
-}
-
-.mout_container span{
+    margin: 0 auto;
+    width: min(90%, 20rem); 
+    gap: var(--spacing-md);
+  }
+  
+  .mount_container span {
     text-align: center;
     flex-grow: 1;
-}
-
-
-/* Setas */
-.btn_mounth_select,.btn_mount_select2{
+  }
+  
+  /* Setas de Navegação */
+  .btn_mounth_select,
+  .btn_mount_select2 {
     background: none;
     text-decoration: none;
     background-color: transparent;
     border: none;
-
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-
     cursor: pointer;
-}
-
-.btn_mount_select2{
-    left: 0
-}
-
-.btn_mounth_select{
+  }
+  
+  .btn_mount_select2 {
+    left: 0;
+  }
+  
+  .btn_mounth_select {
     right: 0;
-}
-.btn_mounth_select img{
-    width: clamp(20px, 2vw, 30px);
-    
-}
-.btn_mount_select2 img{
+  }
+  
+  .btn_mounth_select img,
+  .btn_mount_select2 img {
+    width: clamp(1rem, 2vw, 1.5rem);
+  }
+  
+  .btn_mount_select2 img {
     transform: rotate(180deg);
-    width: clamp(20px, 2vw, 30px);
-}
-
-
-/*  Calendario  */
-
-.btn_day_select{
+  }
+  
+  /* Botões de Dias */
+  .btn_day_select {
     background: none;
     text-decoration: none;
-    
-    width: clamp(30px, 3vw, 50px);
-    height: clamp(30px, 3vw, 50px);
-
-    padding: 5px;
-    
-    font-size: clamp(8px, 0.8vw, 17px);
+    width: clamp(2rem, 3vw, 3rem);
+    height: clamp(2rem, 3vw, 3rem);
+    padding: clamp(3px, 0.3vw, 5px);
+    font-size: clamp(0.6rem, 0.8vw, 1rem);
     font-weight: 700;
-    
     color: var(--text-secondary-color);
-    border: 1px solid var(--text-secondary-color);
-    border-radius: clamp(5px, 0.5vw, 9px);
-}
-
-/* Botão focado */
-.selected {
+    border: clamp(1px, 0.2vw, 2px) solid var(--text-secondary-color);
+    border-radius: var(--border-radius-sm);
+  }
+  
+  /* Botão Selecionado */
+  .selected {
     background-color: var(--secondary-color);
     color: var(--bg-color);
     border: none;
   }
-
-.day_buttons_container{
+  
+  /* Contêiner de Botões de Dias */
+  .day_buttons_container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-
-    width: 70%;
-    gap: clamp(10px, 0.7vw, 15px);
-}
-
-
-/*------------------*/
-/*   Quadra Card   */
-
-.quadra_main_container{
+    width: min(90%, 40rem); 
+    gap: var(--spacing-sm);
+  }
+  
+  /*-----------------*/
+  /* Card de Quadra */
+  .quadra_main_container {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    
+    flex-wrap: wrap; /* Permite quebra em telas pequenas */
     width: 100%;
-
-    
-    gap: clamp(20px, 1.5vw, 30px);
-    padding: clamp(10px, 1vw, 20px) 20px;
-
-    border: 2px solid var(--border-color);
-    border-radius: clamp(10px, 1vw, 20px);
-}
-
-
-/* Imagem */
-.quadra_img_container{
+    max-width: 75rem; /* Ajuste proporcional */
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) clamp(0.8rem, 1.5vw, 1.2rem);
+    border: clamp(1px, 0.2vw, 2px) solid var(--border-color);
+    border-radius: var(--border-radius-md);
+  }
+  
+  /* Imagem da Quadra */
+  .quadra_img_container {
     display: flex;
-}
-.quadra_img_container img{
-    width: clamp(400px, 30vw, 50px);
-    border-radius: 10px;
-    
-}
-
-/* Informações */
-.quadra_info_main_container{
+    flex: 1;
+    min-width: 0; /* Evita overflow */
+  }
+  
+  .quadra_img_container img {
+    width: 100%;
+    max-width: clamp(300px, 30vw, 600px);
+    border-radius: var(--border-radius-sm);
+    object-fit: cover; /* Mantém proporções */
+  }
+  
+  /* Informações da Quadra */
+  .quadra_info_main_container {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    flex: 0;
-    flex-grow:1;
-
-}
-
-.quadra_info_title,.quadra_info_sport{
+    gap: var(--spacing-sm);
+    flex: 1;
+    min-width: 14rem; 
+  }
+  
+  /* Título e Esportes */
+  .quadra_info_title,
+  .quadra_info_sport {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
-    
     color: var(--text-main-color);
     white-space: nowrap;
-}
-
-
-/*  Esportes da Quadra  */
-
-.quadra_info_sports_container{
+  }
+  
+  .quadra_info_sports_container {
     display: flex;
-    gap: clamp(15px, 2vw, 30px);
-}
-.quadra_info_title h1{
+    gap: var(--spacing-md);
+    margin: 0;
+  }
+  
+  .quadra_info_title h1 {
     font-weight: var(--text-title-weight);
-    font-size: var(--text-title-size);
-}
-
-.quadra_info_title h2{
+    font-size: var(--font-size-lg);
+  }
+  
+  .quadra_info_title h2 {
     font-weight: var(--text-subtitle-weight);
-    font-size: var(--text-subtitle-size);
-}
-
-/* Esportes */
-.item_sport {
+    font-size: var(--font-size-md);
+    margin: 0;
+  }
+  
+  /* Ícones de Esportes */
+  .item_sport {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-
-    gap: 3px;
-}
-
-.item_sport img {
-    max-width: 20px;
-    max-height: auto;
-}
-
-.item_sport h2{
+    gap: clamp(2px, 0.3vw, 4px);
+  }
+  
+  .item_sport img {
+    max-width: clamp(0.8rem, 1.5vw, 1.2rem);
+    height: auto;
+  }
+  
+  .item_sport h2 {
     font-weight: var(--text-subtitle-weight);
-    font-size: var(--text-size);
+    font-size: var(--font-size-sm);
+  }
+  
+  /* Horários Alugáveis */
+  .hours_main_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  
+  .hours_main_container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .hours_card_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    white-space: nowrap;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) clamp(0.4rem, 1vw, 0.6rem);
+    border: clamp(1px, 0.2vw, 2px) solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: fit-content;
+  }
+  
+  .hours_card_container input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: clamp(0.8rem, 2vw, 1.2rem);
+    height: clamp(0.8rem, 2vw, 1.2rem);
+    min-width: clamp(0.8rem, 2vw, 1.2rem);
+    min-height: clamp(0.8rem, 2vw, 1.2rem);
+    background-color: transparent;
+    border: clamp(1px, 0.2vw, 2px) solid var(--border-color);
+    border-radius: clamp(2px, 0.3vw, 4px);
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .hours_card_container input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .hours_card_container input[type="checkbox"]:checked::after {
+    content: '✓';
+    color: white;
+    font-size: clamp(0.5rem, 1.5vw, 0.8rem);
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .hours_card_container:has(input:checked) {
+    border-color: var(--primary-color);
+  }
+  
+  .hours_text_container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: clamp(1px, 0.2vw, 3px);
+  }
+  
+  .hours_text_container h2 {
+    font-size: clamp(0.5rem, 1vw, 0.8rem);
+    line-height: 1.2;
+  }
 
-}
+  /* Setas de Navegação de Horários */
+  .button_next_hours {
+    width: 30px;
+    height: auto;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .next_hours,
+  .next_hours2 {
+    width: 100%;
+    height: auto;
+  }
+  
+  .next_hours2 {
+    transform: rotate(180deg);
+  }
+
+
+
+
+  /*-----------------------*/
+  /* Botão de Agendamento */
+  .btn_scheduling {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--primary-color);
+
+    font-size: var(--font-size-md);
+    color: var(--text-main-color);
+    
+    font-family: var(--primary-font);
+    font-weight: var(--text-title-weight);
+    
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+  }
+  
+  .btn_scheduling:hover {
+    background-color: #0056d6;
+  }
+  
