@@ -13,16 +13,14 @@ function QuadraInfoContent(){
       };
 
 
-    const hiddenAll = document.querySelector('.main_container') 
-    function hiddenMain(){
-        hiddenAll.style.display = 'none';
-    }
 
     
     const [textoAtivo, setTextoAtivo] = useState(textos.descricao);
 
     {/*Ver Horários*/}
     const [modalSeeHours,setModalSeeHours] = useState(false);
+    {/*Preço Final*/}
+    const [modalTotalPrice, setModalTotalPrice] = useState(false);
 
     return(
         <div className={styles.main_container}>

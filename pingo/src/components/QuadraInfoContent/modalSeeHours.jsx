@@ -81,45 +81,60 @@ function Calendario({ onDiaSelecionado, disponibilidade }) {
   
   const mudarMes = (incremento) => {
     const novaData = new Date(anoAtual, mesAtual + incremento, 1);
-    if (novaData >= new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1)) {
+    const dataLimite = new Date(dataAtual.getFullYear() + 1, dataAtual.getMonth(), 1);
+    
+    if (novaData >= new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1) && 
+        novaData <= dataLimite) {
       setMesAtual(novaData.getMonth());
       setAnoAtual(novaData.getFullYear());
       setDiaSelecionado(null);
     }
   };
   
-  const handleDiaSelecionado = (dia) => {
-    setDiaSelecionado(dia);
-    onDiaSelecionado(dia, mesAtual, anoAtual);
-  };
+  // Verifica se está no mês/ano atual (para desabilitar o botão anterior)
+  const isMesAtual = mesAtual === dataAtual.getMonth() && anoAtual === dataAtual.getFullYear();
   
-  return (
-    <div className={styles.date_container}>
-      <div className={styles.mount_container}>
-        {!(mesAtual === dataAtual.getMonth() && anoAtual === dataAtual.getFullYear()) && (
-          <button onClick={() => mudarMes(-1)} className={styles.btn_mount_select2}>
-            <img src="../img/QuadraInfo/seta.png" alt="Anterior" />
-          </button>
-        )}
-        <span>{new Date(anoAtual, mesAtual).toLocaleString('default', { month: 'long' })} {anoAtual}</span>
-        <button onClick={() => mudarMes(1)} className={styles.btn_mounth_select}>
-          <img src="../img/QuadraInfo/seta.png" alt="Próximo" />
-        </button>
-      </div>
+  // Verifica se atingiu o limite de 1 ano no futuro (para desabilitar o botão próximo)
+  const atingiuLimiteFuturo = new Date(anoAtual, mesAtual + 1, 1) > 
+                             new Date(dataAtual.getFullYear() + 1, dataAtual.getMonth(), 1);
   
-      <DiasContainer
-        mes={mesAtual}
-        ano={anoAtual}
-        onDiaSelecionado={handleDiaSelecionado}
-        dataAtual={dataAtual}
-        diaSelecionado={diaSelecionado}
-        setDiaSelecionado={setDiaSelecionado}
-        diasIndisponiveis={diasIndisponiveis}
-        disponibilidade={disponibilidade}
-      />
-    </div>
-  );
-}
+                             return (
+                              <div className={styles.date_container}>
+                                <div className={styles.mount_container}>
+                                  {/* Botão anterior - SEMPRE visível, mas desabilitado quando no mês atual */}
+                                  <button 
+                                    onClick={() => mudarMes(-1)} 
+                                    className={styles.btn_mount_select2}
+                                    disabled={isMesAtual}
+                                  >
+                                    <img src="../img/QuadraInfo/seta.png" alt="Anterior" />
+                                  </button>
+                          
+                                  <span>{new Date(anoAtual, mesAtual).toLocaleString('default', { month: 'long' })} {anoAtual}</span>
+                          
+                                  {/* Botão próximo - SEMPRE visível, mas desabilitado quando atinge o limite */}
+                                  <button 
+                                    onClick={() => mudarMes(1)} 
+                                    className={styles.btn_mounth_select}
+                                    disabled={atingiuLimiteFuturo}
+                                  >
+                                    <img src="../img/QuadraInfo/seta.png" alt="Próximo" />
+                                  </button>
+                                </div>
+                          
+                                <DiasContainer
+                                  mes={mesAtual}
+                                  ano={anoAtual}
+                                  onDiaSelecionado={(dia) => onDiaSelecionado(dia, mesAtual, anoAtual)}
+                                  dataAtual={dataAtual}
+                                  diaSelecionado={diaSelecionado}
+                                  setDiaSelecionado={setDiaSelecionado}
+                                  diasIndisponiveis={diasIndisponiveis}
+                                  disponibilidade={disponibilidade}
+                                />
+                              </div>
+                            );
+                          }
 
 // Dados mockados
 const HORARIOS_PADRAO = [
@@ -166,8 +181,8 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade='todos' }) {
         return !estaReservado;
       });
       setHorariosDisponiveis(disponiveis);
-      setPaginaAtual(0); // Resetar paginação ao mudar data
-      setHorariosSelecionados([]); // Limpar seleção ao mudar data
+      setPaginaAtual(0); 
+      setHorariosSelecionados([]); 
     }
   }, [diaSelecionado, mesSelecionado, anoSelecionado]);
 
@@ -312,6 +327,7 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade='todos' }) {
               className={styles.button_next_hours}
               disabled={(paginaAtual + 1) * HORARIOS_POR_PAGINA >= horariosDisponiveis.length}
             >
+              
               <img src="../img/QuadraInfo/seta.png" alt="Próximo" className={styles.next_hours} />
             </button>
           </div>
