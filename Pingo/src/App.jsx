@@ -5,7 +5,6 @@ import Register from "./pages/Register/Register";
 import Informacoes from "./pages/Sobre/Informacoes";
 import MenuCourt from "./pages/MenuQuadras/MenuQuadras";
 
-
 function App() {
   return (
     <Router>
