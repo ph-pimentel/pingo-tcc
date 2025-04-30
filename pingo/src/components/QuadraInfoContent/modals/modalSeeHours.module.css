@@ -14,17 +14,20 @@
   .modal_main_container {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     position: absolute;
+
+    flex: 1;
     inset: 0;
     padding: var(--spacing-md) clamp(1rem, 4vw, 2.5rem);
     gap: var(--spacing-lg);
+
     background-color: var(--bg-color);
     border-radius: var(--medium-border-radius);
-    flex: 1;
+    
     z-index: 99;
-    overflow-y: auto; /* Permite rolagem em telas pequenas */
+    overflow-y: auto; 
   }
   
   /* Botão de Fechar */

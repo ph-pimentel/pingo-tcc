@@ -1,0 +1,239 @@
+.modal_main_container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    position: absolute;
+
+    flex: 1;
+    inset: 0;
+    padding: var(--spacing-md) clamp(1rem, 4vw, 2.5rem);
+    gap: var(--spacing-lg);
+
+    background-color: var(--bg-color);
+    border-radius: var(--medium-border-radius);
+    
+    z-index: 99;
+    overflow-y: auto; 
+  
+}
+
+ /* Botão de Fechar */
+ .modal_leave_button {
+    background: none;
+    border: none;
+    outline: none;
+    text-decoration: none;
+
+    align-self: flex-start;
+
+    font-family: var(--primary-font);
+    color: var(--text-secondary-color);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 400;
+
+    cursor: pointer;
+    transition: all 0.15s ease-out;
+  }
+  
+  .modal_leave_button img {
+    width: clamp(1.2rem, 2vw, 1.8rem);
+    height: auto;
+    padding: clamp(2px, 0.2vw, 4px);
+    border-radius: var(--border-radius-sm);
+  }
+
+  /* Resumo do Agendamento */
+  .text_main_container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .text_main_container h1{
+    color: var(--text-main-color);
+    font-size: var(--text-title-size);
+  }
+
+  .text_form{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    font-size: var(--text-subtitle-size);
+    font-weight: var(--text-subtitle-weight);
+
+    color: var(--text-main-color);
+    border: 1px solid var(--primary-font);
+    flex: 0;
+  }
+
+  .text_form p{
+    position: relative;
+    font-size: 100%;
+    color: var(--text-main-color);
+    
+    padding-bottom: 2px; 
+    
+    word-break:normal;
+  }
+
+  .text_form p::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.23);
+  }
+
+/* Botão de Confirmação */
+.btn_confirmar{
+
+    font-family: var(--primary-font);
+    font-weight: var(--text-title-weight);
+    font-size: var(--text-size);
+    color: var(--text-main-color);
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 3px;
+
+    padding: 10px;
+    height: 50px;
+
+    cursor:pointer;
+}
+
+
+
+
+/*-----------------*/
+/*   Pagamento   */
+  .pix_main_container{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
+    width: 100%;
+    gap: 5px;
+
+    margin-top: 30px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+    
+}
+
+.pix_main_container.show{
+    opacity: 1;
+    max-height: 1000px; /* Valor maior que o conteúdo máximo */
+}
+.pix_main_container h1{
+    font-size: var(--text-title-size);
+    font-weight: var(--text-title-weight);
+}
+
+.pix_flex{
+      gap: 50px;
+    display: flex;
+  }
+  /*Imagem*/
+  .pix_image_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    
+    border-radius: 10px;
+    border: 10px solid #0165FC ;
+}
+
+.pix_image_container img{
+    max-width: 100%;
+    width: clamp(300px, 30vw, 450px);
+    padding: 5px;
+    background-color: white;
+  }
+
+/*Texto pix*/
+
+.pix_text_container{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 12px;
+}
+
+.pix_text_container h3{
+    color: var(--text-main-color);
+    font-weight: 600;
+}
+
+.pix_text{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    width: 70%;
+    height: fit-content;
+
+
+    background-color: rgb(243, 243, 243);
+    padding: 10px;
+    border-radius: 10px;
+
+    overflow: auto;
+    word-break: break-all; 
+    white-space: pre-wrap; 
+    font-family: monospace; 
+}
+
+.pix_text p{
+    color: black;
+    font-size: var(--text-size);
+    font-weight: var(--text-subtitle-weight);
+
+    margin: 0; 
+    word-break: break-all; 
+    overflow-wrap: anywhere; 
+    hyphens: manual; 
+}
+
+/*Botão Copiar e colar*/
+
+.pix_copy_and_paste{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: fit-content;
+    gap: 5px;
+    padding: 7px;
+    border-radius: 10px;
+
+    border: none;
+    background-color: var(--primary-color);
+    flex: 0;
+
+    cursor: pointer;
+}
+
+
+.pix_copy_and_paste p{
+    color: var(--text-main-color);
+    font-size: var(--text-size);
+}
+
+.pix_copy_and_paste img{
+    width: clamp(15px, 5vw, 25px);
+}
