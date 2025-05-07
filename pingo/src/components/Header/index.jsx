@@ -28,13 +28,17 @@ function Header() {
                         </a>
 
                         {/* Favoritos */}
-                        <a href="">
+                        <a href="/">
                             <img src="../img/Header/amigos.png" className={styles.left_icons} />
                         </a>
 
                         {/* Quadras */}
-                        <a href="">
+                        <a href="/">
                             <img src="../img/Header/favoritos.png" className={styles.left_icons} />
+                        </a>
+
+                        <a href="/meusagendamentos">
+                        <img src="../img/Header/agendamentos.png" className={styles.left_icons} />
                         </a>
                     </div>
 

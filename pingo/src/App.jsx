@@ -5,6 +5,7 @@ import Register from "./pages/Register/Register";
 import Informacoes from "./pages/Sobre/Informacoes";
 import MenuCourt from "./pages/MenuQuadras/MenuQuadras";
 import QuadraInfo from "./pages/QuadraInfo/QuadraInfo"
+import UsuarioAgendamento from "./pages/UsuarioAgendamento/usuarioagendamento";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/informacoes" element={<Informacoes />} />
         <Route path="/quadraopcoes" element={<MenuCourt />} />
         <Route path="/quadrainformacoes" element={<QuadraInfo/>}/>
+        <Route path="/meusagendamentos" element={<UsuarioAgendamento/>} />
       </Routes>
     </Router>
   );

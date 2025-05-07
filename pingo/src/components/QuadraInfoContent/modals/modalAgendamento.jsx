@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styles from './modalAgendamento.module.css';
 
-function ModalAgendamento({ isVisible, onClose, agendamentoDados }) {
+function ModalAgendamento({ isVisible, onClose, agendamentoDados, onPagamentoConfirmado }) {
   const [agendamentoConfirmado, setAgendamentoConfirmado] = useState(false);
   const [pixCopiado, setPixCopiado] = useState(false);
+  const [pagamentoSimulado, setPagamentoSimulado] = useState(false);
 
   if (!isVisible) {
     return null;
@@ -19,6 +20,18 @@ function ModalAgendamento({ isVisible, onClose, agendamentoDados }) {
       </div>
     );
   }
+
+  const simularPagamento = () => {
+    // Simula um delay de processamento
+    setTimeout(() => {
+      setPagamentoSimulado(true);
+      // Chama a função para passar os dados para o componente pai
+      onPagamentoConfirmado(agendamentoDados);
+      // Fecha o modal após 2 segundos
+      setTimeout(onClose, 2000);
+    }, 1500);
+  };
+
 
   const { data, horarios, total } = agendamentoDados;
 
@@ -103,6 +116,7 @@ function ModalAgendamento({ isVisible, onClose, agendamentoDados }) {
                 </button>
               </div>
             </div>
+            
           </div>
         )}
       </div>
