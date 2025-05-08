@@ -1,30 +1,14 @@
-@import url('../../styles/fonts/Poppins.css');
+@import url('../../styles/global.css');
 :root {
     /* Cores */
-    --primary-color: #72a9fb;
-    --secondary-color: #4E94FF;
-    --text-color: black;
-    --background-color: white;
-    --border-color: black;
-    --placeholder-color: #949494;
-    --forgot-password-color: #72a9fb;
-
-    /* Fontes */
-    --font-primary: 'Poppins', sans-serif;
-    --font-size-small: 14px;
-    --font-size-medium: 18px;
-    --font-size-large: 30px;
+    --placeholder-color: var(--quartenary-color);
 
     /* Espaçamentos */
     --padding-default: 15px;
     --margin-top-default: 25px;
 
     /* Bordas e sombras */
-    --border-radius: 10px;
     --border-thickness: 0.5px;
-    --box-shadow-default: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    --box-shadow-strong: 0px 3px 5px rgba(0, 0, 0, 0.45);
-    --box-shadow-super-strong: 0px 5px 8px rgba(0, 0, 0, 0.50);
 }
 
 html, body {
@@ -42,8 +26,10 @@ html, body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
     height: 100vh;
     width: 100vw;
+
     background: var(--background-color);
     background: url('../../../public/img/BackGround/BackgroundLogin.png');
     background-position: center;
@@ -64,9 +50,9 @@ html, body {
 
 /*___Título___*/
 .loginTitle {
-    font-family: var(--font-primary);
-    font-weight: unset;
-    font-size: var(--font-size-large);
+    font-family: var(--primary-font);
+    font-size: var(--text-mega-size);
+    font-weight: var(--text-small-weight);
     pointer-events: none;
     -webkit-user-drag: none;
 }
@@ -77,11 +63,11 @@ html, body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: var(--background-color);
+    background-color: var(--octonary-color);
     padding: 30px 90px;
     border: none;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-super-strong);
+    border-radius: var(--border-radius-regular);
+    box-shadow: var(--box-shadow-medium);
 }
 
 /*--Input de Email--*/
@@ -91,11 +77,10 @@ html, body {
     width: 400px;
     height: 57px;
     padding: var(--padding-default);
-    font-size: var(--font-size-small);
+    font-size: var(--text-medium-size);
     margin-top: var(--margin-top-default);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-default);
-    border: solid var(--border-thickness) var(--border-color);
+    border-radius: var(--border-radius-medium);
+    border: solid var(--border-thickness) var(--quaternary-color);
 }
 
 .loginForm input::placeholder {
@@ -115,11 +100,10 @@ html, body {
     align-items: center;
     width: 400px;
     padding: var(--padding-default);
-    font-size: var(--font-size-small);
+    font-size: var(--text-medium-size);
     margin-top: var(--margin-top-default);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-default);
-    border: solid var(--border-thickness) var(--border-color);
+    border-radius: var(--border-radius-medium);
+    border: solid var(--border-thickness) var(--quaternary-color);
     background-color: white;
     cursor: text;
 }
@@ -134,9 +118,11 @@ html, body {
     height: 25px;
     border: none;
     outline: none;
-    font-size: inherit;
-    background: white;
+    
+    font-size: var(--text-medium-size);
     padding-right: 10px;
+
+    background: var(--octonary-color);
 }
 
 .passwordInputContainer input:focus {
@@ -173,8 +159,8 @@ html, body {
     align-items: center;
     justify-content: center;
     width: 150px;
-    font-size: var(--font-size-small);
-    color: var(--text-color);
+    font-size: var(--text-small-size);
+    color: var(--tertiary-color);
     cursor: pointer;
     white-space: nowrap;
 }
@@ -186,16 +172,16 @@ html, body {
     position: relative;
     width: 20px;
     height: 20px;
-    background-color: var(--background-color);
+    background-color: transparent;
     appearance: none;
-    border: 1.5px solid var(--border-color);
-    border-radius: 5px;
+    border: 1.5px solid var(--tertiary-color);
+    border-radius: var(--border-radius-small);
     cursor: pointer;
 }
 
 .rememberMeCheckbox::after {
     content: "✓";
-    font-size: var(--font-size-small);
+    font-size: var(--text-small-weight);
     font-weight: bold;
     font-family: sans-serif;
     color: transparent;
@@ -210,15 +196,15 @@ html, body {
 }
 
 .rememberMeCheckbox:checked::after {
-    color: var(--background-color);
+    color: var(--quinary-color);
 }
 
 /*--Esqueceu a Senha--*/
 .forgotPasswordLink {
     width: 50%;
     text-decoration: none;
-    color: var(--forgot-password-color);
-    font-size: var(--font-size-small);
+    color: var(--primary-color);
+    font-size: var(--text-small-size);
     white-space: nowrap;
 }
 
@@ -228,10 +214,9 @@ html, body {
     align-items: center;
     justify-content: center;
 
-    background-color: #4E94FF;
-    color: var(--background-color);
+    background-color: var(--primary-color);
+    color: var(--text-light1-color);
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-default);
     border: none;
     cursor: pointer;
     width: 100%;
@@ -240,11 +225,12 @@ html, body {
     font-size: var(--font-size-small);
     margin-top: var(--margin-top-default);
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: all var(--animation-hover-regular-speed) ease;
 }
 
 .continueButton:hover {
-    background-color: #3d86f3;
+    box-shadow: var(--box-shadow-low);
+    scale: calc(1.01)
 }
 
 /*___Mover para Registro___*/
@@ -258,7 +244,7 @@ html, body {
 
 .registerLink {
     text-decoration: none;
-    color: #4E94FF;
+    color: var(--primary-color);
 }
 
 /*___Formas de Login___*/
@@ -271,12 +257,12 @@ html, body {
 
 .alternativeLoginContainer hr {
     flex-grow: 1;
-    border-top: solid 1px #ccc;
+    border-top: solid 1px var(--senary-color);
     margin: 0 15px;
 }
 
 .alternativeLoginContainer span {
-    color: var(--placeholder-color);
+    color: var(--senary-color);
     margin-bottom: 5px;
 }
 
@@ -285,22 +271,28 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: left;
+
     gap: 20px;
     width: 100%;
     height: 60px;
+
     margin-top: 15px;
     font-size: 16px;
     font-weight: unset;
+    font-family: var(--primary-font);
+
     background-color: white;
     cursor: pointer;
     border: none;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-strong);
+
+    box-shadow: var(--box-shadow-low);
+    border-radius: var(--border-radius-medium);
+
     transition: all 0.2s ease;
 }
 
 .googleLoginButton:hover {
-    background-color: rgb(237, 237, 237);
+    background-color: rgb(249, 249, 249);
 }
 
 .googleLoginButton img {

@@ -1,19 +1,14 @@
-@import url('../../styles/fonts/Poppins.css');
+@import url('../../styles/global.css');
+
 :root{
-    /*-- Cores --*/
-    --primary-color: #297EFF;
-    --primary-font: 'Poppins'
-    --background-color: #651a1a;
-    --hover-icons: rgb(220, 220, 220);
 
     /*-- Tamanhos --*/
     --icons-size: 45px;
     --search-icons-size:20px;
     --profile-size: 38px;
-    --icon-border-radius: 14px;
-    --icon-padding: 6px;
+
+
     --icon-gap: 20px;
-    
 }
 
 * {
@@ -34,15 +29,17 @@ html,body{
     align-items: center;
     justify-content: center;
     position: fixed;
-    z-index: 999;
+    
+    z-index: var(--z-index-overlay);
 
     width: 100%;
+    max-width: 100%;
+
     padding-right: 40px;
     padding-left: 35px;
-    max-width: 1980px;
     
-    background-color: rgb(238, 238, 238);
-    box-shadow: 0px -1px 6px black;
+    background-color: var(--octonary-color);
+    box-shadow: var(--box-shadow-low);
 }
 
 .container{
@@ -89,11 +86,8 @@ html,body{
     
     padding: 0;
     margin: 0;
-    max-width: 70%;
-    max-height: 70%;
-    min-width: 30%;
-    min-height: 30%;
-    
+    width: clamp(50px, 9vw, 100px);
+    height: auto;
 
     transition: all 0.3s ease;
 }
@@ -113,6 +107,7 @@ html,body{
     display: flex;
     justify-content: flex-start;
     gap:var(--icon-gap);
+    padding-left: 30px;
 }
 
 .left_icons{
@@ -122,18 +117,19 @@ html,body{
     
     cursor: pointer;
     
-    padding: var(--icon-padding);
-    border-radius: var(--icon-border-radius);
-    width: var(--icons-size);
+    padding: var(--icon-padding-small);
+    border-radius:var(--border-radius-regular);
+    width: var(--icon-size-high);
     height: auto;
 
     background-color: transparent;
 
-    transition: all 0.1s ease-in-out;
+    transition: all var(--animation-hover-small-speed) ease-in-out;
 }
 
+
 .left_icons:hover{
-    background-color: var(--hover-icons);
+    background-color: var(--quinary-color);
 }
 
 
@@ -149,12 +145,12 @@ html,body{
     padding: 8px;
     
     border-radius: 13px;
-    border: solid rgb(116, 116, 116) 1px;
-    transition: all 0.1s ease
+    border: solid var(--quaternary-color) 1px;
+    transition: all var(--animation-hover-small-speed) ease-out;
 }
 
 .search_container:focus-within{
-    border: solid black 1.5px;
+    border: solid var(--tertiary-color) 2px;
 }
 
 .search_input{
@@ -164,9 +160,9 @@ html,body{
     
     width: 100%;
     margin-left: 30px;
-    font-size: 14px;
-    
-    font-weight:lighter;
+
+    font-size: var(--text-small-size);
+    font-weight: var(--text-small-weight);
     
     background: transparent;
     border: none;
@@ -182,10 +178,8 @@ html,body{
     margin-left:auto;
     margin-right: 10px;
     
-    width: var(--search-icons-size);
-    height: var(--search-icons-size);
-    max-width: 30px;
-    max-height: 30px;
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
 }
 
 
@@ -206,18 +200,18 @@ html,body{
     
     cursor: pointer;
     
-    padding: var(--icon-padding);
-    border-radius: var(--icon-border-radius);
-    width: var(--icons-size);
+    padding: var(--icon-padding-small);
+    border-radius: var(--border-radius-regular);
+    width: var(--icon-size-high);
     height: auto;
 
     background-color: transparent;
 
-    transition: all 0.1s ease-in-out;
+    transition: all var(--animation-hover-small-speed) ease-in-out;
 }
 
 .right_icons:hover{
-    background-color: var(--hover-icons);
+    background-color: var(--quinary-color);
 }
 
 /*--Profile--*/
@@ -242,13 +236,11 @@ html,body{
 
     cursor: pointer;
 
-    background-color: rgb(137, 255, 160);
-
     & img{
         width: var(--profile-size);
         height: var(--profile-size);
         border-radius: 20px;
-        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.17);
+        box-shadow: var(--box-shadow-low);
     }
 }
 
@@ -269,10 +261,10 @@ html,body{
     margin-top: 15px;
     border-radius: 10px;
 
-    background-color: rgb(236, 236, 236);
-    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.368);
+    background-color: var(--octonary-color);
+    box-shadow: var(--box-shadow-low);
 
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition: opacity var(--animation-hover-regular-speed) ease-in-out, transform 0.3s ease-in-out;
 
 }
 
@@ -282,7 +274,7 @@ html,body{
     pointer-events: auto;
     visibility: visible;
 
-    border-radius: 10px;
+    border-radius: var(--border-radius-regular);
 }
 
 .menu_items{
@@ -292,19 +284,19 @@ html,body{
     
     width: 100%;
     padding: 8px;
-
-    font-size: 14px;
+    
+    font-size: var(--text-small-size);
     font-weight:600;
     font-style: none;
     text-decoration: none;
 
-    color: rgb(0, 0, 0);
-    border-radius: 10px;
+    color: var(--tertiary-color);
+    border-radius: var(--border-radius-regular);
 
 }
 
 .menu_desconect{
-    color: rgb(246, 48, 48);
+    color: var(--septenary-color);
     display: flex;
     justify-content: left;
     white-space: nowrap;
@@ -313,22 +305,17 @@ html,body{
     width: 100%;
     padding: 8px;
 
-    font-size: 15px;
+    font-size: var(--text-small-size);
     font-weight: 600;
     font-style: none;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: var(--border-radius-regular);
 }
 
 .menu_desconect:hover{
-    background-color: rgba(172, 172, 172, 0.444);
+    background-color: var(--quinary-color);
 }
 
 .menu_items:hover{
-    background-color: rgba(172, 172, 172, 0.444);
+    background-color: var(--quinary-color);
 }
-
-
-
-
-

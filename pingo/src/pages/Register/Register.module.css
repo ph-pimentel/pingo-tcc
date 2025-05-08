@@ -1,20 +1,8 @@
-@import url('../../styles/fonts/Poppins.css');
+
+@import url('../../styles/global.css');
 
 :root {
-    /* Cores */
-    --primary-color: #72a9fb;
-    --secondary-color: #4E94FF;
-    --text-color: black;
-    --background-color: white;
-    --border-color: black;
     --placeholder-color: #949494;
-    --forgot-password-color: #72a9fb;
-
-    /* Fontes */
-    --font-primary: 'Poppins';
-    --font-size-small: 16px;
-    --font-size-medium: 18px;
-    --font-size-large: 30px;
 
     /* Espaçamentos */
     --padding-default: 15px;
@@ -32,7 +20,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: white;
+    background-color: var(--octonary-color);
     user-select: none;
 }
 
@@ -44,7 +32,7 @@ html, body {
     flex-direction: column;
     height: 100vh;
     width: 100vw;
-    background: var(--background-color);
+    background: var(--octonary-color);
     background: url('../../../public/img/BackGround/BackgroundLogin.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -64,9 +52,9 @@ html, body {
 
 /*___Título___*/
 .registerTitle {
-    font-family: var(--font-primary);
+    font-family: var(--primary-font);
     font-weight: unset;
-    font-size: var(--font-size-large);
+    font-size: var(--text-mega-size);
     pointer-events: none;
     -webkit-user-drag: none;
 }
@@ -77,7 +65,7 @@ html, body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: var(--background-color);
+    background-color: var(--octonary-color);
     padding: 30px 90px;
     border: none;
     border-radius: var(--border-radius);
@@ -91,11 +79,10 @@ html, body {
     width: 400px;
     height: 57px;
     padding: var(--padding-default);
-    font-size: var(--font-size-small);
+    font-size: var(--text-small-size);
     margin-top: var(--margin-top-default);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-default);
-    border: solid var(--border-thickness) var(--border-color);
+    border-radius: var(--border-radius-medium);
+    border: solid var(--border-thickness) var(--quaternary-color);
 }
 
 /*--Input de Email--*/
@@ -104,12 +91,12 @@ html, body {
     justify-content: center;
     width: 400px;
     height: 57px;
-    padding: var(--padding-default);
-    font-size: var(--font-size-small);
     margin-top: var(--margin-top-default);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-default);
-    border: solid var(--border-thickness) var(--border-color);
+    
+    padding: var(--padding-default);
+    font-size: var(--text-small-size);
+    border-radius: var(--border-radius-medium);
+    border: solid var(--border-thickness) var(--quaternary-color);
 }
 
 .registerForm input::placeholder {
@@ -129,11 +116,10 @@ html, body {
     align-items: center;
     width: 400px;
     padding: var(--padding-default);
-    font-size: var(--font-size-small);
+    font-size: var(--text-small-size);
     margin-top: var(--margin-top-default);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-default);
-    border: solid var(--border-thickness) var(--border-color);
+    border-radius: var(--border-radius-medium);
+    border: solid var(--border-thickness) var(--quaternary-color);
     background-color: white;
     cursor: text;
 }
@@ -181,7 +167,7 @@ html, body {
     justify-content: left;
     align-items: center;
     width: 100%;
-    gap: 20px;
+    gap: 10px;
 }
 
 .rememberMeLabel {
@@ -189,8 +175,8 @@ html, body {
     align-items: center;
     justify-content: center;
     width: 150px;
-    font-size: var(--font-size-small);
-    color: var(--text-color);
+    font-size: var(--text-small-size);
+    color: var(--tertiary-color);
     cursor: pointer;
     white-space: nowrap;
 }
@@ -202,16 +188,16 @@ html, body {
     position: relative;
     width: 20px;
     height: 20px;
-    background-color: var(--background-color);
+    background-color: transparent;
     appearance: none;
-    border: 1.5px solid var(--border-color);
-    border-radius: 5px;
+    border: 1.5px solid var(--tertiary-color);
+    border-radius: var(--border-radius-small);
     cursor: pointer;
 }
 
 .rememberMeCheckbox::after {
     content: "✓";
-    font-size: var(--font-size-small);
+    font-size: var(--text-small-weight);
     font-weight: bold;
     font-family: sans-serif;
     color: transparent;
@@ -226,7 +212,7 @@ html, body {
 }
 
 .rememberMeCheckbox:checked::after {
-    color: var(--background-color);
+    color: var(--quinary-color);
 }
 
 /*___Botão Continuar___*/
@@ -234,11 +220,10 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #4E94FF;
-    color: var(--background-color);
-    border: solid 1px var(--border-color);
+
+    background-color: var(--primary-color);
+    color: var(--text-light1-color);
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-default);
     border: none;
     cursor: pointer;
     width: 100%;
@@ -247,9 +232,10 @@ html, body {
     font-size: var(--font-size-small);
     margin-top: var(--margin-top-default);
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: all var(--animation-hover-regular-speed) ease;
 }
 
 .continueButton:hover {
-    background-color: #0057d9;
+    box-shadow: var(--box-shadow-low);
+    scale: calc(1.01)
 }

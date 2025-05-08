@@ -1,7 +1,6 @@
-@import url('../../styles/fonts/Poppins.css');
+@import url('../../styles/global.css');
 
 :root{
-
     --text-color: #f0f0f0;
     --text-size: 14px;
     --text-font-family:'Poppins';
@@ -27,10 +26,10 @@
     width: 100%;
     padding: 30px;
 
-    background-color: #313131;
-    color: white;
+    background-color: var(--tertiary-color);
+    color: var(--text-light1-color);
 
-    font-family: var(--text-font-family);
+    font-family: var(--primary-font);
 }
 
 .items{
@@ -54,7 +53,7 @@
 .logo p{
     margin-top: 5px;
     font-weight: 300;
-    font-family: var(--text-font-family);
+    font-family: var(--primary-font);
 }
 
 /*___Redirect___*/
@@ -68,24 +67,24 @@
 
 .list a{
     text-decoration: none;
-    font-family:var(--text-font-family);
-    font-size: var(--text-size);
-    color: rgb(222, 222, 222);
+    font-family:var(--primary-font);
+    font-size: var(--text-small-size);
+    color: var(--quinary-color);
 }
 .list a:hover{
-    color: white;
+    color: var(--octonary-color);
 }
 
 .list h1{
-    font-size: 22px;
+    font-size: var(--text-regular-size);
 }
 
 .list h2{
     font-weight: 500;
-    font-size: 14px;
+    font-size: var(--text-small-size);
 }
 .list p{
-    font-size: var(--text-size);
+    font-size: var(--text-small-size);
     user-select: text;
 }
 
@@ -96,5 +95,3 @@
     gap: 3px;
     
 }
-
-
