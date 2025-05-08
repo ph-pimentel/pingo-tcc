@@ -1,32 +1,18 @@
 
+@import url('../../styles/global.css');
 :root{
     
-    --primary-color: #72a9fb;
-    
-    --primary-font:'Poppins';
-    
-    --high-font-size: 30px;
-    --medium-font-size: 20px;
-    --small-font-size: 15px;
-    --super-small-font-size: 10px;
-    
-    --title-font-weight:300;
-    --high-icon-width: 30px;
-    --high-icon-height: 30px;
+    --high-font-size: var(--text-mega-size);
+    --medium-font-size: var(--text-regular-size);
+    --small-font-size: var(--text-small-size);
 
     --small-padding: 10px;
     --medium-padding: 15px;
     
-    --icon-border-radius: 14px;
     --radio-border-radius: 12px;
     --icon-padding: 6px;
 
     --margin-left-form: 5%;
-    
-    --background-color: #3D3D3D;
-    --title-color: white;
-    --primary-font-color-:black;
-    --hover-icons: rgb(220, 220, 220);
 
 }
 
@@ -72,16 +58,16 @@
 }
 
 .title_container h1{
-    font-size: var(--high-font-size);
+    font-size: var(--text-regular-size);
     font-family: var(--primary-font);
-    font-weight: var(--title-font-weight);
+    font-weight: var(--text-small-weight);
 
-    color: var(--primary-font-color-)
+    color: var(--text-light2-color)
 }
 
 .title_container img{
-    max-width: var(--high-icon-width);
-    max-height: var(--high-icon-width);
+    max-width: var(--icon-size-medium);
+    height: auto;
 }
 
 
@@ -91,13 +77,13 @@
     cursor: pointer;
     
     padding: var(--icon-padding);
-    border-radius: var(--icon-border-radius);
+    border-radius: var(--border-radius-regular);
     
     transition: all 0.2s ease-in-out;
 }
 
 .icon_form:hover{
-    background-color: var(--hover-icons);
+    background-color: var(--quinary-color);
 }
 
 
@@ -115,25 +101,25 @@
     gap: 10px;
     margin-top: 50px;
 
-    background-color: #3D3D3D;
+    background-color: var(--tertiary-color);
     border-radius: 5px;
-    box-shadow: 0px 4px 8px black;
+    box-shadow: var(--box-shadow-low);
     
     padding-left: var(--small-padding);
     padding-right: var(--small-padding);
     padding-top: var(--medium-padding);
     padding-bottom: var(--medium-padding);
     
-    z-index: 12;
+    z-index: var(--z-index-overlay);
 }
 
 /*--Título--*/
 .filter_form h1,h2{
     font-family: var(--primary-font);
-    font-size: var(--small-font-size);
-    font-weight: 500;
+    font-size: var(--text-small-size);
+    font-weight: var(--text-high-weight);
 
-    color: var(--title-color);
+    color: var(--text-light2-color);
     margin-left: var(--margin-left-form);
 }
 
@@ -161,7 +147,7 @@
     border: none;
     background-color: transparent;
     width: 90%;
-    color: white;
+    color: var(--text-light1-color);
     margin-left: 5px;
 
 }
@@ -172,7 +158,7 @@
 }
 
 .form_input input::placeholder{
-    color: rgb(197, 197, 197);
+    color: var(--text-light2-color);
 }
 
 
@@ -183,8 +169,8 @@
 
 .form_input img{
     min-height: auto;
-    max-width: 17px;
-    padding: 1px;
+    max-width: var(--icon-size-small);
+    padding: 1.5px;
 }
 
 
@@ -224,18 +210,18 @@
     
     border-radius: var(--radio-border-radius);
 
-    color: black;
+    color: var(--text-dark1-color);
     background-color: white;
     
-    transition: all 0.2s ease-in-out;
+    transition: all var(--animation-hover-small-speed) ease-in-out;
 }
 
 .form_radio_btn:checked + span {
     scale: calc(1.02);    
 
-    color: white;
+    color: var(--text-light1-color);
     border-radius: var(--radio-border-radius);
-    background-color: rgb(93, 97, 109);
+    background-color: var(--quaternary-color);
 }
 
 
@@ -248,23 +234,22 @@
     justify-content: center;
    
     width: 100%;
-
     flex: 1;
 }
 
 .search_btn{
     font-family:var(--primary-font);
-    font-size:var(--small-font-size);
-    font-weight: 600;
+    font-size:var(--text-small-size);
+    font-weight: var(--text-high-weight);
     
     width: 100%;
     padding: var(--small-padding);
     
     border: none;
-    border-radius: var(--icon-border-radius);
+    border-radius: var(--border-radius-regular);
 
-    color: white;
-    background-color: #2e81fd;
+    color: var(--text-light1-color);
+    background-color: var(--primary-color);
 
     cursor: pointer;
 
@@ -272,6 +257,6 @@
 }
 
 .search_btn:hover{
-    background-color: #106fff;;
+    scale:calc(1.02);
 }
 

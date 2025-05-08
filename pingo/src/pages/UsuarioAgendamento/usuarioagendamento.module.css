@@ -1,34 +1,27 @@
 
-
+@import url('../../styles/global.css');
 
 :root{
     /*__Backgrounds*/
-    --bg-color:#3D3D3D; 
-    --border-color: #535353;
+    --bg-color:var(--tertiary-color); 
+    --border-color: var(--quartenary-color);
 
     /*__Text*/
     /*--Size*/
-    --text-title-size: 27px;
-    --text-subtitle-size: 21px;
-    --text-size: 13px;
+    --text-title-size: var(--text-high-size);
+    --text-subtitle-size: var(--text-regular-size);
+    --text-size: var(--text-small-size);;
     /*--Weight*/
-    --text-title-weight: 600;
-    --text-subtitle-weight: 500;
-    --text-weight: 300;
+    --text-title-weight: var(--text-high-weight);
+    --text-subtitle-weight: var(--text-regular-weight);
+    --text-weight: var(--text-medium-weight);
     /*--Colors*/
     --text-main-color:#E3E3E3;
     --text-secondary-color: #BBBBBB;
 
     /*__Borders*/
-    --medium-border-radius: 10px;
-    --small-border-radius: 4px;
-
-    /*__Colors*/
-    --primary-color: #297EFF;
-    --secondary-color: #F65858;
-
-    /*__Font*/
-    --primary-font: "Poppins";
+    --medium-border-radius: var(--border-radius-regular);
+    --small-border-radius: var(--border-radius-small);
 }
 
 .main_container{
@@ -54,7 +47,7 @@
 /*Tabela não encontrada*/
 .table_not_found{
     font-size: var(--text-size);
-    background-color: #3D3D3D;
+    background-color: var(--bg-color);
     font-weight: var(--text-subtitle-weight);
     color: var(--text-main-color);
     border-radius: 5px;

@@ -1,32 +1,22 @@
+@import url('../../styles/global.css');
 
 :root{
     /*__Backgrounds*/
-    --bg-color:#3D3D3D; 
-    --border-color: #535353;
+    --bg-color:var(--tertiary-color); 
+    --border-color: var(--quartenary-color);
 
     /*__Text*/
     /*--Size*/
-    --text-title-size: 27px;
-    --text-subtitle-size: 21px;
-    --text-size: 16px;
+    --text-title-size: var(--text-high-size);
+    --text-subtitle-size: var(--text-medium-size);
+    --text-size: var(--text-small-size);
     /*--Weight*/
-    --text-title-weight: 600;
-    --text-subtitle-weight: 500;
-    --text-weight: 300;
+    --text-title-weight: var(--text-high-weight);
+    --text-subtitle-weight: var(--text-regular-weight);
+    --text-weight: var(--text-small-weight);
     /*--Colors*/
-    --text-main-color:#E3E3E3;
-    --text-secondary-color: #BBBBBB;
-
-    /*__Borders*/
-    --medium-border-radius: 10px;
-    --small-border-radius: 4px;
-
-    /*__Colors*/
-    --primary-color: #297EFF;
-    --secondary-color: #F65858;
-
-    /*__Font*/
-    --primary-font: "Poppins";
+    --text-main-color:var(--text-light1-color);
+    --text-secondary-color: var(--text-light2-color);
 }
 
 .main_container{
@@ -52,11 +42,11 @@
     padding-top: 55px;
     
     
-    border-radius: var(--medium-border-radius);
+    border-radius: var(--border-radius-regular);
     
     background-color: var(--bg-color);
-    box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.412);
-    margin-top: 200px;
+    box-shadow:var(--box-shadow-medium);
+    margin-top: 125px;
 }
 
 
@@ -67,7 +57,7 @@
     padding-bottom: clamp(20px, 1vw, 25px);
     flex: 1;
 
-    border-bottom: 1px solid var(--text-secondary-color);
+    border-bottom: 1px solid var(--quaternary-color);
     gap: clamp(0px, 1.2vw, 40px);
 }
 
@@ -81,7 +71,7 @@
 .img_container img{
     width: 100%;
     height: auto;
-    border-radius: var(--small-border-radius);
+    border-radius: var(--border-radius-small);
     object-fit: cover;
 }
 
@@ -102,7 +92,7 @@
     padding-bottom: 5px;
     
     font-family:var(--primary-font);
-    color: var(--text-main-color);
+    color: var(--text-light1-color);
 
 }
 
@@ -173,7 +163,7 @@
     font-size: clamp(18px, 1.3vw, 24px);
     font-weight: var(--text-subtitle-weight);
     
-    color: white;
+    color: var(--octonary-color);
     background-color: var(--primary-color);
     
     cursor: pointer;
@@ -182,7 +172,8 @@
 }
 
 .btn_see_hours:hover{
-    background-color: #0057da;
+    box-shadow: var(--box-shadow-low);
+    scale:calc(1.01);
 }
 
 .btn_see_hours img{
@@ -215,7 +206,7 @@
 
     gap: clamp(10px, 1vw, 20px);
 
-    font-family: 'Poppins';
+    font-family: var(--primary-font);
 }
 
 .description_content_container button{
@@ -233,7 +224,7 @@
     border-radius: 0.5vh;
 
     cursor: pointer;
-    transition: all 0.2s ease-out;
+    transition: all var(--animation-hover-medium-speed) ease-out;
 }
 
 .description_content_container button:focus{
@@ -251,7 +242,8 @@
     justify-content: flex-start;
     flex-direction: column;
 
-    border-bottom: 1px solid var(--text-secondary-color);
+    border-bottom: 1px solid var(--text-light2-color);
+    font-weight: var(--text-regular-weight);
     padding-bottom: 1vw;
 
 }
@@ -323,4 +315,3 @@
     font-size: 100%; 
     font-weight: var(--text-subtitle-weight);
 }
-

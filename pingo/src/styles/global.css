@@ -9,7 +9,7 @@
 --secondary-color: #4E94FF;
 --tertiary-color: #3D3D3D;
 --quaternary-color: #535353;
---quinary-color: #e3e3e3;
+--quinary-color: #ededed;
 --senary-color: #BBBBBB;
 --septenary-color: #F65858;
 --octonary-color: #ffffff;
@@ -66,9 +66,9 @@
 --border-radius-mega: 50px;
 
 /* > Box-Shadow */
---box-shadow-low: 0px 4px 7px var(--senary-color);
---box-shadow-medium: 0px 6px 10px var(--senary-color);
---box-shadow-high: 0px 8px 12px var(--senary-color);
+--box-shadow-low: 0px 4px 7px rgba(0, 0, 0, 0.17);
+--box-shadow-medium: 0px 6px 10px rgba(0, 0, 0, 0.192);
+--box-shadow-high: 0px 8px 12px rgba(0, 0, 0, 0.210);
 
 /* > Animations */
 --animation-hover-small-speed: 0.125s;

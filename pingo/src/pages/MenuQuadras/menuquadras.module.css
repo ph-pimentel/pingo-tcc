@@ -1,4 +1,4 @@
-@import url('../../styles/fonts/Poppins.css');
+@import url('../../styles/global.css');
 
 
 .buttons_container{
@@ -13,7 +13,7 @@
     gap: 1rem; 
     
     z-index: 2;
-    font-family: 'Poppins';
+    font-family: var(--primary-font);
 }
 
 .button1, .button2, .button3 {
@@ -43,22 +43,22 @@
 }
 
 .button1{
-    background-color: white;
-    color: black;
+    background-color: var(--octonary-color);
+    color: var(--tertiary-color);
 }
 
 .button2{
-    background-color: black;
-    color: white;
+    background-color: var(--tertiary-color);
+    color: var(--octonary-color);
 }
 .button3{
-    background-color: #4E94FF;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--octonary-color);
 }
 
 .button1:hover,.button2:hover,.button3:hover{
     scale: calc(1.012);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3)
+    box-shadow: var(--box-shadow-medium);
 }
 
 

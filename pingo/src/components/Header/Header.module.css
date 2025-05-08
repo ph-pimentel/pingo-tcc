@@ -3,10 +3,10 @@
 :root{
 
     /*-- Tamanhos --*/
-    --icons-size: 45px;
-    --search-icons-size:20px;
     --profile-size: 38px;
-
+    
+    --search-icons-size:20px;
+    
 
     --icon-gap: 20px;
 }

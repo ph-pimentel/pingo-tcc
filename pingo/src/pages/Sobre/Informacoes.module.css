@@ -1,9 +1,7 @@
-@import url('../../styles/fonts/Poppins.css');
+@import url('../../styles/global.css');
 
 /*___ROOTS___*/
 :root{
-    --primary-font: 'Poppins';
-    --primary-color: #4E94FF;
     --secondary-color: #333333;
     --terceary-color: #297EFF;
 
@@ -88,16 +86,16 @@ html{
     text-align: left;
     padding: 0;
     margin: 0;
-    color: black;
-    font-size: 20px;
+    color: var(--tertiary-color);
+    font-size: var(--text-medium-size);
     font-weight: 500;
 }
 
 .sobre_text{
     text-align: left;
-    color: rgb(75, 75, 75);
-    font-size: 16px;
-    font-weight: 500;
+    color: var(--tertiary-color);
+    font-size: var(--text-medium-size);
+    font-weight: var(--text-regular-weight);
     height: auto;
 }
 
@@ -111,7 +109,7 @@ html{
     max-width: 100%;
     padding: 50px;
     gap: 20px;
-    background-color: #333333;
+    background-color:var(--tertiary-color);
 }
 
 .instructions_title{
@@ -123,12 +121,12 @@ html{
 
 .instructions_title h1,.instructions_title h2{
     font-family: var(--primary-font);
-    font-weight: 600;
-    font-size: 20px;
+    font-weight: var(--text-high-weight);
+    font-size: var(--text-medium-size);
 }
 
 .instructions_title h1{
-    color: white;
+    color: var(--text-light1-color);
 }
 
 .instructions_title h2{
@@ -158,18 +156,18 @@ html{
     height: var(--card-height);
     max-width: var(--card-max-width);
     border-radius: 20px;
-    background-color: var(--terceary-color);
+    background-color: var(--primary-color);
 }
 
 .instructions_card h1,.instructions_card h2{
-    font-family: 'Poppins';
-    font-size: 20px;
-    font-weight: 300;
-    color: white;
+    font-family: var(--primary-font);
+    font-size: var(--text-medium-size);
+    font-weight: var(--text-high-weight);
+    color: var(--text-light1-color);
 }
 
 .instructions_card h2{
-    font-size: 16px;
+    font-size: var(--text-small-size);
     white-space: normal;
     word-break: keep-all;
     overflow-wrap: break-word;
@@ -223,36 +221,37 @@ html{
 
 .banner_content_container h1,.banner_content_container h2{
     font-family: var(--primary-font);
-    color: white;
+    color: var(--text-light1-color);
 }
 
 .banner_content_container h1{
-    font-size: 30px;
-    font-weight: 600;
+    font-size: var(--text-high-size);
+    font-weight: var(--text-high-weight);
 }
 
 .banner_content_container h2{
     font-size: 20px;
-    font-weight: 500;
+    font-weight:var(--text-regular-weight);
 }
 
 .banner_btn{
     font-family: var(--primary-font);
-    font-weight: 700;
+    font-weight: var(--text-mega-weight);
     font-size: var(--btn-font-size);
     padding: var(--btn-padding);
     border-radius: 500px;
     text-decoration: none;
     background-color: #252525;
-    color: white;
+    color: var(--text-light1-color);
     white-space: nowrap;
 
-    transition: all 0.2s ease-out;
+    transition: all var(--animation-hover-small-speed) ease-out;
 }
 
 
 .banner_btn:hover{
     background-color: #1b1b1b;
+    scale: calc(1.01);
 }
 
 
@@ -290,15 +289,16 @@ html{
 
 .faq_title,.faq_subtitle{
     font-family: var(--primary-font);
-    color: black;
+    color: var(--text-dark2-color);
 }
 
 .faq_title{
-    font-size: 40px;
+    font-size: var(--text-mega-size);
+    font-weight: var(--text-high-weight);
 }
 
 .faq_subtitle{
-    font-size: 30px;
+    font-size: var(--text-high-size);
 }
 
 
@@ -322,8 +322,8 @@ html{
 
 
     font-weight: 400;
-    color: #4d4d4d;
-    font-size: 13px;
+    color: var(--text-dark2-color);
+    font-size: calc(var(--text-small-size) - 20%);
 }
 /*--Seta--*/
 .faq_text_title img{
@@ -333,9 +333,10 @@ html{
     transform: rotate(0deg);
     margin-left: 30px;
     
-    background-color: #dddddd;
+    background-color: #e9e9e9;
     padding: 10px;
     border-radius: 300px;
+    border: solid 1px var(--senary-color);
 
     cursor: pointer;
 
@@ -356,8 +357,8 @@ html{
 
 .faq_text_text{
     font-weight: 500;
-    color: black;
-    font-size: 15px;
+    color: var(--text-dark2-color);
+    font-size: var(--text-small-size);
 
 }
 
@@ -380,16 +381,16 @@ html{
   }
   
   .seta {
-    transition: transform 0.3s ease;
+    transition: transform var(--animation-hover-regular-speed) ease;
     animation-fill-mode: forwards;
   }
   
   .setaAberta {
-    animation: girarSeta 0.3s forwards;
+    animation: girarSeta var(--animation-hover-regular-speed) forwards;
   }
   
   .setaFechada {
-    animation: girarSetaReverso 0.3s forwards;
+    animation: girarSetaReverso var(--animation-hover-regular-speed) forwards;
   }
   
 
@@ -397,7 +398,7 @@ html{
 .linha {
     width: 100%;
     height: 1px;
-    background-color: #0000006e; 
+    background-color: var(--senary-color); 
     margin: 8px 0; 
   }
 

@@ -168,7 +168,7 @@
   
   /* Botão Selecionado */
   .selected {
-    background-color: var(--secondary-color);
+    background-color: var(--septenary-color);
     color: var(--bg-color);
     border: none;
   }
@@ -299,7 +299,7 @@
     border-radius: var(--border-radius-sm);
     
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--animation-hover-regular-speed) ease;
   }
   
   .hours_card_container input[type="checkbox"] {
@@ -320,7 +320,7 @@
     border-radius: clamp(2px, 0.3vw, 4px);
     
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--animation-hover-regular-speed) ease;
   }
   
   .hours_card_container input[type="checkbox"]:checked {
@@ -412,10 +412,10 @@
     font-weight: var(--text-title-weight);
     
     cursor: pointer;
-    transition: all 0.2s ease-out;
+    transition: all var(--animation-hover-medium-speed) ease-out;
   }
   
   .btn_scheduling:hover {
-    background-color: #0056d6;
+    scale: calc(1.012);
   }
   

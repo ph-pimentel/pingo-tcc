@@ -1,9 +1,8 @@
-
+@import url('../../styles/global.css');
 /* Global Variables */
 :root {
-    --card-bg-color: #3D3D3D;
+    --card-bg-color: var(--tertiary-color);
     --card-border-color: rgb(49, 49, 49);
-    --primary-font: "Poppins";
     
     --card-height: 210px;
     --card-width: 900px;
@@ -14,13 +13,13 @@
     --max-text-width: 150px;
     --max-text-height: 50px;
 
-    --font-size-h1: 17px;
-    --font-size-h2: 13px;
-    --font-size-h3: 12px;
+    --font-size-h1: var(--text-medium-size);
+    --font-size-h2:  var(--text-small-size);
+    --font-size-h3:  var(--text-small-size);
 
 
-    --icon-size-large: 30px;
-    --icon-size-small: 20px;
+    --icon-size-small: var(--icon-size-small);
+    --icon-size-large: var(--icon-size-medium);
 
     --default-spacing: 10px;
 }
@@ -46,19 +45,19 @@
     background-color: var(--card-bg-color);
     
     border: 3px solid var(--card-border-color);
-    box-shadow: 0px 3px 3px black;
     border-radius: 15px;
-
+    
     overflow: hidden;
     z-index: 10;
-
+    
     cursor: pointer;
-
-    transition: all 0.3s ease-in-out;
+    
+    transition: all var(--animation-hover-regular-speed) ease-in-out;
 }
 
 .card_container:hover{
     scale: calc(1.01);
+    box-shadow: var(--box-shadow-low);
 }
 
 /* Image Container */
@@ -104,7 +103,7 @@
 .item_info h1,
 .item_info h2,
 .sport_info_container {
-    color: white; 
+    color: var(--text-light1-color); 
     font-family: var(--primary-font);
 }
 
@@ -147,15 +146,15 @@
     font-family: var(--primary-font);
 
     
-    color: white; 
+    color: var(--text-light1-color);  
 
 }
 
 /* Divider */
 .divider {
     height: 160%;
-    border: solid 1px white; 
-    border-radius: 10px;
+    border: solid 1px var(--text-light1-color); 
+    border-radius: var(--border-radius-regular);
     scale: calc(0.5);
 }
 
@@ -168,9 +167,9 @@
 
 .item_info_text h1 {
     font-size: var(--font-size-h1);
-    font-weight: 600;
+    font-weight: var(--text-high-weight);
     font-family: var(--primary-font);
-    color: white; 
+    color: var(--text-light1-color); 
     overflow: hidden; 
 }
 
@@ -213,19 +212,19 @@
 
 .item_sport h2 {
     font-size: var(--font-size-h2);
-    font-weight: 400;
+    font-weight: var(--text-medium-weight);
 }
 .item_sport h3{
     font-size: var(--font-size-h2);
-    font-weight: 500;
+    font-weight:var(--text-regular-weight);
     
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 2px;
     padding-bottom: 2px;
 
-    color: #3D3D3D;
-    background-color: #e8e8e8;
+    color: var(--tertiary-color);
+    background-color: var(--quinary-color);
 }
 
 .item_sport img {
@@ -235,7 +234,6 @@
 
 .info_container{
     display: flex;
-
     gap:10px
 }
 
