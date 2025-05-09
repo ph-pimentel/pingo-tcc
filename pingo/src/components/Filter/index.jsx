@@ -27,35 +27,27 @@ function Filter() {
 
                     <div className={styles.filter_form}>
 
-                         <div className={styles.form_item}>
-                            <h1>Local de Busca</h1>
-                            <label className={styles.form_input} onClick={focusInput}>
-                                <img src="../img/Filter/lupawhite.png"/>
-                                <input type="text" placeholder="Digite o endereço..." />
-                            </label>
-                         </div>
-
                         <div className={styles.form_item}>
-                        <h2>Raio de Busca</h2>
+                        <h2>Região de Busca</h2>
                             <label className={styles.form_radio_container}>
 
                             <label className={styles.radio_label}>
-                                <input className={styles.form_radio_btn} type="radio" name="distancia" value="1"/>
-                                <span>500m</span>
+                                <input className={styles.form_radio_btn} type="checkbox" name="regiao" value="1"/>
+                                <span>Norte</span>
                             </label>
 
                             <label className={styles.radio_label}>
-                                <input className={styles.form_radio_btn} type="radio" name="distancia" value="2"/>
-                                <span>1000m</span>
+                                <input className={styles.form_radio_btn} type="checkbox" name="regiao" value="2"/>
+                                <span>Sul</span>
                             </label>
 
                             <label className={styles.radio_label}>
-                                <input className={styles.form_radio_btn} type="radio" name="distancia" value="3"/>
-                                <span>2km</span>
+                                <input className={styles.form_radio_btn} type="checkbox" name="regiao" value="3"/>
+                                <span>Leste</span>
                             </label>
                             <label className={styles.radio_label}>
-                                <input className={styles.form_radio_btn} type="radio" name="distancia" value="4"/>
-                                <span>5km</span>
+                                <input className={styles.form_radio_btn} type="checkbox" name="regiao" value="4"/>
+                                <span>Oeste</span>
                             </label>  
                         </label>
                         </div>
@@ -79,22 +71,20 @@ function Filter() {
                         </div>
 
                         <div className={styles.form_item}>
-                        <h2>Quadras</h2>
+                        <h2>Tipo de Quadra</h2>
                         <label className={styles.form_radio_container}>
                             <label className={styles.radio_label}>
-                                <input className={styles.form_radio_btn} type="radio" name="quadra" value="1"/>
-                                <span>Campo</span>
-                            </label>
-
+                                    <input className={styles.form_radio_btn} type="checkbox" name="quadra" value="1"/>
+                                    <span>Campo</span>
+                            </label>  
                             <label className={styles.radio_label}>
-                                <input className={styles.form_radio_btn} type="radio" name="quadra" value="2"/>
-                                <span>Salão</span>
-                            </label>
-
+                                    <input className={styles.form_radio_btn} type="checkbox" name="quadra" value="1"/>
+                                    <span>Salão</span>
+                            </label>  
                             <label className={styles.radio_label}>
-                                <input className={styles.form_radio_btn} type="radio" name="quadra" value="3"/>
-                                <span>Areia</span>
-                            </label>
+                                    <input className={styles.form_radio_btn} type="checkbox" name="quadra" value="1"/>
+                                    <span>Areia</span>
+                            </label>  
                         </label>
                         
                         </div>
