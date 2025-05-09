@@ -60,11 +60,11 @@ function Filter() {
                                     <span>Futebol</span>
                             </label>  
                             <label className={styles.radio_label}>
-                                    <input className={styles.form_radio_btn} type="checkbox" name="esporte" value="1"/>
+                                    <input className={styles.form_radio_btn} type="checkbox" name="esporte" value="2"/>
                                     <span>Basquete</span>
                             </label>  
                             <label className={styles.radio_label}>
-                                    <input className={styles.form_radio_btn} type="checkbox" name="esporte" value="1"/>
+                                    <input className={styles.form_radio_btn} type="checkbox" name="esporte" value="3"/>
                                     <span>Vôlei</span>
                             </label>  
                         </label>
@@ -78,11 +78,11 @@ function Filter() {
                                     <span>Campo</span>
                             </label>  
                             <label className={styles.radio_label}>
-                                    <input className={styles.form_radio_btn} type="checkbox" name="quadra" value="1"/>
+                                    <input className={styles.form_radio_btn} type="checkbox" name="quadra" value="2"/>
                                     <span>Salão</span>
                             </label>  
                             <label className={styles.radio_label}>
-                                    <input className={styles.form_radio_btn} type="checkbox" name="quadra" value="1"/>
+                                    <input className={styles.form_radio_btn} type="checkbox" name="quadra" value="3"/>
                                     <span>Areia</span>
                             </label>  
                         </label>
