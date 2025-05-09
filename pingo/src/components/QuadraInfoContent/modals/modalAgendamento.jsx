@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './modalAgendamento.module.css';
 
 function ModalAgendamento({ isVisible, onClose, agendamentoDados, onPagamentoConfirmado }) {
   const [agendamentoConfirmado, setAgendamentoConfirmado] = useState(false);
   const [pixCopiado, setPixCopiado] = useState(false);
   const [pagamentoSimulado, setPagamentoSimulado] = useState(false);
+
+  useEffect(() => {
+    // Só reseta os estados se o modal estiver visível e os dados estiverem disponíveis
+    if (isVisible && agendamentoDados) {
+      setAgendamentoConfirmado(false);
+      setPixCopiado(false);
+      setPagamentoSimulado(false);
+    }
+  }, [isVisible, agendamentoDados]); // Agora depende de ambos
 
   if (!isVisible) {
     return null;
@@ -21,44 +30,36 @@ function ModalAgendamento({ isVisible, onClose, agendamentoDados, onPagamentoCon
     );
   }
 
+  // Restante do seu código original...
   const simularPagamento = () => {
-    // Simula um delay de processamento
     setTimeout(() => {
       setPagamentoSimulado(true);
-      // Chama a função para passar os dados para o componente pai
       onPagamentoConfirmado(agendamentoDados);
-      // Fecha o modal após 2 segundos
       setTimeout(onClose, 2000);
     }, 1500);
   };
 
-
   const { data, horarios, total } = agendamentoDados;
 
-  // Código PIX de exemplo (você pode gerar dinamicamente)
   const codigoPix = `00020126360014BR.GOV.BCB.PIX0114+55119876543210210Pingo
   52040000530398654061000.005802BR5910Pingo6009SaoPaulo621
-  00506PingoTx6304ABCD`.replace(/\s+/g, ''); // Remove espaços e quebras de linha
+  00506PingoTx6304ABCD`.replace(/\s+/g, '');
 
-  // Função para copiar o código PIX
   const copiarCodigoPix = () => {
     navigator.clipboard.writeText(codigoPix)
       .then(() => {
         setPixCopiado(true);
-        setTimeout(() => setPixCopiado(false), 2000); // Reset após 2 segundos
+        setTimeout(() => setPixCopiado(false), 2000);
       })
       .catch(err => {
         console.error('Falha ao copiar: ', err);
       });
   };
 
-  // Função para confirmar o agendamento
   const confirmarAgendamento = () => {
     setAgendamentoConfirmado(true);
-    // Aqui você pode adicionar lógica para enviar para o backend
   };
 
-  // Calcular data de expiração (1 hora a partir de agora)
   const calcularExpiracao = () => {
     const agora = new Date();
     agora.setHours(agora.getHours() + 1);
@@ -116,7 +117,6 @@ function ModalAgendamento({ isVisible, onClose, agendamentoDados, onPagamentoCon
                 </button>
               </div>
             </div>
-            
           </div>
         )}
       </div>

@@ -89,7 +89,7 @@
     font-weight: var(--text-title-weight);
    
     color: var(--bg-color);
-    background-color: var(--text-main-color);
+    background-color: var(--octonary-color);
 }
 
 .table_data{

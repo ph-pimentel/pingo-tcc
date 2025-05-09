@@ -288,11 +288,11 @@ html, body {
     box-shadow: var(--box-shadow-low);
     border-radius: var(--border-radius-medium);
 
-    transition: all 0.2s ease;
+    transition: all var(--animation-hover-medium-speed) ease;
 }
 
 .googleLoginButton:hover {
-    background-color: rgb(249, 249, 249);
+    background-color: rgb(237, 237, 237);
 }
 
 .googleLoginButton img {

@@ -33,9 +33,9 @@ function UsuarioAgendamento() {
             id: 3,
             quadra: "Campo Rosa",
             endereco: "Rua das Flores, 123 - Jardim Primavera",
-            horarios: "14:00 às 15:00",
-            data: "22/12/25",
-            valor: "R$600,00"
+            horarios: "11:00 às 15:00",
+            data: "23/05/25",
+            valor: "R$900,00"
           }
         ];
         
