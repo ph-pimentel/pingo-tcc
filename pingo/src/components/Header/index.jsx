@@ -22,21 +22,21 @@ function Header() {
 
                     {/* - Icons -*/}
                     <div className={styles.left_icons_container}>
-                       {/* Amigos */}
+                       {/* Home */}
                         <a href="/">
                         <img src="../img/Header/home.png" className={styles.left_icons} />
                         </a>
 
-                        {/* Favoritos */}
-                        <a href="/">
+                        {/* Amigos */}
+                        <a href="/amigos">
                             <img src="../img/Header/amigos.png" className={styles.left_icons} />
                         </a>
 
-                        {/* Quadras */}
+                        {/* Favoritos */}
                         <a href="/">
                             <img src="../img/Header/favoritos.png" className={styles.left_icons} />
                         </a>
-
+                        {/* Agendamentos */}
                         <a href="/meusagendamentos">
                         <img src="../img/Header/agendamentos.png" className={styles.left_icons} />
                         </a>
@@ -86,7 +86,7 @@ function Header() {
                         <div ref={menuRef} className={`${styles.menu_profile_container} 
                             ${isOpen ? styles.menu_profile_container_active : ""}`}>
 
-                            <a href="/" className={styles.menu_items}>Perfil</a>
+                            <a href="/perfil" className={styles.menu_items}>Perfil</a>
                             <a href="/" className={styles.menu_items}>Configurações</a>
                             <a href="/login" className={styles.menu_desconect}>Desconectar-se</a>
                         </div>

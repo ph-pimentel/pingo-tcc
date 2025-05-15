@@ -1,0 +1,125 @@
+@import url('../../styles/global.css');
+
+
+:root{
+    /*Titulo*/
+    --text-title-size: var(--text-mega-size);
+    --text-line-color: var(--secondary-color);
+    --primary-font:var(--primary-font);
+
+    /*Cards*/
+    --card-border-radius: var(--border-radius-medium);
+    --card-border-color: var(--senary-color);
+    --card-bg-color: var(--tertiary-color);
+
+    --card-font-size: var(--text-small-size);
+    --card-font-weigth: var(--text-regular-weight);
+    --card-text-color: var(--text-light1-color);
+    
+    --card-image-border-radius: var(--border-radius-mega);
+    --card-image-size: clamp(60px, 6vw, 100px);
+
+}
+.main_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    height: 100vh;
+}
+
+
+.friends_main_container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    width: clamp(700px, 60vw, 1000px);
+
+    font-family: var(--primary-font);
+    font-size: var(--text-title-size);
+
+}
+
+/* > Title */
+.friends_title {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-size: 100%;
+    padding-bottom: 25px;
+}
+.friends_title::after{
+    content: '';
+    background-color: var(--text-line-color);
+
+    height: 2px;
+}
+
+/* > Card */
+.card_friend_main_container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-content: start;
+
+    width: 100%;
+    
+    gap: 7px;
+}
+
+
+.card_friend_container{
+    display: flex; 
+
+    padding: 15px;
+    gap: 5px;
+
+    width: 100%;
+
+    
+    background-color: var(--card-bg-color);
+    border: solid 1px var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    transition: all 0.2s ease-out;
+
+}
+.card_friend_container:hover{
+    box-shadow: var(--box-shadow-medium);
+    scale: calc(1.02);
+}
+/* > Card Imagem */
+.card_friend_container img{
+    width: var(--card-image-size);
+    height: var(--card-image-size);
+    border-radius: var(--card-image-border-radius);
+}
+
+/* > Card Nome */
+.card_friend_name_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+
+    width: 100%;
+    height: 100%;
+
+    word-break:normal;
+    font-size: var(--card-font-size);
+}
+
+.card_friend_name_container h1{
+    font-weight: var(--card-font-weigth);
+    font-size: 100%;
+    color: var(--card-text-color);
+    outline: none !important;
+    text-decoration: none;
+}
+
+.card_friend_name_container a, a:link, a:visited, a:hover, a:active, a:focus {
+    text-decoration: none !important;
+}
+

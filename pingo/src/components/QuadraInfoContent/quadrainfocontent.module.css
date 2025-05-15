@@ -17,6 +17,9 @@
     /*--Colors*/
     --text-main-color:var(--text-light1-color);
     --text-secondary-color: var(--text-light2-color);
+
+    /*--Court Card-*/
+    --court-cart-width-size: 
 }
 
 .main_container{

@@ -25,7 +25,8 @@
 --text-dark2-color: var(--quartenary-color, #535353);
 
 /* > Size */ 
---text-small-size: clamp(0.75rem, 1.7vw, 0.9175rem);  
+--text-super-small-size: clamp(0.65rem, 1.7vw, 0.8rem);  
+--text-small-size: clamp(0.75rem, 1.6vw, 0.8775rem);  
 --text-medium-size: clamp(0.875rem, 1.8vw, 1.125rem); 
 --text-regular-size: clamp(1rem, 2vw, 1.4375rem);     
 --text-high-size: clamp(1.125rem, 3vw, 1.6875rem);    
@@ -49,6 +50,7 @@
 --icon-size-small: clamp(15px, 1.5vw, 20px);
 --icon-size-medium: clamp(20px, 3vw, 30px);
 --icon-size-high: clamp(30px, 4vw, 45px);
+--icon-size-mega: clamp(60px, 7vw, 75px);
 
 /* > Padding */
 --icon-padding-small: clamp(3px, 0.6vw, 6px);
@@ -63,7 +65,7 @@
 --border-radius-medium: 8px;
 --border-radius-regular: 11px;
 --border-radius-high: 20px;
---border-radius-mega: 50px;
+--border-radius-mega: 100%;
 
 /* > Box-Shadow */
 --box-shadow-low: 0px 4px 7px rgba(0, 0, 0, 0.17);

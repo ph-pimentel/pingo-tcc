@@ -1,0 +1,253 @@
+@import url('../../styles/global.css');
+
+:root {
+    --bg-color: var(--tertiary-color);
+    --bg-border-radius: var(--border-radius-regular);
+    
+    --profile-img-border-radius: var(--border-radius-mega);
+    --profile-main-container-max-size: auto;
+    --profile-main-container-min-size: 300px;
+
+    --text-color: var(--text-light1-color);
+    --primary-font: var(--primary-font);
+    --name-font-size: var(--text-high-size);
+    --social-font-size: var(--text-small-size);
+
+    --card-main-title: var(--text-medium-size);
+
+    --friend-img-border-radius: var(--border-radius-mega);
+    --friend-img-size: var(--icon-size-mega);
+}
+
+/* Container Principal */
+.main_container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 200px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+
+/* Card do Perfil */
+.profile_main_container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: clamp(var(--profile-main-container-min-size), 70vw, var(--profile-main-container-max-size));
+    padding: 70px;
+    background-color: var(--bg-color);
+    border-radius: var(--bg-border-radius);
+    box-shadow: var(--box-shadow-low);
+}
+
+.profile_block_container{
+    display: flex;
+    gap: 40px;
+    width: clamp(var(--profile-main-container-min-size), 70vw, var(--profile-main-container-max-size));
+}
+
+.profile_block{
+    display: flex;
+}
+
+/* Seção da Imagem */
+.profile_img_container {
+    flex-shrink: 0;
+    width: clamp(200px, 25vw, 300px);
+    height: clamp(200px, 25vw, 300px);
+    border-radius: var(--profile-img-border-radius);
+    overflow: hidden;
+}
+
+.profile_img_container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Seção de Conteúdo */
+.profile_content_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: clamp(200px, 40vw, 700px); 
+    max-width: 700px;
+}
+
+
+.profile_header {
+    display: flex;
+    align-items: center; 
+    justify-content: left;
+    gap: clamp(20px, 3vw, 40px);
+    width: 70%;
+
+}
+
+.profile_name_container{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+}
+
+.profile_name_container h1 {
+    font-family: var(--primary-font);
+    color: var(--text-color);
+    font-size: var(--name-font-size);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+
+
+/* Redes Sociais */
+.social_container {
+    display: flex;
+    gap: 20px;
+}
+
+.social_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 75px;
+}
+
+.social_item h3 {
+    margin: 5px 0;
+    font-size: var(--social-font-size);
+    font-weight: var(--text-mega-weight);
+    color: var(--text-color);
+}
+
+.social_item img {
+    width: 30px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Biografia */
+
+.bio_main_container{
+    display: flex;
+    text-align: left;
+    word-break:normal;
+    width: 90%;
+}
+.bio_main_container h2 {
+    margin: 0;
+    font-family: var(--primary-font);
+    color: var(--text-color);
+    font-size: var(--social-font-size);
+    line-height: 1.6;
+    white-space: pre-line;
+    
+    max-width: 700px;
+
+
+    padding: 10px;
+    border: solid 1px var(--quaternary-color);
+    border-radius: var(--border-radius-medium);
+    box-sizing: border-box;
+
+}
+
+
+
+/*  Área Amigos */
+.friends_main_container{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.friends_title_container{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    left: 0;
+
+    color: var(--text-color);
+    font-size: var(--card-main-title);
+}
+
+
+.friends_title_container h1{
+    position: relative;
+    font-size: 100%;
+    padding-bottom: 3px;
+    flex-direction: column;
+}
+
+.friends_title_container h1::after{
+    content: '';
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--secondary-color);
+}
+
+
+
+/* Friend Icons & Name*/
+
+.friends_item_main_container{
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    gap: clamp(5px, 3vw, 20px);
+
+    overflow: auto;
+
+}
+
+.friends_item_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    width: clamp(55px, 7vw, 85px);
+
+    font-size: var(--text-small-size);
+    
+    cursor: pointer;
+}
+
+.friends_item_container img{
+    object-fit: cover;
+    
+    
+    
+    width: var(--friend-img-size);
+    height:var(--friend-img-size);
+    border-radius: var(--friend-img-border-radius);
+    
+}
+
+.friends_item_container a{
+    color: var(--text-color);
+    font-weight: var(--text-regular-weight);
+    font-size: 100%;
+    
+    max-width: 100%;
+    text-decoration: none;
+    
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.friends_item_container:hover{
+    text-decoration: underline;
+    color: white;
+}

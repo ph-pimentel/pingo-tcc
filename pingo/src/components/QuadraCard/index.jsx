@@ -13,15 +13,15 @@ function QuadraCard() {
     {/* --Informações da quadra-- */}
                 <div className={styles.info_container}>
                     <div className={styles.item_info} alt="Nome da quadra">
-                        <h1>Etec Homem</h1>
+                        <h1>Etec Paulistano</h1>
                     </div>
                     <div className={styles.item_info} alt="região">
                         <h1>Região</h1>
-                        <h2>TesteDeQuebra de LinhaTesteDeQuebra</h2>
+                        <h2>Norte</h2>
                     </div>
                     <div className={styles.item_info} alt="endereço">
                         <h1>Endereço</h1>
-                        <h2>Moema: Av. Ibirapuera, 3103 – Moema, São Paulo, SP</h2>
+                        <h2>Avenida Elísio Teixeira Leite, 3611, Jardim Paulistano</h2>
                     </div>
                 </div>
 

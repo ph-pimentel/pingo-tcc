@@ -15,8 +15,8 @@ function MenuCourt() {
                quando o usuário já tiver uma quadra registrada.
                 */}
                 <a href="#" className={styles.button1}>Minhas Quadras</a>
-                <a href="#" className={styles.button2}>Cadastrar Quadra</a>
-                <a href="#" className={styles.button3}>Indicar Quadra</a>
+                <a href="https://forms.gle/vVzy9JyQZWPS4o2m8" className={styles.button2}>Cadastrar Quadra</a>
+                <a href="https://forms.gle/kHv944H2fo1Jq6Sw7" className={styles.button3}>Indicar Quadra</a>
 
             </div>
     

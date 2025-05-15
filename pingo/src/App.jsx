@@ -6,6 +6,8 @@ import Informacoes from "./pages/Sobre/Informacoes";
 import MenuCourt from "./pages/MenuQuadras/MenuQuadras";
 import QuadraInfo from "./pages/QuadraInfo/QuadraInfo"
 import UsuarioAgendamento from "./pages/UsuarioAgendamento/usuarioagendamento";
+import Perfil from "./pages/Perfil/perfil"
+import Friends from "./pages/Friends/friends";
 
 
 function App() {
@@ -19,7 +21,9 @@ function App() {
         <Route path="/quadraopcoes" element={<MenuCourt />} />
         <Route path="/quadrainformacoes" element={<QuadraInfo/>}/>
         <Route path="/meusagendamentos" element={<UsuarioAgendamento/>} />
-      </Routes>
+        <Route path="/perfil" element={<Perfil/>}/>
+        <Route path="/amigos" element={<Friends/>}/>
+        </Routes>
     </Router>
   );
 }
