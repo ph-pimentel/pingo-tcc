@@ -17,6 +17,8 @@
 
     --friend-img-border-radius: var(--border-radius-mega);
     --friend-img-size: var(--icon-size-mega);
+
+    --option-margin: 15px;
 }
 
 /* Container Principal */
@@ -29,11 +31,132 @@
     box-sizing: border-box;
 }
 
+/* > Edit, Add or Remove Button */
+.options_container{
+    display: flex;
+    position: absolute;
+    width: clac(var(--friend-img-size) * 0.5);
+    height: 10px;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px;
+
+    right: 0;
+    top: 0;
+
+    margin-top: var(--option-margin);
+    margin-right: var(--option-margin);
+
+    border-radius: var(--border-radius-small);
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    border: 1px solid transparent;
+    background-color: transparent;
+    transition: all 0.2s ease-out;
+}
+
+.options_container img{
+    height: calc(var(--friend-img-size) * 0.30);
+}
+
+.options_container:hover{
+    background-color: var(--quaternary-color);
+}
+
+/* mini-menu */
+.menu_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+    gap: 7px;
+    position: absolute;
+
+    width: calc(var(--friend-img-size) * 1.1);
+
+    right: 0;
+    top: calc(0 + 0);
+    margin-right: var(--option-margin);
+
+    border: 2px solid var(--quaternary-color);
+    border-radius: var(--border-radius-medium);
+    background-color: var(--tertiary-color);
+    font-size: var(--social-font-size);
+    
+    animation: spawnMenu 0.2s ease-out forwards;
+}
+
+@keyframes spawnMenu {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.menu_container button{
+    width: 100%;
+    padding: 4px;
+    
+    color: var(--text-color);
+    font-weight: var(--text-high-weight);
+    background: none;
+    text-decoration: none;
+    border: none;
+    
+    transition: all var(--animation-hover-small-speed) ease-out;
+}
+
+.menu_container button:hover{
+    background-color: var(--quaternary-color);
+}
+
+/* > Edit Mode */
+.edit_buttons_container{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    left: 0;
+}
+
+.cancel_button, .save_button{
+    padding: 7px;
+    font-family: var(--primary-font);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    width: 90px;
+    border-radius: var(--border-radius-medium);
+}
+
+.cancel_button{
+    color: var(--text-light1-color);
+    background-color:var(--septenary-color);
+}
+.save_button{
+    color: var(--text-light1-color);
+    background-color: var(--secondary-color);
+}
+
+.save_button:hover, .cancel_button:hover{
+    filter: brightness(90%);
+}
+
 
 /* Card do Perfil */
 .profile_main_container {
     display: flex;
     flex-direction: column;
+    position: relative;
     gap: 40px;
     width: clamp(var(--profile-main-container-min-size), 70vw, var(--profile-main-container-max-size));
     padding: 70px;
@@ -75,6 +198,25 @@
     flex-direction: column;
     width: clamp(200px, 40vw, 700px); 
     max-width: 700px;
+}
+
+@media screen and (max-width: 1000px){
+
+    
+    .profile_block_container{
+        flex-direction: column;
+        align-items: center;
+    }
+    .profile_header{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .profile_name_container h1{
+        margin: 0 auto;
+    }
 }
 
 
@@ -156,6 +298,34 @@
 
 }
 
+.bio_main_container textarea{
+    margin: 0;
+    font-family: var(--primary-font);
+    color: var(--text-color);
+    font-size: var(--social-font-size);
+    line-height: 1.6;
+    white-space: pre-line;
+    background-color: transparent;
+    
+    width: 100%;
+    resize: none;
+    outline: none;
+
+    scrollbar-width: none;
+    overflow-y: scroll;
+
+    height: 200px;
+
+    padding: 10px;
+    border: solid 1px var(--octonary-color);
+    border-radius: var(--border-radius-medium);
+    box-sizing: border-box;
+
+    transition: all 0.2s ease-out;
+}
+.bio_main_container textarea:focus{
+    border: solid 1px var(--secondary-color);
+}
 
 
 /*  Área Amigos */
