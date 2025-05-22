@@ -233,18 +233,58 @@
     display: flex;
     align-items: center;
     justify-content: left;
+    flex-direction: column;
     width: 100%;
 }
 
-.profile_name_container h1 {
+.profile_name_container h1, .name_input {
     font-family: var(--primary-font);
     color: var(--text-color);
     font-size: var(--name-font-size);
     font-weight: 600;
     line-height: 1.2;
 }
+/*Edição de nome*/
+.name_input{
+    background: none;
+    border: 1px solid var(--quinary-color);
+    font-size: 100%;
+
+    margin: 0;
+    font-family: var(--primary-font);
+    color: var(--text-color);
+    font-size: var(--social-font-size);
+    line-height: 1.6;
+    white-space: pre-line;
+    background-color: transparent;
+    
+    width: 100%;
+    resize: none;
+    outline: none;
+
+    scrollbar-width: none;
+    overflow-y: scroll;
 
 
+    padding: 10px;
+    border: solid 1px var(--octonary-color);
+    border-radius: var(--border-radius-medium);
+    box-sizing: border-box;
+
+    transition: all 0.2s ease-out;
+}
+
+.name_input:focus{
+    border: 1px solid var(--primary-color);
+}
+
+
+/*Name Input Error*/
+.name_error{
+    font-size: var(--text-super-small-size);
+    color: var(--septenary-color);
+    font-weight: var(--text-regular-weight);
+}
 
 /* Redes Sociais */
 .social_container {
@@ -277,7 +317,8 @@
 .bio_main_container{
     display: flex;
     text-align: left;
-    word-break:normal;
+    word-break: break-all;
+    white-space: nowrap;
     width: 90%;
 }
 .bio_main_container h2 {

@@ -1,0 +1,56 @@
+@import url('../../styles/global.css');
+
+:root {
+    /*Seach Text*/
+    --you-search-text-size:var(--text-small-size);   
+    --you-search-text-weight:var(--text-high-weight);
+    --you-search-text-color: var(--text-dark1-color);
+    /*Search Text Content*/
+    --you-search-content-text-weight:var(--text-regular-weight);
+    --you-search-content-text-color:var(--text-dark1-color);
+}
+
+.main_container{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.main_wrapper{
+    width: clamp(330px, 80vw, 1200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/*----------------------*/
+/* Pesquisa do Usuario */
+.you_search_container{
+    position: relative;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: var(--text-size-you-search);
+
+    margin-top: 50px;
+}
+
+.you_search_text_container{
+    display: flex;
+    position: absolute;
+    width: 100%;
+}
+.you_search_text_container h2{
+    display: flex;
+    font-size: 100%;
+    font-weight: var(--you-search-text-weight);
+    color: var(--you-search-text-color);
+}
+.you_search_text_container p{
+    font-size: 100%;
+    font-weight: var(--you-search-content-text-weight);
+    color: var(--you-search-content-text-color);
+}

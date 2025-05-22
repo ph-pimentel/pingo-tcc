@@ -8,12 +8,14 @@ import QuadraInfo from "./pages/QuadraInfo/QuadraInfo"
 import UsuarioAgendamento from "./pages/UsuarioAgendamento/usuarioagendamento";
 import Perfil from "./pages/Perfil/perfil"
 import Friends from "./pages/Friends/friends";
+import SearchPage from "./pages/SearchPage/SearchPage";
 
 
 function App() {
   return (
     <Router>
       <Routes>
+        
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Register />} />
@@ -23,6 +25,8 @@ function App() {
         <Route path="/meusagendamentos" element={<UsuarioAgendamento/>} />
         <Route path="/perfil" element={<Perfil/>}/>
         <Route path="/amigos" element={<Friends/>}/>
+        <Route path="/pesquisa" element={<SearchPage/>}/>
+
         </Routes>
     </Router>
   );

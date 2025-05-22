@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "../../components/Layout";
+import AmigoCard from "../../components/AmigoCard/amigo";
 import styles from "./friends.module.css";
 
 function Friends() {
-  // Dados mockados (substituir pela API depois)
-  const allFriends = [
-    { id: 1, name: "Amigo 1", profileImage: "../../img/Header/steve.png" }
 
+  const allFriends = [
+    { id: 1, name: "Amigo 1", profileImage: "../../img/Header/steve.png" },
+    { id: 2, name: "Amigo 2", profileImage: "../../img/Header/steve.png" },
   ];
 
   return (
@@ -15,25 +16,20 @@ function Friends() {
         <div className={styles.friends_main_container}>
           <h1 className={styles.friends_title}>Amigos</h1>
           
-      
-            <div className={styles.card_friend_main_container}>
-           
-           {/* Adicionar Rota para perfil do amigo*/}
-                <a href="/" className={styles.card_friend_container}>
-                  <img 
-                    src="../../img/Header/steve.png"
-                  />
-                  <div className={styles.card_friend_name_container}>
-                    <h1>leonardo</h1>
-                  </div>
-                </a>
-               
-         
-
-            </div>
-           </div>
+          <div className={styles.card_friend_main_container}>
+            {allFriends.length > 0 ? (
+              allFriends.map(friend => (
+                <AmigoCard 
+                  key={friend.id} 
+                  friend={friend} 
+                />
+              ))
+            ) : (
+              <p className={styles.no_friends}>Nenhum amigo encontrado</p>
+            )}
+          </div>
         </div>
-
+      </div>
     </Layout>
   );
 }

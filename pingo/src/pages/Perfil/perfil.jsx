@@ -6,9 +6,11 @@ function Perfil() {
     const [isProfileOption, setProfileOption] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [bio, setBio] = useState("Biografia Mais Bonita deste Brasil Quadrado que eu tanto amo. Viva a vida como se você tivesse apenas um ultimo bloco.");
-    const [originalBio, setOriginalBio] = useState(""); // Armazena a bio original
+    const [name, setName] = useState("Bravudo");
+    const [originalBio, setOriginalBio] = useState("");
+    const [originalName, setOriginalName] = useState("");
     const [profileImage, setProfileImage] = useState("../../img/Header/steve.png");
-    const [originalImage, setOriginalImage] = useState(""); // Armazena a imagem original
+    const [originalImage, setOriginalImage] = useState("");
     const fileInputRef = useRef(null);
 
     const toggleMenu = () => {
@@ -17,18 +19,31 @@ function Perfil() {
 
     const handleEditClick = () => {
         setOriginalBio(bio); 
+        setOriginalName(name);
         setOriginalImage(profileImage); 
         setIsEditing(true);
         setProfileOption(false);
     };
 
+    const validateAndSaveName = () => {
+        // Verifica se o nome está vazio ou com menos de 3 caracteres
+        if (name.trim() === "" || name.trim().length < 3) {
+            setName(originalName); // Reseta para o nome original
+            return false;
+        }
+        return true;
+    };
+
     const handleSaveClick = () => {
-        setIsEditing(false);
-        // Backend Area
+        if (validateAndSaveName()) {
+            setIsEditing(false);
+            // Backend Area
+        }
     };
 
     const handleCancelClick = () => {
         setBio(originalBio);
+        setName(originalName);
         setProfileImage(originalImage); 
         setIsEditing(false);
     };
@@ -63,7 +78,6 @@ function Perfil() {
                     )}
 
                     <div className={styles.profile_block_container}>
-                        {/* Imagem do perfil */}
                         <div className={styles.profile_img_container}>
                             {isEditing ? (
                                 <>
@@ -86,12 +100,26 @@ function Perfil() {
                             )}
                         </div>
 
-                        {/* Conteúdo do perfil */}
                         <div className={styles.profile_content_container}>
-                            {/* Cabeçalho com nome e redes sociais */}
                             <div className={styles.profile_header}>
                                 <div className={styles.profile_name_container}>
-                                    <h1>Leonardo</h1>
+                                    {isEditing ? (
+                                        <>
+                                            <input
+                                                type="text"
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                className={styles.name_input}
+                                                maxLength={75}
+                                                onBlur={validateAndSaveName} 
+                                            />
+                                            {name.trim().length < 3 && name.trim() !== "" && (
+                                                <p className={styles.name_error}>Nome deve ter pelo menos 3 caracteres</p>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <h1>{name}</h1>
+                                    )}
                                 </div>
 
                                 <div className={styles.social_container}>
@@ -108,31 +136,31 @@ function Perfil() {
                                 </div>
                             </div>
 
-                            {/* Biografia - Só mostra se não estiver vazia */}
                             <div className={styles.bio_main_container}>
                                 {isEditing ? (
                                     <textarea
                                         value={bio}
                                         onChange={(e) => setBio(e.target.value)}
                                         className={styles.bio_input}
+                                        maxLength={250}
                                     />
                                 ) : (
-                                    bio && <h2>{bio}</h2> // Só renderiza se bio não for vazia
+                                    bio && <h2>{bio}</h2>
                                 )}
                             </div>
-
                         </div>
                     </div>
-                            {isEditing && (
-                                <div className={styles.edit_buttons_container}>
-                                    <button onClick={handleSaveClick} className={styles.save_button}>
-                                        Salvar
-                                    </button>
-                                    <button onClick={handleCancelClick} className={styles.cancel_button}>
-                                        Cancelar
-                                    </button>
-                                </div>
-                            )}
+                    
+                    {isEditing && (
+                        <div className={styles.edit_buttons_container}>
+                            <button onClick={handleSaveClick} className={styles.save_button}>
+                                Salvar
+                            </button>
+                            <button onClick={handleCancelClick} className={styles.cancel_button}>
+                                Cancelar
+                            </button>
+                        </div>
+                    )}
 
                     <div className={styles.friends_main_container}>
                         <div className={styles.friends_title_container}>
