@@ -1,12 +1,24 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Navbar.module.css"
 import { useNavigate } from 'react-router-dom';
 import { obterUsuario, logout } from "../../api";
+const API_URL = 'http://localhost:5000';
+
 const Navbar = () => {
-   const usuario = obterUsuario();
+  const [usuario, setUsuario] = useState(obterUsuario());
   const navigate = useNavigate();
-  const [open, setOpen] = useState()
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setUsuario(obterUsuario());
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
   const irParaSettings = () => {
     navigate("/settings");
   };

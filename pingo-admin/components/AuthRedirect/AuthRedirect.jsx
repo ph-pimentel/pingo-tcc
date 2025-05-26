@@ -1,12 +1,12 @@
 
 import { jwtDecode } from 'jwt-decode';
-import { useEffect } from 'react'
+import { useEffect, useCallback} from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AuthRedirect = ({children}) => {
     const navigate = useNavigate();
 
-    useEffect(() => {
+    const checkAuth = useCallback(() => {
         const token = localStorage.getItem('token') || sessionStorage.getItem('token')
         
         if(token) {
@@ -17,13 +17,23 @@ const AuthRedirect = ({children}) => {
                 if (decoded.exp && decoded.exp > now) {
                     //Verifica se está valido
                     navigate("/home");
+                }else {
+                    //Se for inválido leva para o Login
+                    navigate("/")
                 }
             }catch(error) {
                 console.error("Erro ao decodificar o token:", error);
-                //Se for inválido leva para o Login
+                navigate("/")
             }
+         } else {
+            navigate("/")
          }
     }, [navigate]);
+
+    useEffect(() => {
+        checkAuth();
+    }, [checkAuth])
+    
         return children;
     }
 

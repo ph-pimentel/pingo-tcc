@@ -7,7 +7,7 @@
 .loginContainer{
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    width: 30%;
+    width: 400px;
     height: 40%;
 }
 .loginContainer h1{
@@ -24,12 +24,13 @@
 }
 .inputGroup input{
     text-align: left;
-    width: 30%;
+    width: 37%;
     padding: 2px;
     margin-bottom: 20px;
     padding: 15px;
     border-radius: 5px;
     border: 1px solid black;
+    text-align: center;
 }
 .inputGroup button{
     width: 15%;

@@ -1,7 +1,31 @@
 import { Link } from "react-router-dom"
 import styles from "./Menu.module.css"
-import {menu} from "../../data"
+import { useEffect, useState } from "react";
+import { obterUsuario } from "../../api"
+
 const Menu = () => {
+  const [menu, setMenu] = useState([]);
+  const usuario = obterUsuario();
+
+  useEffect(() => {
+    const carregarMenu = async () => {
+      try{
+        if (usuario && usuario.TipoUsuario) {
+          const response = await fetch(`http://localhost:5000/menu/${usuario.TipoUsuario}`);
+          const data = await response.json();
+          setMenu(data);
+        }
+      } catch (error) {
+        console.error("Erro ao carregar menu:", error);
+      }
+      };
+
+      carregarMenu();
+    }, [usuario]);
+
+    if (!usuario) return null
+
+  
   return (
     <div className={styles.menu}>
       {menu.map((item) => ( 

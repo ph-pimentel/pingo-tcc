@@ -1,7 +1,7 @@
 @import url(../../styles/variables.css);
 .add{
     width: 100vw;
-    height:  92.5vh;
+    height: 100vh;
     position: absolute;
     top:0;
     left: 0;
@@ -15,7 +15,7 @@
     padding: 50px;
     border-radius: 10px;
     background-color: var(--tertiary-color);
-    position: fixed;
+    position: relative;
 }
 
 .modal h1{
@@ -69,15 +69,4 @@
     width: 100%;
     padding: 10px;
     cursor: pointer;
-}
-
-@media screen and (max-width: 1400px){
-    .add{
-    height: 92.4vh;
-    }
-}
-@media screen and (max-width: 768px){
-    .add{
-        height: 92.4vh;
-    }
 }

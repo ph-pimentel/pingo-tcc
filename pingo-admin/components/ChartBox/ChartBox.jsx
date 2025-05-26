@@ -23,7 +23,6 @@ const ChartBox = ({ color, icon, title, dataKey, number, percentage, chartData, 
               <Tooltip
                 contentStyle={{ background: 'transparent', border: 'none'}}
                 labelStyle={{ display: 'none'}}
-                position={{x: 10, y: 90}}
               />
                 <Line 
                 type="monotone" 

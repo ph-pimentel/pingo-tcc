@@ -22,6 +22,7 @@ import SingleUser from '../pages/SingleUser/SingleUser.jsx'
 import Login from '../pages/Login/Login.jsx'
 import Unauthorized from '../pages/Unauthorized/Unauthorized.jsx'
 import AuthRedirect from '../components/AuthRedirect/AuthRedirect.jsx'
+import MinhasQuadras from '../pages/MinhasQuadras/MinhasQuadras.jsx'
 
 const Layout = () => {
   return (
@@ -50,9 +51,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element:(
-          <AuthRedirect>
           <Login/>
-          </AuthRedirect>
         ) 
       },
       {
@@ -111,7 +110,19 @@ const router = createBrowserRouter([
       {
         path: "/users/:id",
         element: <SingleUser/>
+      },
+    {
+      element:(
+        <ProtectedRoute allowedRoles={['Proprietario']}>
+        </ProtectedRoute>
+      ),
+      children: [
+      {
+        path: "/minhas-quadras",
+        element: <MinhasQuadras/>
       }
+      ]
+      },
     ]
   }
 ]}

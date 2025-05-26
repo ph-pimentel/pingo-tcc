@@ -3,7 +3,7 @@ import styles from './DataTable.module.css'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const DataTable = ({columns, rows, slug, path,  onDeleted, deleteFunction, entityNameKey}) => {
+const DataTable = ({columns, rows, slug, path,  onDeleted, deleteFunction, entityNameKey, showActions = true}) => {
   const handleDelete = async (id, entityNameKey) =>{
     if(confirm(`Tem certeza que deseja deletar ${entityNameKey ? 'o(a) ' + entityNameKey : 'este item'}`)) {
       try {
@@ -34,7 +34,7 @@ const DataTable = ({columns, rows, slug, path,  onDeleted, deleteFunction, entit
       },
     };
     //Faz update da lista de columns
-    const updatedColumns = [...columns, actionColumn]
+    const updatedColumns = showActions ? [...columns, actionColumn] : columns;
 
   return (
     <div className={styles.dataTable}>

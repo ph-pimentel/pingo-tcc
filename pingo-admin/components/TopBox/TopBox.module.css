@@ -25,7 +25,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    .username{
+    .username {
         font-size: 14px;
         font-weight: 500;
     }
@@ -36,4 +36,22 @@
 
 .amount {
     font-weight: 500;
+}
+
+@media screen and (max-width: 1400px){
+    .topBox{
+        font-size: 20px;
+    }
+    .amount {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 768px){  
+    .user img{
+        display: none;
+    }
+    .email {
+        display: none;
+    }
 }

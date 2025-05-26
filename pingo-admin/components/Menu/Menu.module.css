@@ -25,3 +25,12 @@
 .listItem:hover{
     background-color: var(--tertiary-color);
 }
+
+@media screen and (max-width: 1024px){
+    .title{
+        display: none;
+    }
+    .listItemTitle{
+        display: none;
+    }
+}

@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react'
-import { createQuadrasPub } from '../../api'
-import styles from './AddQuadra.module.css'
+import { createQuadrasPriv } from '../../api'
+import styles from './AddQuadraPrivada.module.css'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 
-const AddQuadra = ({columns, slug, setOpen, onSubmit, initialData}) => {
-    const [formData, setFormData] = useState({})
+const AddQuadraPrivada = ({columns, slug, setOpen, onSubmit, initialData}) => {
+    const [formData, setFormData] = useState({
+        ValorHora: '',
+        HorarioDisponiveis: ''
+    });
     const navigate = useNavigate();
+    const proprietarioId = localStorage.getItem('proprietarioID');
+
     useEffect(() => {
         if (initialData) {
             setFormData(initialData);
@@ -23,11 +28,15 @@ const AddQuadra = ({columns, slug, setOpen, onSubmit, initialData}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await createQuadrasPub(
+            await createQuadrasPriv(
                 formData.NomeQuadra,
                 formData.EnderecoQuadra,
                 formData.Bairro,
-                formData.Cidade
+                formData.Cidade,
+                formData.ValorHora,
+                formData.HorarioDisponiveis,
+                formData.Contato,
+                proprietarioId
             );
             setOpen(false);
             navigate(0); //Recarrega a Pagina Atual
@@ -35,6 +44,7 @@ const AddQuadra = ({columns, slug, setOpen, onSubmit, initialData}) => {
             console.error('Erro ao criar quadra:', error)
         }
     }
+
   return (
     <div className={styles.add}>
         <div className={styles.modal}>
@@ -46,7 +56,8 @@ const AddQuadra = ({columns, slug, setOpen, onSubmit, initialData}) => {
                 {columns
                 .filter((item) => item.field !== "id" 
                 && item.field !== "Foto"
-                && item.field !== "DataCriacao")
+                && item.field !== "DataCriacao"
+                && item.field !== "NomeProprietario")
                 .map((column) =>(
                     <div className={styles.item} key={column.field}>
                         <label>{column.headerName}</label>
@@ -67,9 +78,9 @@ const AddQuadra = ({columns, slug, setOpen, onSubmit, initialData}) => {
   )
 }
 
-AddQuadra.PropTypes = {
+AddQuadraPrivada.PropTypes = {
   columns: PropTypes.array.isRequired,
   setOpen: PropTypes.func.isRequired,
   slug: PropTypes.string.isRequired,
 }
-export default AddQuadra
+export default AddQuadraPrivada

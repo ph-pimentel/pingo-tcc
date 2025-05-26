@@ -42,3 +42,24 @@
 .duration{
     font-size: 14px;
 }
+
+@media screen and (max-width: 1400px){
+    .title{
+        font-size: 14px;
+    }
+    .percentage{
+        font-size: 16px;
+    }
+    h1{
+        font-size: 20px
+    }
+}
+
+@media screen and (max-width: 480px){
+    .chartBox{
+        flex-direction: column;
+    }
+    .boxInfo{
+        gap: 20px;
+    }
+}

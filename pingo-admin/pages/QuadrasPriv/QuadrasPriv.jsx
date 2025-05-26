@@ -44,7 +44,7 @@ const columns = [
   ];
   
 
-const QuadrasPub = () => {
+const QuadrasPriv = () => {
     const [quadras, setQuadras ] = useState([])
 
     const deleteQuadraPriv = async (id) => {
@@ -111,4 +111,4 @@ const QuadrasPub = () => {
     )
 }
 
-export default QuadrasPub
+export default QuadrasPriv

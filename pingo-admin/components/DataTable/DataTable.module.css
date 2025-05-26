@@ -1,6 +1,7 @@
 .dataGrid{
     background-color: white;
     padding: 20px;
+    
 }
 
 .action {
@@ -13,3 +14,4 @@
     cursor: pointer;
     
 }
+

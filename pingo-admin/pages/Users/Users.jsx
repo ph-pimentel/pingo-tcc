@@ -11,7 +11,7 @@ const columns = [
     {
     field: 'FotoUsuario', headerName: 'Foto', width:100,
         renderCell: (params)=>{
-            return <img className={styles.img}src={params.row.Foto || "../src/assets/icons/menu/perfil.png"} alt=""/>
+            return <img className={styles.img}src={params.row.Foto || "../../src/assets/icons/menu/perfil.png"} alt=""/>
         },
     },
     {
@@ -80,7 +80,7 @@ const Users = () => {
              setUsuarios(usuarios); // Atualiza os dados, agora com a formatação JSON
        
             } catch (error) {
-          console.error('Erro ao buscar as quadras:', error);
+          console.error('Erro ao buscar as usuarios:', error);
         }
       };
     

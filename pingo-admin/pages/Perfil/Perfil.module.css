@@ -74,15 +74,21 @@
     margin-bottom: 30px;
 }
 
+.divButton{
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+}
 /* Botão de senha */
 .buttonPassword {
-    width: 100%;
+    width: auto;
     padding: 10px;
-    background: #28a745;
+    background: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    align-items: right;
 }
 
 /* Lado direito (detalhes do usuário) */
@@ -123,4 +129,27 @@
     margin-bottom: 10px;
     margin-left: 5px;
     color: gray;
+}
+
+@media screen and (max-width: 1024px){
+    .profileImage{
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .profileImage{
+        width: 100px;
+        height: 100px;
+    }
+    .profileHeader{
+        width: 40%;
+    }
+    .infoProfile{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .divButton{
+        flex-direction: column;
+    }
 }
