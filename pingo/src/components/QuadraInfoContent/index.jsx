@@ -90,7 +90,7 @@ function QuadraInfoContent() {
               <h1>Nome da Quadra</h1>
             </a>
             <a href="LINK DA QUADRA" className={styles.court_card}>
-              <img src="../img/Carrossel/image1.jpg" alt="Quadra"/> 
+              <img src="../img/Header/steve.png     " alt="Quadra"/> 
               <h1>Nome da Quadra</h1>
             </a>
           </div>

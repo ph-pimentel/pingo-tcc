@@ -1,23 +1,22 @@
 @import url('../../styles/global.css');
 
-
 :root{
     /*Titulo*/
-    --text-title-size: var(--text-mega-size);
-    --text-line-color: var(--secondary-color);
-    --primary-font:var(--primary-font);
+        --text-title-size: var(--text-mega-size);
+        --text-line-color: var(--secondary-color);
+        --primary-font:var(--primary-font);
 
     /*Cards*/
-    --card-border-radius: var(--border-radius-medium);
-    --card-border-color: var(--senary-color);
-    --card-bg-color: var(--tertiary-color);
-
-    --card-font-size: var(--text-small-size);
-    --card-font-weigth: var(--text-regular-weight);
-    --card-text-color: var(--text-light1-color);
-    
-    --card-image-border-radius: var(--border-radius-mega);
-    --card-image-size: clamp(60px, 6vw, 100px);
+        --card-border-radius: var(--border-radius-medium);
+        --card-border-color: var(--senary-color);
+        --card-bg-color: var(--tertiary-color);
+        /*Text*/
+        --card-font-size: var(--text-small-size);
+        --card-font-weigth: var(--text-regular-weight);
+        --card-text-color: var(--text-light1-color);
+        /*Image*/
+        --card-image-border-radius: var(--border-radius-mega);
+        --card-image-size: clamp(60px, 6vw, 100px);
 
 }
 .main_container{
