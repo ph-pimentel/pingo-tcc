@@ -1,0 +1,273 @@
+@import url('../../styles/global.css');
+
+:root{
+    --config-bg-color:var(--tertiary-color);
+    --config-border-color: var(--quaternary-color);
+    --config-border-radius:var(--border-radius-medium);
+    
+    --config-text-color: var(--text-light1-color);
+    --config-text-color2: var(--text-light2-color);
+
+    --config-button-bg-hover:var(--config-bg-color);
+    --config-text-size: var(--text-medium-size);
+    --config-title-size: var(--text-regular-size);
+
+
+    --config-title-font-weight-topic: var(--text-regular-weight);
+    --config-text-font-weight-topic: var(--text-small-weight);
+
+    --primary-font: var(var(--primary-font));
+}
+
+
+.main_container{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 100px;
+    font-family: var(--primary-font);
+}
+
+
+.config_main_container{
+    display: flex;
+    align-items: flex-start ;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1300px;
+    color: var(--config-text-color);
+    padding: 1rem;
+}
+/*------*/
+/*Botões*/
+.config_buttons_main_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    background-color: var(--config-bg-color);
+    border: solid 2px var(--quaternary-color);
+    border-radius: var(--config-border-radius);
+
+    font-size: var(--config-title-size);
+    padding: 1rem;
+}
+
+.config_buttons_main_container h1{
+    color: var(--config-text-color);
+    font-size: 80%;
+}
+
+.config_buttons_main_container button{
+    position: relative;
+    padding: 0.7rem;
+    font-size: 70%;
+    color: var(--text-light2-color);    
+    font-family: var(--primary-font);
+    white-space: nowrap;
+
+    text-decoration: none;
+    background: none;
+    border: none;
+
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    z-index: 10;
+}
+
+.config_buttons_main_container button::before{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: var(--config-bg-color);
+    border-radius: var(--config-border-radius);
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.config_buttons_main_container button:hover::before,.config_buttons_main_container button:hover{
+    filter: brightness(110%);
+}
+
+/*--------*/
+/*Conteúdo*/
+.config_content_main_container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    width: 100%;
+    padding: 1rem;
+
+    background-color: var(--config-bg-color);
+    border-radius: var(--config-border-radius);
+    border: solid 2px var(--quaternary-color);
+    
+    font-size: var(--config-text-size);
+    font-family: var(--primary-font);
+}
+
+.config_content_main_container h1{
+    font-size: 100%;
+}
+
+.config_content_account_info{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+    
+    font-size: var(--config-text-size);
+    font-family: var(--primary-font);
+}
+
+/*Cada Linha de Informação Alterável*/
+.config_content_account_info_input_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.7rem;
+
+}
+/*Input*/
+.config_info_input{
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    flex-direction: row;
+    text-align: left;
+    font-family: var(--primary-font);
+    gap: 4px;
+}
+
+.config_info_input p, .config_info_input h1{
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    display: flex;
+    white-space: nowrap;
+    font-size: 90%;
+}
+
+.config_info_input p{
+    font-weight: var(--config-title-font-weight-topic);
+}
+
+
+.config_info_input h1{
+    font-weight: var(--config-text-font-weight-topic);
+    overflow:hidden;
+    text-overflow:ellipsis;
+    max-width: clamp(300px, 80vh, 800px); 
+}
+
+.config_info_edit_button{
+    display: flex;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+}
+
+.config_info_edit_button button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    
+    background: none;
+    border: none;
+    padding: 0.2rem;
+    height: auto;   
+    
+    cursor: pointer;
+}
+
+.config_info_edit_button img{
+    width: 17px;
+    height: auto;
+    object-fit: cover;
+}
+
+/*Edit Modal*/
+.modal_overlay{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 200px;
+    width: 100%;
+    height: 100vh;
+}
+
+.modal_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: var(--config-border-color);
+    font-family: var(--primary-font);
+    font-size: var(--config-text-font-weight-topic);
+    border-radius: var(--config-border-radius);
+    gap: 5px;
+}
+
+.modal_box h2{
+    font-size: 100%;
+    color: var(--config-text-color);
+}
+
+.modal_box input{
+    background: none;
+    color: var(--config-text-color);
+    padding:0.5rem;
+    
+    font-size: 100%;
+    border: 2px solid var(--config-text-color);
+    border-radius: var(--config-border-radius);
+    outline: none;
+}
+
+.modal_buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    gap: 10px;
+}
+
+.modal_buttons_cancel, .modal_buttons_accept{
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    width: calc(100%/2);
+
+    font-weight: var(--config-title-font-weight-topic);
+
+    border: none;
+    font-family: var(--primary-font);
+    color: var(--config-text-color);
+    transition: all 0.2s ease-out;
+}
+
+.modal_buttons_cancel:hover, .modal_buttons_accept:hover{
+    filter: brightness(90%);
+}
+
+.modal_buttons_accept{
+    background-color: var(--primary-color);
+}
+.modal_buttons_cancel{
+    background-color: var(--septenary-color);
+}

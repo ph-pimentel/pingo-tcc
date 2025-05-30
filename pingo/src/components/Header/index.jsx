@@ -87,7 +87,7 @@ function Header() {
                             ${isOpen ? styles.menu_profile_container_active : ""}`}>
 
                             <a href="/perfil" className={styles.menu_items}>Perfil</a>
-                            <a href="/" className={styles.menu_items}>Configurações</a>
+                            <a href="/configuracoes" className={styles.menu_items}>Configurações</a>
                             <a href="/login" className={styles.menu_desconect}>Desconectar-se</a>
                         </div>
                     </div>

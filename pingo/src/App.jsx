@@ -9,6 +9,7 @@ import UsuarioAgendamento from "./pages/UsuarioAgendamento/usuarioagendamento";
 import Perfil from "./pages/Perfil/perfil"
 import Friends from "./pages/Friends/friends";
 import SearchPage from "./pages/SearchPage/SearchPage";
+import Config from "./pages/config/config";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/perfil" element={<Perfil/>}/>
         <Route path="/amigos" element={<Friends/>}/>
         <Route path="/pesquisa" element={<SearchPage/>}/>
+        <Route path="/configuracoes" element={<Config/>}/>
 
         </Routes>
     </Router>
