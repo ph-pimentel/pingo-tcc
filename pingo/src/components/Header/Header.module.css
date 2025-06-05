@@ -246,7 +246,10 @@ html,body{
     
     max-width: 500px;
     width:100%;
-    padding: 8px;
+    padding-right: 8px;
+
+    padding-bottom: 8px;
+    padding-top: 8px;
     
     border-radius: 13px;
     border: solid var(--quaternary-color) 1px;
@@ -272,11 +275,18 @@ html,body{
 
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0 10px;
+    padding-right:10px;
 }
 
 .search_input:focus{
     outline:none;
+}
+
+@media screen and (max-width: 500px){
+    .search_input{
+        text-align: left;
+        margin-left:clamp(8px, 3vw, 30px);
+    }
 }
 
 .search_icon{
