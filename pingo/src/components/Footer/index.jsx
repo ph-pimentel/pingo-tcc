@@ -8,6 +8,7 @@ function Footer() {
         <div className={styles.footer_container}>
            
 
+
             <div className={styles.items}>
                 <div className={styles.logo}>
                 <img src="../img/Footer/WhitePingo.png"/>
