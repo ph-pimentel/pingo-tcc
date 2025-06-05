@@ -7,7 +7,6 @@
     
     --search-icons-size:20px;
     
-
     --icon-gap: 20px;
 }
 
@@ -35,8 +34,7 @@ html,body{
     width: 100%;
     max-width: 100%;
 
-    padding-right: 40px;
-    padding-left: 35px;
+    padding: 0px clamp(6px, 2vw, 35px);
     
     background-color: var(--octonary-color);
     box-shadow: var(--box-shadow-low);
@@ -60,13 +58,13 @@ html,body{
     flex:1;
 }
 
+
+
 .center {
     display: flex;
     justify-content: center;
     align-items: center;
-    
     flex: 1;
-    min-width: 0;
 }
 
 .right {
@@ -79,6 +77,110 @@ html,body{
 
 
 /*____Left____*/
+
+.options{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-out
+}
+.options:hover{
+    filter: brightness(95%);
+    background-color: rgb(255, 255, 255)
+}
+
+.options img{
+    width: 25px;
+    height: auto;
+}
+
+.options_selected_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: auto;
+    width: fit-content;
+    margin-top: 55px;
+    
+    box-shadow: 0px 10px 7px rgba(0, 0, 0, 0.17);
+    background-color: var(--octonary-color);
+}
+/*Container da lista de Redirects*/
+.options_selected_buttons_container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+/*Button & icon*/
+.options_icons_container{
+    display: flex;
+    align-items:center;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: auto;
+    padding: 15px 10px;
+    
+    gap: clamp(5px, 0.5vw, 10px);
+    font-family: var(--primary-font);
+
+    transition: all 0.15s ease-out; 
+}
+
+.options_icons_container:hover{
+    background-color: white;
+    filter: brightness(95%);
+}
+
+.options_icons_container h1{
+    font-size: 1rem;
+    color: var(--text-dark1-color);
+    font-weight: var(--text-regular-weight);
+    line-height: 100%;
+}
+
+.options_icons_container img{
+    width: 25px;
+    height: auto;
+}
+
+@media screen and (max-width: 500px){
+    .options_selected_container{
+        width: 100%;
+    }
+    .options_icons_container{
+        justify-content: center;
+            align-items: center;
+
+    }
+    .options img{
+    width: 20px;
+    height: auto;
+}
+}
+
+
+.logo_container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    flex: 0;
+
+}
 .logo{
     display: flex;
     justify-content: center;
@@ -86,7 +188,7 @@ html,body{
     
     padding: 0;
     margin: 0;
-    width: clamp(50px, 9vw, 100px);
+    width: clamp(50px, 18vw, 100px);
     height: auto;
 
     transition: all 0.3s ease;
@@ -105,9 +207,11 @@ html,body{
 /*--Icons--*/
 .left_icons_container{
     display: flex;
+    align-items: center;
     justify-content: flex-start;
     gap:var(--icon-gap);
     padding-left: 30px;
+    flex: 0;
 }
 
 .left_icons{
@@ -163,9 +267,12 @@ html,body{
 
     font-size: var(--text-small-size);
     font-weight: var(--text-small-weight);
-    
     background: transparent;
     border: none;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 10px;
 }
 
 .search_input:focus{
@@ -223,6 +330,7 @@ html,body{
     flex-direction: column;
     justify-content: flex-end;
     margin-left: auto;
+    flex: 0 ;
 
     cursor: pointer;
 }
@@ -256,8 +364,8 @@ html,body{
     align-items: center;
     flex-direction: column;
     
-    transform: translateY(-15px);
     top: 100%;
+    right: -15px;
     margin-top: 15px;
     border-radius: 10px;
 
@@ -319,3 +427,29 @@ html,body{
 .menu_items:hover{
     background-color: var(--quinary-color);
 }
+
+
+
+/*REPONSIVIDADE - TABLET*/
+@media screen and (max-width: 1100px) {
+    /*Opção de lista dos icons*/
+    .options{
+        display: flex;
+    }
+    
+    /*desabilitar icons de redirecionamento*/
+    .left_icons_container{
+        display: none;
+    }
+    .right_icons_container{
+        display: none;
+    }
+    
+} 
+@media screen and (min-width: 1101px){
+    
+    .options_selected_container{
+        display: none;
+    }
+}
+    

@@ -1,24 +1,73 @@
 // Header.js
 import styles from "./Header.module.css";
 import { focusInput, useProfileMenu } from "../../scripts/script.js";
+import { useState } from 'react'
 
 
 
 function Header() {
     
+
+    const [options, setOptions] = useState(false);
+    const toggleOptions = () => {
+        setOptions(!options);    
+    };
+
     const { isOpen, toggleMenu, menuRef, buttonRef } = useProfileMenu();
     return (
 
             
         <div className={styles.header}>
-
             {/*-- Main Container -- */}
             <div className={styles.container}>
 
                 <div className={styles.left}>
+                    <div className={styles.logo_container}>
+                    <button className={styles.options} onClick={toggleOptions}>   
+                        <img src="../img/Header/options.png"/>
+                    </button>
+
+                    { options && (
+                        <div className={styles.options_selected_container}>
+                            <div className={styles.options_selected_buttons_container}>
+            
+                       {/* Home */}
+                            <a href="/" className={styles.options_icons_container}>
+                                <img src="../img/Header/home.png" />
+                                <h1> Início</h1>
+                            </a>
+                        {/* Amigos */}
+                            <a href="/amigos" className={styles.options_icons_container}>
+                                <img src="../img/Header/amigos.png" />
+                                <h1> Amigos</h1>
+                            </a>
+                        {/* Meus Agendamentos */}
+                            <a href="/meusagendamentos" className={styles.options_icons_container}>
+                                <img src="../img/Header/agendamentos.png" />
+                                <h1> Agendamentos</h1>
+                            </a>
+                        {/* Meus Agendamentos */}
+                            <a href="/quadraopcoes" className={styles.options_icons_container}>
+                                <img src="../img/Header/AddQuadra.png" />
+                                <h1>Gestão de Quadras</h1>
+                            </a>
+                        {/* Informação Pingo */}
+                            <a href="/informacoes" className={styles.options_icons_container}>
+                                <img src="../img/Header/informacoes.png" />
+                                <h1>Informaçãoes Pingo</h1>
+                            </a>
+                    </div>
+                </div>
+                     
+                    )}
+
+
+
+
                     <a href="/">
                         <img src="../img/Header/pingoLogo.png" className={styles.logo} />
                     </a>
+                    </div>
 
                     {/* - Icons -*/}
                     <div className={styles.left_icons_container}>
@@ -32,10 +81,6 @@ function Header() {
                             <img src="../img/Header/amigos.png" className={styles.left_icons} />
                         </a>
 
-                        {/* Favoritos */}
-                        <a href="/">
-                            <img src="../img/Header/favoritos.png" className={styles.left_icons} />
-                        </a>
                         {/* Agendamentos */}
                         <a href="/meusagendamentos">
                         <img src="../img/Header/agendamentos.png" className={styles.left_icons} />
@@ -66,11 +111,6 @@ function Header() {
                         {/* Informações */}
                         <a href="/informacoes">
                         <img src="../img/Header/informacoes.png" className={styles.right_icons} />
-                        </a>
-
-                        {/* Notificações */}
-                        <a href="">
-                        <img src="../img/Header/notification.png" className={styles.right_icons} />
                         </a>
 
 
