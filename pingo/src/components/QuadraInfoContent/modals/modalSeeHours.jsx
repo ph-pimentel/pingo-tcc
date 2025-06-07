@@ -328,12 +328,15 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade = 'todos', onAgenda
     horariosVisiveis.length > 0 ? (
       horariosVisiveis.map(horario => (
         <label key={horario.id} className={styles.hours_card_container}>
+          <div>
+
           <input 
             type="checkbox" 
             className={styles.hours_checkbox}
             checked={horariosSelecionados.some(h => h.id === horario.id)}
             onChange={() => handleSelecionarHorario(horario)}
-          />
+            />
+            </div>
           <div className={styles.hours_text_container}>
             <h2>{horario.inicio} às {horario.fim}</h2>
             <h2>R${horario.preco}</h2>

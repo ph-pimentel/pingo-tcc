@@ -271,3 +271,16 @@
 .modal_buttons_cancel{
     background-color: var(--septenary-color);
 }
+
+/*Responsividade Mobile*/
+@media screen and (max-width: 500px){
+    .config_buttons_main_container{
+        width: 100%;
+    }
+
+    .config_main_container{
+        flex-direction:column;
+        width:100%;
+        background-color:red;
+}
+}

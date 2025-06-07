@@ -72,9 +72,11 @@
 }
 
 .table_titles th{
-    width: calc(100% / 5);
+    font-size: var(--text-size);
     text-align: center;
-    padding: 8px;
+    font-weight: var(--text-regular-weight);
+    width: calc(100% / 5);
+    padding: 5px;
 }
 .table_titles tr{
     background-color: var(--bg-color);
@@ -83,12 +85,12 @@
 /* Valores */
 .table_data td{
     text-align: center;;
-    padding: 8px 2px;
 
-    font-size: var(--text-size);
-    font-weight: var(--text-title-weight);
-   
     color: var(--bg-color);
+    font-size: calc(var(--text-size) - 3px);
+    font-weight: var(--text-title-weight);
+    padding: 1px;
+
     background-color: var(--octonary-color);
 }
 

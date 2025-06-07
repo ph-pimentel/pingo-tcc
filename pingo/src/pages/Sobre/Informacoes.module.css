@@ -35,7 +35,7 @@ html{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    max-width: 1920px;
+    max-width: 100%;
     height: auto;
     background-color: transparent;
     margin-top: 100px;
@@ -506,5 +506,34 @@ html{
         --btn-padding: 17px 60px;
         --btn-font-size: 22px;
     }
+    /*Remoção de imagem da descrição pingo*/
+    .sobre_item2{
+        display: none;
+    }
+    
+    /*Alinhamento do banner cadastrar quadra*/
+    .banner_container{
+        flex-direction: column;
+
+    /*Extensâo da linha de faq*/
+    }
+    .faq_main_container{
+        width: 60%;
+    }
+
 }
 
+@media screen and (max-width: 400px){
+
+    :root{
+        --btn-padding: 13px 40px;
+        --btn-font-size: 18px;
+    }
+    .instructions_card{
+    padding: 25px;
+    min-width: 200px;
+    height: 200px;
+    max-width: 200px;
+    border-radius: 20px;
+}
+}

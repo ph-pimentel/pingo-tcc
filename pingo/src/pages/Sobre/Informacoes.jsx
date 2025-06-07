@@ -19,7 +19,6 @@ function Informacoes() {
 
     return (
         <>
-            <HeaderNoLog />
             <Layout>
                 <div id="sobre" />
                 <div className={styles.main_container}>

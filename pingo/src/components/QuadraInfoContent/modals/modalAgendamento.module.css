@@ -99,14 +99,13 @@
 
     font-family: var(--primary-font);
     font-weight: var(--text-title-weight);
-    font-size: var(--text-size);
+    font-size: var(--text-subtitle-size);
     color: var(--text-main-color);
     background-color: var(--primary-color);
     border: none;
     border-radius: 3px;
 
-    padding: 10px;
-    height: 50px;
+    padding: clamp(5px, 1vw, 10px) clamp(15px, 3vw, 25px);
 
     cursor:pointer;
 }
@@ -238,4 +237,47 @@
 
 .pix_copy_and_paste img{
     width: clamp(15px, 5vw, 25px);
+}
+
+
+
+
+
+
+
+
+
+
+/*Responsividade Mobile*/
+@media screen and (max-width: 600px){
+ 
+   .text_main_container h1{
+    font-size: var(--text-subtitle-size);
+  }
+ 
+  .pix_main_container{
+    margin-top: 10px;
+
+    
+}
+
+  
+  .pix_flex{
+    flex-direction: column;
+    gap: 10px;
+  } 
+    .pix_image_container{
+      width: fit-content;
+    border: 10px solid #0165FC ;
+}
+
+  .pix_image_container img{
+    width: clamp(250px, 20vw, 350px);
+
+  }
+
+  .pix_main_container h1{
+    font-size: var(--text-subtitle-size);
+    font-weight: var(--text-subtitle-weight);
+}
 }

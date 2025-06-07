@@ -48,6 +48,7 @@
     flex-direction: column;
     font-size: 100%;
     padding-bottom: 25px;
+    margin-left: 10px;
 }
 .friends_title::after{
     content: '';
@@ -60,11 +61,32 @@
 .card_friend_main_container{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    align-items: center;
     align-content: start;
-    width: 100%;
+    justify-content: center;
+    width: 95%;
     height: auto;
         
     padding-bottom: 100px;
     gap: 7px;
+
+    margin-left: 5px;
+}
+
+
+
+/*Responsividade Tablet*/
+@media screen and (max-width: 1050px){
+    .card_friend_main_container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/*Responsividade Celular*/
+@media screen and (max-width: 375px){
+    .card_friend_main_container{
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
 

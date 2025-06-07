@@ -100,7 +100,7 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  width: min(90%, 20rem);
+  width: min(80%, 20rem);
   margin: 0 auto;
   gap: var(--spacing-md);
   white-space: nowrap;
@@ -188,10 +188,10 @@
   .quadra_main_container {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap; 
-    width: 100%;
-    max-width: 75rem; 
+    justify-content: left;
+    width: fit-content;
+    overflow: hidden;
+ 
     gap: var(--spacing-md);
     padding: var(--spacing-sm) clamp(0.8rem, 1.5vw, 1.2rem);
     border: clamp(1px, 0.2vw, 2px) solid var(--quaternary-color);
@@ -219,8 +219,7 @@
     justify-content: flex-start;
     flex-direction: column;
     gap: var(--spacing-sm);
-    flex: 1;
-    min-width: 14rem; 
+    left: 0;
   }
   
   /* Título e Esportes */
@@ -242,7 +241,7 @@
   
   .quadra_info_title h1 {
     font-weight: var(--text-title-weight);
-    font-size: var(--text-high-size);
+    font-size: var(--text-regular-size);
   }
   
   .quadra_info_title h2 {
@@ -260,7 +259,7 @@
   }
   
   .item_sport img {
-    max-width: clamp(0.8rem, 1.5vw, 1.2rem);
+    max-width: clamp(0.6rem, 1.5vw, 1rem);
     height: auto;
   }
   
@@ -276,7 +275,6 @@
     justify-content: left;
     
     width: 100%;
-    padding: var(--spacing-sm);
     gap: clamp(3px, 0.3vw, 7px);
     flex-wrap: nowrap;
   }
@@ -288,13 +286,13 @@
   .hours_card_container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    min-width: fit-content;
+    justify-content: flex-start;
+    flex: 0;
+  
     white-space: nowrap;
     
     gap: var(--spacing-sm);
-    padding: var(--spacing-sm) clamp(0.4rem, 1vw, 0.6rem);
+    padding: 7px 7px;
     
     border: clamp(1px, 0.2vw, 2px) solid var(--quaternary-color);
     border-radius: var(--border-radius-sm);
@@ -302,6 +300,7 @@
     cursor: pointer;
     transition: all var(--animation-hover-regular-speed) ease;
   }
+
   
   .hours_card_container input[type="checkbox"] {
     -webkit-appearance: none;
@@ -311,15 +310,16 @@
     position: relative;
     margin: 0;
 
-    width: clamp(6px, 1vw, 1.2rem);
-    height: clamp(6px, 1vw, 1.2rem);
-    min-width: clamp(6px, 1vw, 1.2rem);
-    min-height: clamp(6px, 1vw, 1.2rem);
+    width: clamp(8px, 1vw, 1.2rem);
+    height: clamp(8px, 1vw, 1.2rem);
+    min-width: clamp(8px, 1vw, 1.2rem);
+    min-height: clamp(8px, 1vw, 1.2rem);
 
     background-color: transparent;
     border: clamp(1px, 0.2vw, 2px) solid var(--quaternary-color);
     border-radius: clamp(2px, 0.3vw, 4px);
     
+    outline: none;
     cursor: pointer;
     transition: all var(--animation-hover-regular-speed) ease;
   }
@@ -346,14 +346,17 @@
   
   .hours_text_container {
     display: flex;
+    justify-content: flex-start;
     flex-direction: column;
-    text-align: center;
-    gap: clamp(1px, 0.2vw, 2px);
+    text-align: left;
+    left: 0;
+    
   }
   
   .hours_text_container h2 {
     font-size: clamp(8px, 0.7vw, 13px);
     line-height: 1.2;
+    left: 0;
   }
 
   /* Setas de Navegação de Horários */
@@ -366,7 +369,6 @@
     background: none;
     
     cursor: pointer;
-
   }
   
   .next_hours,
@@ -399,9 +401,9 @@
     justify-content: center;
     text-align: center;
 
-    padding: var(--spacing-sm) var(--spacing-sm);
+    padding: 7px 10px;
     border: none;
-    border-radius: var(--border-radius-sm);
+    border-radius: clamp(2px, 1vw, 5px);
     background-color: var(--primary-color);
 
     font-size: var(--text-small-size);
@@ -418,3 +420,75 @@
     scale: calc(1.012);
   }
   
+
+
+
+
+/*-----------------------*/  
+/*Responsividade Celular*/
+  @media screen and (max-width: 700px){
+    /* Botões de Dias do calendário*/
+    
+        .btn_day_select {
+          width: clamp(30px, 10vw, 40px);
+          height:  clamp(30px, 10vw, 40px);
+        }
+    
+
+    /*Card dos horários para locação*/
+    .quadra_main_container{
+      flex-direction: column;
+    }
+
+    .quadra_info_main_container{
+      width: 100%;;
+    }
+
+    .quadra_img_container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; 
+  }
+
+  /*Card dos horários*/
+  .hours_main_container{
+    gap: clamp(2px, 2.3vw, 10px);
+  }
+  .hours_card_container{
+    padding: clamp(5px,2vw, 9px );
+  }
+   .hours_text_container h2 {
+    font-size: clamp(8px, 2vw, 13px);
+  }
+
+   .next_hours,
+  .next_hours2 {
+    width: clamp(15px, 1vw, 30px);
+    height: auto;
+  }
+ /* Botão de Agendamento */
+  .btn_scheduling {
+    padding: 13px 17px;
+    font-size: var(--text-medium-size);
+    cursor: pointer;
+    transition: all var(--animation-hover-medium-speed) ease-out;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  }
+
+  @media screen and (max-width: 400px){
+     .hours_card_container{
+    padding: clamp(5px,2vw, 9px );
+  }
+   .hours_text_container h2 {
+    font-size: clamp(8px, 2vw, 13px);
+  }
+   .hours_card_container{
+    padding: clamp(3px,2vw, 5px );
+  }
+  .btn_scheduling{
+    padding: 9px 12px;
+  }
+  }

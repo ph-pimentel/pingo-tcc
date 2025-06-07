@@ -28,6 +28,7 @@
 .main_container {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
     margin-top: 30px;
 }
@@ -40,6 +41,7 @@
     
     height: var(--card-height);
     width: var(--card-width);
+    max-width: 90%;
     
     
     background-color: var(--card-bg-color);
@@ -55,6 +57,7 @@
     transition: all var(--animation-hover-regular-speed) ease-in-out;
 }
 
+
 .card_container:hover{
     scale: calc(1.01);
     box-shadow: var(--box-shadow-low);
@@ -67,9 +70,9 @@
 }
 
 .image_container img {
-    width: 98%;
+    width: 100%;
     height: 100%;
-
+    
     object-fit: cover;
 
     border-radius: 15px;
@@ -90,14 +93,13 @@
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: column;
-
+    
     flex: 1;
     height: 100%;
     width: 300px;
-
+    
     padding: 15px;
     margin-left: 20px;
-    
 }
 
 .item_info h1,
@@ -111,7 +113,7 @@
 .item_info h1 {
     font-size: var(--font-size-h1);
     font-weight: 600;
-
+    
     display: -webkit-box;
     -webkit-line-clamp: 1; 
     -webkit-box-orient: vertical;
@@ -242,4 +244,49 @@
     flex-direction: column;
     gap: var(--default-spacing);
     margin-bottom: 20px; 
+}
+
+@media screen and (max-width: 900px){
+
+    .card_container{
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction:column;
+
+        width: 360px;
+        height: auto;
+    }
+    .image_container img {
+
+    border-radius: 0px;
+}
+    .divider{
+        display:none;
+    }
+
+    .info_container{
+        flex-direction:row;
+        width: 100%;
+        max-width:100%;
+        padding: 10px;
+        gap: 4px;
+        margin-top: 5px;
+    }
+    .item_info{
+        width: calc(100% / 3);
+    }
+    .item_info h1 {
+        font-size: var(--font-size-h1);
+        font-weight: 600;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; 
+        max-width: 90%;
+        max-height: auto;
+    }
+    .info_container_2{
+        padding: 10px;
+    }
+
+
 }

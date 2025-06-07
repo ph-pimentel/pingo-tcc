@@ -456,10 +456,23 @@ html,body{
     }
     
 } 
-@media screen and (min-width: 1101px){
+@media screen and (min-width: 1130px){
     
     .options_selected_container{
         display: none;
     }
+}
+
+@media screen and (max-width: 700px){
+    .menu_items{
+    width: 100%;
+    font-size: 17px;
+
+
+}
+
+.menu_desconect{
+    font-size: 17px;
+}
 }
     

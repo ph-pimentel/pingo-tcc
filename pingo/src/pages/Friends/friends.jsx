@@ -17,7 +17,7 @@ function Friends() {
         <div className={styles.friends_main_container}>
           <h1 className={styles.friends_title}>Amigos</h1>
           
-          /* Card Amigo*/
+          {/* Card Amigo*/}
           <div className={styles.card_friend_main_container}>
             {allFriends.length > 0 ? (
               allFriends.map(friend => (

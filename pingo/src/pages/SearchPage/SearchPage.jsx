@@ -14,7 +14,7 @@ function SearchPage(){
                 <div className={styles.main_wrapper}>
                     <div className={styles.you_search_container}>
                         <div className={styles.you_search_text_container}>
-                        <h2>Você pesquisou por "<p>{search}</p>"</h2>
+                        <h2>Você pesquisou por "{search}"</h2>
                         </div>
                     <Filter/>
                     </div>

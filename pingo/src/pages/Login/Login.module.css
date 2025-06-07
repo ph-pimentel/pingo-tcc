@@ -64,7 +64,7 @@ html, body {
     align-items: center;
     flex-direction: column;
     background-color: var(--octonary-color);
-    padding: 30px 90px;
+    padding: 30px clamp(10px, 6vw, 90px);
     border: none;
     border-radius: var(--border-radius-regular);
     box-shadow: var(--box-shadow-medium);
@@ -74,7 +74,7 @@ html, body {
 .emailInput {
     align-items: center;
     justify-content: center;
-    width: 400px;
+    width: clamp(200px, 100%, 400px);
     height: 57px;
     padding: var(--padding-default);
     font-size: var(--text-medium-size);
@@ -98,13 +98,13 @@ html, body {
 .passwordInputContainer {
     display: flex;
     align-items: center;
-    width: 400px;
+    justify-content: space-beetween;
+    width: clamp(200px, 100%, 400px);
     padding: var(--padding-default);
     font-size: var(--text-medium-size);
     margin-top: var(--margin-top-default);
     border-radius: var(--border-radius-medium);
     border: solid var(--border-thickness) var(--quaternary-color);
-    background-color: white;
     cursor: text;
 }
 
@@ -114,13 +114,13 @@ html, body {
 }
 
 .passwordInputContainer input {
-    flex: 1;
     height: 25px;
     border: none;
     outline: none;
+    width: 100%;
     
     font-size: var(--text-medium-size);
-    padding-right: 10px;
+
 
     background: var(--octonary-color);
 }
@@ -134,6 +134,7 @@ html, body {
     max-width: 20px;
     max-height: 20px;
     cursor: pointer;
+    left: 0;
 }
 
 /*___Manter Conectado e Esqueceu a Senha___*/
@@ -150,14 +151,14 @@ html, body {
     display: flex;
     justify-content: left;
     align-items: center;
-    width: 100%;
-    gap: 10px;
+    width: clamp(250px, 40%, 400px);
+    gap: clamp(5px, 2vw, 10px);
 }
 
 .rememberMeLabel {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     width: 150px;
     font-size: var(--text-small-size);
     color: var(--tertiary-color);
@@ -170,7 +171,7 @@ html, body {
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 20px;
+    width: 30px;
     height: 20px;
     background-color: transparent;
     appearance: none;
