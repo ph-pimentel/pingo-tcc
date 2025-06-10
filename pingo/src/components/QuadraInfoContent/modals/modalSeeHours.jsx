@@ -45,15 +45,20 @@ const KITS_HORARIOS = [
 ];
 
 // Dias que não terão nenhum horário disponível (sobrescreve tudo)
-const DIAS_INDISPONIVEIS = [
-  { dia: 22, mes: 5, ano: 2025 }, // 22/06/2025
-  { dia: 23, mes: 5, ano: 2025 }, // 23/06/2025
-  { dia: 27, mes: 5, ano: 2025 }  // 27/06/2025
+const PERIODOS_INDISPONIVEIS = [
+  {
+    inicio: new Date(2025, 5, 22), // 22/06/2025
+    fim: new Date(2025, 5, 24)     // 24/06/2025 
+  },
+  {
+    inicio: new Date(2025, 6, 1),  // 01/07/2025
+    fim: new Date(2025, 6, 7)      // 07/07/2025 
+  }
 ];
 
 // Horários já reservados (dentro dos disponíveis)
 const HORARIOS_RESERVADOS = [
-  { dia: 15, mes: 5, ano: 2025, horarioId: 4 } // Reservou o horário de id 4 no dia 15/05/2025
+  { dia: 15, mes: 6, ano: 2025, horarioId: 4 } // Reservou o horário de id 4 no dia 15/05/2025
 ];
 
 const HORARIOS_POR_PAGINA = 3;
@@ -79,13 +84,13 @@ function DiasContainer({
     }
   };
   
-  const isDiaIndisponivel = (dia) => {
-    return DIAS_INDISPONIVEIS.some(d => 
-      d.dia === dia && 
-      d.mes === mes && 
-      d.ano === ano
-    );
-  };
+ const isDiaIndisponivel = (dia) => {
+  const dataTeste = new Date(ano, mes, dia);
+  return PERIODOS_INDISPONIVEIS.some(periodo => 
+    dataTeste >= periodo.inicio && 
+    dataTeste <= periodo.fim
+  );
+};
 
   const isDiaUtil = (dia) => {
     const diaSemana = new Date(ano, mes, dia).getDay();
