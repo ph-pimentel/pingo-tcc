@@ -136,7 +136,48 @@
 }
 
 
+/*--Favorite Button--*/
+.btn_favorite_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
 
+    width: 40px;
+    height: 40px;
+    margin-top: auto;
+    padding: 2px;
+
+    border-bottom: 1px solid white;
+}
+
+.btn_favorite_container:hover:after{
+    content: 'Favoritar';
+    position: absolute;
+
+    font-family: var(--primary-font);
+    background-color: var(--quaternary-color);
+    
+    border-radius: 5px;
+    padding: 4px;
+    font-size: var(--text-super-small-size);
+    font-weight: var(--text-regular-weight);
+    width: fit-content;
+    margin-top: 200%;
+    margin-left:3px;
+}
+.btn_favorite{
+    background: none;
+    border: none;
+    cursor: pointer;
+} 
+
+.btn_favorite img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
 
 
 
@@ -147,10 +188,9 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    position:relative;
+
     box-sizing: border-box;
     gap: 15px;
-    
     
     margin-top: auto;
     white-space: nowrap;

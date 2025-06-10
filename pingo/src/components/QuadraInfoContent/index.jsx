@@ -1,7 +1,7 @@
 // src/QuadraInfoContent.jsx
 import styles from "./quadrainfocontent.module.css";
-import { useState } from "react";
-import ModalSeeHours from "./modals/ModalSeeHours";
+import { useState, useEffect } from "react";
+import ModalSeeHours from './modals/ModalSeeHours';
 import ModalAgendamento from "./modals/ModalAgendamento";
 
 function QuadraInfoContent() {
@@ -14,11 +14,49 @@ function QuadraInfoContent() {
   const [textoAtivo, setTextoAtivo] = useState(textos.descricao);
   const [modalSeeHours, setModalSeeHours] = useState(false);
   const [modalAgendamento, setModalAgendamento] = useState(false);
-  const [agendamentoDados, setAgendamentoDados] = useState(null); // Estado para armazenar os dados do agendamento
+  const [agendamentoDados, setAgendamentoDados] = useState(null);
+  const [isFavorito, setIsFavorito] = useState(false);
+  const [loadingFavorito, setLoadingFavorito] = useState(false);
+
+  const quadraId = "1"; 
+  const usuarioId = "1"; 
+
+
+  const fetchFavoritoStatus = async () => {
+    try {
+      const mockFavorito = false; 
+      setIsFavorito(mockFavorito);
+    } catch (error) {
+      console.error("Erro ao buscar status de favorito:", error);
+    }
+  };
+
+  // Função para atualizar o favorito no backend
+  const updateFavoritoBackend = async (novoEstado) => {
+    setLoadingFavorito(true);
+    try {
+      // Mock temporário 
+      console.log(`Atualizando favorito no backend: Quadra ${quadraId}, Usuário ${usuarioId}, Status: ${novoEstado}`);
+      setIsFavorito(novoEstado); 
+    } catch (error) {
+      console.error("Erro ao atualizar favorito:", error);
+    } finally {
+      setLoadingFavorito(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchFavoritoStatus();
+  }, []);
 
   const handleAgendar = (dados) => {
-    setAgendamentoDados(dados); // Armazena os dados do agendamento
-    setModalAgendamento(true); // Abre o ModalAgendamento
+    setAgendamentoDados(dados);
+    setModalAgendamento(true);
+  };
+
+  const toggleFavorito = () => {
+    const novoEstado = !isFavorito;
+    updateFavoritoBackend(novoEstado);
   };
 
   return (
@@ -52,14 +90,35 @@ function QuadraInfoContent() {
               <h1>Endereço</h1>
               <p>Rua joãozinho pereira da silva @ 943 - belo campo amarelonho pereira da silva @ 943 - belo campo amarelo</p>
             </div>
+
+            <div className={styles.btn_favorite_container}>
+              <button 
+                className={styles.btn_favorite} 
+                onClick={toggleFavorito}
+                disabled={loadingFavorito}
+              >
+                {loadingFavorito ? (
+                  <span>Carregando...</span>
+                ) : (
+                  <img 
+                    src={isFavorito ? "../img/QuadraInfo/favoritofull.png" : "../img/QuadraInfo/favorito.png"} 
+                    alt={isFavorito ? "Remover dos favoritos" : "Adicionar aos favoritos"}
+                  />
+                )}
+              </button>
+            </div>
+            
             <button className={styles.btn_see_hours} onClick={() => setModalSeeHours(true)}>
               <img src="../img/QuadraInfo/clock.png" alt="Clock"/>    
               Horários Disponíveis
             </button>
+
           </div>
         </div>
 
-        {/* DESCRIÇÃO */}
+        {/*---------------------------*/}
+        {/*         DESCRIÇÃO         */}
+        {/*---------------------------*/}
         <div className={styles.description_container}>
           <div className={styles.description_content_container}>
             <button onClick={() => setTextoAtivo(textos.descricao)}>Descrição</button>
@@ -90,7 +149,7 @@ function QuadraInfoContent() {
               <h1>Nome da Quadra</h1>
             </a>
             <a href="LINK DA QUADRA" className={styles.court_card}>
-              <img src="../img/Header/steve.png     " alt="Quadra"/> 
+              <img src="../img/Header/steve.png" alt="Quadra"/> 
               <h1>Nome da Quadra</h1>
             </a>
           </div>

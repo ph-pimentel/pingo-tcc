@@ -136,6 +136,7 @@ html,body{
     
     gap: clamp(5px, 0.5vw, 10px);
     font-family: var(--primary-font);
+    text-decoration: none;
 
     transition: all 0.15s ease-out; 
 }
