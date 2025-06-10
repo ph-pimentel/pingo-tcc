@@ -1,0 +1,37 @@
+@import url('../../styles/global.css');
+
+
+:root{
+--testefeio:0;
+}
+
+.favorite_card_main_container{
+    display:flex;
+    flex-direction: column;
+    width: clamp(245px, 40vw, 300px);
+    font-size: var(--text-medium-size);
+    text-decoration: none;
+    transition: all 0.2s ease-out;
+}
+
+.favorite_card_main_container:hover{
+    scale: calc(1.011);
+}
+.favorite_card_text{
+    font-size: 110%;
+    color: var(--text-dark1-color);
+    font-weight: var(--text-high-weight);
+}
+
+.favorite_card_image{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+    border-radius: 5px;
+    transition: all 0.2s ease-out;
+}
+
+.favorite_card_image:hover{
+    box-shadow: var(--box-shadow-low);
+}
