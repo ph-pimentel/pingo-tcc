@@ -2,15 +2,35 @@
 import React, { useState, useEffect } from 'react';
 import styles from './modalSeeHours.module.css';
 
-// Componente DiasContainer (mantido igual)
+// =============================================
+// Constantes e Dados Mockados
+// =============================================
+
+const HORARIOS_PADRAO = [
+  { inicio: '08:00', fim: '09:00', preco: 300, id: 1 },
+  { inicio: '09:00', fim: '10:00', preco: 300, id: 2 },
+  { inicio: '10:00', fim: '11:00', preco: 300, id: 3 },
+  { inicio: '14:00', fim: '15:00', preco: 350, id: 4 },
+  { inicio: '15:00', fim: '16:00', preco: 350, id: 5 },
+  { inicio: '16:00', fim: '17:00', preco: 350, id: 6 },
+  { inicio: '18:00', fim: '19:00', preco: 400, id: 7 },
+  { inicio: '19:00', fim: '20:00', preco: 400, id: 8 },
+];
+
+const HORARIOS_POR_PAGINA = 3;
+
+// =============================================
+// Componente DiasContainer
+// =============================================
+
 function DiasContainer({ 
   mes, 
   ano, 
   onDiaSelecionado, 
   dataAtual, 
   diaSelecionado, 
-  setDiaSelecionado, 
-  diasIndisponiveis,
+  setDiaSelecionado,
+  diasDisponiveis,
   disponibilidade 
 }) {
   const diasNoMes = new Date(ano, mes + 1, 0).getDate();
@@ -23,8 +43,12 @@ function DiasContainer({
     }
   };
   
-  const isDiaIndisponivel = (dia) => {
-    return diasIndisponiveis.some(d => d.dia === dia && d.mes === mes + 1 && d.ano === ano);
+  const isDiaDisponivel = (dia) => {
+    return diasDisponiveis.some(d => 
+      d.dia === dia && 
+      d.mes === mes + 1 && 
+      d.ano === ano
+    );
   };
 
   const isDiaUtil = (dia) => {
@@ -35,9 +59,8 @@ function DiasContainer({
   const shouldShowDay = (dia) => {
     const dataSelecionada = new Date(ano, mes, dia);
     const isDiaFuturo = dataSelecionada >= new Date(dataAtual.getFullYear(), dataAtual.getMonth(), dataAtual.getDate());
-    const isDiaDisponivel = !isDiaIndisponivel(dia);
     
-    if (!isDiaFuturo || !isDiaDisponivel) return false;
+    if (!isDiaFuturo || !isDiaDisponivel(dia)) return false;
     
     switch(disponibilidade) {
       case 'dias-uteis':
@@ -73,29 +96,39 @@ function DiasContainer({
   );
 }
 
-// Componente Calendario (mantido igual)
-function Calendario({ onDiaSelecionado, disponibilidade }) {
+// =============================================
+// Componente Calendario
+// =============================================
+
+function Calendario({ 
+  onDiaSelecionado, 
+  disponibilidade,
+  diasDisponiveis 
+}) {
   const dataAtual = new Date();
   const [mesAtual, setMesAtual] = useState(dataAtual.getMonth());
   const [anoAtual, setAnoAtual] = useState(dataAtual.getFullYear());
   const [diaSelecionado, setDiaSelecionado] = useState(null);
   
+  // Verifica se existem dias disponíveis nos próximos meses
+  const existeMesDisponivel = (incremento) => {
+    const proximoMes = new Date(anoAtual, mesAtual + incremento, 1);
+    return diasDisponiveis.some(d => {
+      const dataDisponivel = new Date(d.ano, d.mes - 1, d.dia);
+      return dataDisponivel >= proximoMes;
+    });
+  };
+  
   const mudarMes = (incremento) => {
     const novaData = new Date(anoAtual, mesAtual + incremento, 1);
-    const dataLimite = new Date(dataAtual.getFullYear() + 1, dataAtual.getMonth(), 1);
-    
-    if (novaData >= new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1) && 
-        novaData <= dataLimite) {
-      setMesAtual(novaData.getMonth());
-      setAnoAtual(novaData.getFullYear());
-      setDiaSelecionado(null);
-    }
+    setMesAtual(novaData.getMonth());
+    setAnoAtual(novaData.getFullYear());
+    setDiaSelecionado(null);
   };
   
   const isMesAtual = mesAtual === dataAtual.getMonth() && anoAtual === dataAtual.getFullYear();
-  const atingiuLimiteFuturo = new Date(anoAtual, mesAtual + 1, 1) > 
-                             new Date(dataAtual.getFullYear() + 1, dataAtual.getMonth(), 1);
-  
+  const temProximoMesDisponivel = existeMesDisponivel(1);
+
   return (
     <div className={styles.date_container}>
       <div className={styles.mount_container}>
@@ -110,7 +143,7 @@ function Calendario({ onDiaSelecionado, disponibilidade }) {
         <button 
           onClick={() => mudarMes(1)} 
           className={styles.btn_mounth_select}
-          disabled={atingiuLimiteFuturo}
+          disabled={!temProximoMesDisponivel}
         >
           <img src="../img/QuadraInfo/seta.png" alt="Próximo" />
         </button>
@@ -122,38 +155,35 @@ function Calendario({ onDiaSelecionado, disponibilidade }) {
         dataAtual={dataAtual}
         diaSelecionado={diaSelecionado}
         setDiaSelecionado={setDiaSelecionado}
-        diasIndisponiveis={diasIndisponiveis}
+        diasDisponiveis={diasDisponiveis}
         disponibilidade={disponibilidade}
       />
     </div>
   );
 }
 
-// Dados mockados (mantido igual)
-const HORARIOS_PADRAO = [
-  { inicio: '08:00', fim: '09:00', preco: 300, id: 1 },
-  { inicio: '09:00', fim: '10:00', preco: 300, id: 2 },
-  { inicio: '10:00', fim: '11:00', preco: 300, id: 3 },
-  { inicio: '14:00', fim: '15:00', preco: 350, id: 4 },
-  { inicio: '15:00', fim: '16:00', preco: 350, id: 5 },
-  { inicio: '16:00', fim: '17:00', preco: 350, id: 6 },
-  { inicio: '18:00', fim: '19:00', preco: 400, id: 7 },
-  { inicio: '19:00', fim: '20:00', preco: 400, id: 8 },
-];
+// =============================================
+// Componente Principal ModalSeeHours
+// =============================================
 
-const horariosReservados = [
-  { dia: 15, mes: 4, ano: 2025, inicio: '14:00', fim: '15:00' },
-];
+function ModalSeeHours({ 
+  isVisible, 
+  onClose, 
+  disponibilidade = 'todos', 
+  onAgendar,
+  diasDisponiveis = [],  // Nova prop: lista de dias disponíveis
+  horariosReservados = [] 
+}) {
+  // Estados
+  const [diaSelecionado, setDiaSelecionado] = useState(null);
+  const [mesSelecionado, setMesSelecionado] = useState(null);
+  const [anoSelecionado, setAnoSelecionado] = useState(null);
+  const [horariosDisponiveis, setHorariosDisponiveis] = useState([]);
+  const [horariosSelecionados, setHorariosSelecionados] = useState([]);
+  const [paginaAtual, setPaginaAtual] = useState(0);
 
-const diasIndisponiveis = [
-  { dia: 22, mes: 4, ano: 2025 },
-  { dia: 23, mes: 4, ano: 2025 },
-  { dia: 27, mes: 5, ano: 2025 },
-];
-
-// Componente Principal
-function ModalSeeHours({ isVisible, onClose, disponibilidade = 'todos', onAgendar }) {
-   useEffect(() => {
+  // Resetar estados quando o modal abre
+  useEffect(() => {
     if (isVisible) {
       const dataAtual = new Date();
       setDiaSelecionado(null);
@@ -165,13 +195,7 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade = 'todos', onAgenda
     }
   }, [isVisible]);
 
-  const [diaSelecionado, setDiaSelecionado] = useState(null);
-  const [mesSelecionado, setMesSelecionado] = useState(null);
-  const [anoSelecionado, setAnoSelecionado] = useState(null);
-  const [horariosDisponiveis, setHorariosDisponiveis] = useState([]);
-  const [horariosSelecionados, setHorariosSelecionados] = useState([]);
-  const [paginaAtual, setPaginaAtual] = useState(0);
-  const HORARIOS_POR_PAGINA = 3;
+  // Atualizar horários disponíveis quando seleciona um dia
   useEffect(() => {
     if (diaSelecionado) {
       const hoje = new Date();
@@ -206,8 +230,9 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade = 'todos', onAgenda
       setPaginaAtual(0); 
       setHorariosSelecionados([]); 
     }
-  }, [diaSelecionado, mesSelecionado, anoSelecionado]);
+  }, [diaSelecionado, mesSelecionado, anoSelecionado, horariosReservados]);
 
+  // Handlers
   const handleDiaSelecionado = (dia, mes, ano) => {
     setDiaSelecionado(dia);
     setMesSelecionado(mes);
@@ -217,22 +242,18 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade = 'todos', onAgenda
   const handleSelecionarHorario = (horario) => {
     setHorariosSelecionados(prev => {
       const alreadySelected = prev.some(h => h.id === horario.id);
-      if (alreadySelected) {
-        return prev.filter(h => h.id !== horario.id);
-      } else {
-        return [...prev, horario];
-      }
+      return alreadySelected 
+        ? prev.filter(h => h.id !== horario.id) 
+        : [...prev, horario];
     });
   };
 
   const handlePaginarHorarios = (direcao) => {
     const totalPaginas = Math.ceil(horariosDisponiveis.length / HORARIOS_POR_PAGINA);
     setPaginaAtual(prev => {
-      if (direcao === 'proximo') {
-        return prev < totalPaginas - 1 ? prev + 1 : prev;
-      } else {
-        return prev > 0 ? prev - 1 : prev;
-      }
+      return direcao === 'proximo' 
+        ? Math.min(prev + 1, totalPaginas - 1) 
+        : Math.max(prev - 1, 0);
     });
   };
 
@@ -252,10 +273,11 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade = 'todos', onAgenda
       total: horariosSelecionados.reduce((sum, horario) => sum + horario.preco, 0)
     };
 
-    onAgendar(dadosAgendamento); // Passa os dados para o pai e abre o ModalAgendamento
-    onClose(); // Fecha o ModalSeeHours
+    onAgendar(dadosAgendamento);
+    onClose();
   };
 
+  // Calcula horários visíveis na paginação atual
   const horariosVisiveis = horariosDisponiveis.slice(
     paginaAtual * HORARIOS_POR_PAGINA,
     (paginaAtual + 1) * HORARIOS_POR_PAGINA
@@ -276,7 +298,8 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade = 'todos', onAgenda
           <h1>Agende seu Horário</h1>
           <Calendario 
             onDiaSelecionado={handleDiaSelecionado} 
-            disponibilidade={disponibilidade} 
+            disponibilidade={disponibilidade}
+            diasDisponiveis={diasDisponiveis}
           />
         </div>
       </div>
@@ -313,60 +336,57 @@ function ModalSeeHours({ isVisible, onClose, disponibilidade = 'todos', onAgenda
           </div>
 
           <div className={styles.hours_main_container}>
-  {/* Botão anterior - só mostra se houver horários e não estiver na primeira página */}
-  {horariosDisponiveis.length > 0 && (
-    <button 
-      onClick={() => handlePaginarHorarios('anterior')} 
-      className={styles.button_next_hours}
-      disabled={paginaAtual === 0}
-    >
-      <img src="../img/QuadraInfo/seta.png" alt="Anterior" className={styles.next_hours2} />
-    </button>
-  )}
+            {horariosDisponiveis.length > 0 && (
+              <button 
+                onClick={() => handlePaginarHorarios('anterior')} 
+                className={styles.button_next_hours}
+                disabled={paginaAtual === 0}
+              >
+                <img src="../img/QuadraInfo/seta.png" alt="Anterior" className={styles.next_hours2} />
+              </button>
+            )}
 
-  {diaSelecionado ? (
-    horariosVisiveis.length > 0 ? (
-      horariosVisiveis.map(horario => (
-        <label key={horario.id} className={styles.hours_card_container}>
-          <div>
+            {diaSelecionado ? (
+              horariosVisiveis.length > 0 ? (
+                horariosVisiveis.map(horario => (
+                  <label key={horario.id} className={styles.hours_card_container}>
+                    <div>
+                      <input 
+                        type="checkbox" 
+                        className={styles.hours_checkbox}
+                        checked={horariosSelecionados.some(h => h.id === horario.id)}
+                        onChange={() => handleSelecionarHorario(horario)}
+                      />
+                    </div>
+                    <div className={styles.hours_text_container}>
+                      <h2>{horario.inicio} às {horario.fim}</h2>
+                      <h2>R${horario.preco}</h2>
+                    </div>
+                  </label>
+                ))
+              ) : (
+                <div className={styles.text_notification}>
+                  {new Date(anoSelecionado, mesSelecionado, diaSelecionado).getDate() === new Date().getDate() &&
+                  new Date(anoSelecionado, mesSelecionado, diaSelecionado).getMonth() === new Date().getMonth() &&
+                  new Date(anoSelecionado, mesSelecionado, diaSelecionado).getFullYear() === new Date().getFullYear()
+                  ? <p>Todos os horários de hoje já passaram.</p>
+                  : <p>Nenhum horário disponível para este dia.</p>}
+                </div>
+              )
+            ) : (
+              <p className={styles.text_notification}>Selecione uma data para ver os horários disponíveis.</p>
+            )}
 
-          <input 
-            type="checkbox" 
-            className={styles.hours_checkbox}
-            checked={horariosSelecionados.some(h => h.id === horario.id)}
-            onChange={() => handleSelecionarHorario(horario)}
-            />
-            </div>
-          <div className={styles.hours_text_container}>
-            <h2>{horario.inicio} às {horario.fim}</h2>
-            <h2>R${horario.preco}</h2>
+            {horariosDisponiveis.length > 0 && (
+              <button 
+                onClick={() => handlePaginarHorarios('proximo')} 
+                className={styles.button_next_hours}
+                disabled={(paginaAtual + 1) * HORARIOS_POR_PAGINA >= horariosDisponiveis.length}
+              >
+                <img src="../img/QuadraInfo/seta.png" alt="Próximo" className={styles.next_hours} />
+              </button>
+            )}
           </div>
-        </label>
-      ))
-    ) : (
-      <div className={styles.text_notification}>
-        {new Date(anoSelecionado, mesSelecionado, diaSelecionado).getDate() === new Date().getDate() &&
-         new Date(anoSelecionado, mesSelecionado, diaSelecionado).getMonth() === new Date().getMonth() &&
-         new Date(anoSelecionado, mesSelecionado, diaSelecionado).getFullYear() === new Date().getFullYear()
-       ? <p>Todos os horários de hoje já passaram.</p>
-       : <p>Nenhum horário disponível para este dia.</p>}
-      </div>
-    )
-  ) : (
-    <p className={styles.text_notification}>Selecione uma data para ver os horários disponíveis.</p>
-  )}
-
-  {/* Botão próximo - só mostra se houver horários e não estiver na última página */}
-  {horariosDisponiveis.length > 0 && (
-    <button 
-      onClick={() => handlePaginarHorarios('proximo')} 
-      className={styles.button_next_hours}
-      disabled={(paginaAtual + 1) * HORARIOS_POR_PAGINA >= horariosDisponiveis.length}
-    >
-      <img src="../img/QuadraInfo/seta.png" alt="Próximo" className={styles.next_hours} />
-    </button>
-  )}
-</div>
 
           <button 
             className={styles.btn_scheduling} 

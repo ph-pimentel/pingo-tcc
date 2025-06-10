@@ -27,7 +27,16 @@ function QuadraInfoContent() {
         <ModalSeeHours 
           isVisible={modalSeeHours} 
           onClose={() => setModalSeeHours(false)}
-          onAgendar={handleAgendar} // Passa a callback para receber os dados
+          disponibilidade="todos" 
+          onAgendar={handleAgendar}
+          diasDisponiveis={[
+            // Receber do banco de dados aqui
+            { dia: 20, mes: 6, ano: 2025 },
+            { dia: 21, mes: 6, ano: 2025 },
+          ]}
+          horariosReservados={[
+            { dia: 15, mes: 5, ano: 2023, inicio: '14:00', fim: '15:00' }
+          ]}
         />
         <ModalAgendamento 
           isVisible={modalAgendamento} 
