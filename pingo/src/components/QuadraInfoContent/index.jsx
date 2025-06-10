@@ -35,7 +35,7 @@ function QuadraInfoContent() {
             { dia: 21, mes: 6, ano: 2025 },
           ]}
           horariosReservados={[
-            { dia: 15, mes: 5, ano: 2023, inicio: '14:00', fim: '15:00' }
+            { dia: 15, mes: 5, ano: 2025, inicio: '14:00', fim: '15:00' }
           ]}
         />
         <ModalAgendamento 
