@@ -2,27 +2,64 @@
 import React, { useState, useEffect } from 'react';
 import styles from './modalSeeHours.module.css';
 
-// =============================================
-// Constantes e Dados Mockados
-// =============================================
+// ============= VARIÁVEIS =============
+const KITS_HORARIOS = [
+  {
+    id: 1,
+    horarios: [
+      { id: 1, inicio: '08:00', fim: '09:00' },
+      { id: 2, inicio: '09:00', fim: '10:00' },
+      { id: 3, inicio: '10:00', fim: '11:00' }
+    ],
+    preco: 300,
+    periodo: {
+      inicio: new Date(2025, 5, 15), // 01/06/2025
+      fim: new Date(2025, 5, 31)    // 31/06/2025
+    }
+  },
+  {
+    id: 2,
+    horarios: [
+      { id: 4, inicio: '14:00', fim: '15:00' },
+      { id: 5, inicio: '15:00', fim: '16:00' },
+      { id: 6, inicio: '16:00', fim: '17:00' }
+    ],
+    preco: 350,
+    periodo: {
+      inicio: new Date(2025, 6, 1), // 01/07/2025
+      fim: new Date(2025, 6, 31)    // 31/07/2025
+    }
+  },
+  {
+    id: 3,
+    horarios: [
+      { id: 7, inicio: '18:00', fim: '19:00' },
+      { id: 8, inicio: '19:00', fim: '20:00' }
+    ],
+    preco: 400,
+    periodo: {
+      inicio: new Date(2025, 7, 1), // 01/08/2025
+      fim: new Date(2025, 7, 31)    // 31/08/2025
+    }
+  }
+];
 
-const HORARIOS_PADRAO = [
-  { inicio: '08:00', fim: '09:00', preco: 300, id: 1 },
-  { inicio: '09:00', fim: '10:00', preco: 300, id: 2 },
-  { inicio: '10:00', fim: '11:00', preco: 300, id: 3 },
-  { inicio: '14:00', fim: '15:00', preco: 350, id: 4 },
-  { inicio: '15:00', fim: '16:00', preco: 350, id: 5 },
-  { inicio: '16:00', fim: '17:00', preco: 350, id: 6 },
-  { inicio: '18:00', fim: '19:00', preco: 400, id: 7 },
-  { inicio: '19:00', fim: '20:00', preco: 400, id: 8 },
+// Dias que não terão nenhum horário disponível (sobrescreve tudo)
+const DIAS_INDISPONIVEIS = [
+  { dia: 22, mes: 5, ano: 2025 }, // 22/06/2025
+  { dia: 23, mes: 5, ano: 2025 }, // 23/06/2025
+  { dia: 27, mes: 5, ano: 2025 }  // 27/06/2025
+];
+
+// Horários já reservados (dentro dos disponíveis)
+const HORARIOS_RESERVADOS = [
+  { dia: 15, mes: 5, ano: 2025, horarioId: 4 } // Reservou o horário de id 4 no dia 15/05/2025
 ];
 
 const HORARIOS_POR_PAGINA = 3;
 
-// =============================================
+// ============= FUNÇÕES =============
 // Componente DiasContainer
-// =============================================
-
 function DiasContainer({ 
   mes, 
   ano, 
@@ -30,7 +67,6 @@ function DiasContainer({
   dataAtual, 
   diaSelecionado, 
   setDiaSelecionado,
-  diasDisponiveis,
   disponibilidade 
 }) {
   const diasNoMes = new Date(ano, mes + 1, 0).getDate();
@@ -43,10 +79,10 @@ function DiasContainer({
     }
   };
   
-  const isDiaDisponivel = (dia) => {
-    return diasDisponiveis.some(d => 
+  const isDiaIndisponivel = (dia) => {
+    return DIAS_INDISPONIVEIS.some(d => 
       d.dia === dia && 
-      d.mes === mes + 1 && 
+      d.mes === mes && 
       d.ano === ano
     );
   };
@@ -56,11 +92,21 @@ function DiasContainer({
     return diaSemana !== 0 && diaSemana !== 6;
   };
 
+  const isDiaNoPeriodoKit = (dia) => {
+    const dataTeste = new Date(ano, mes, dia);
+    return KITS_HORARIOS.some(kit => 
+      dataTeste >= kit.periodo.inicio && 
+      dataTeste <= kit.periodo.fim
+    );
+  };
+
   const shouldShowDay = (dia) => {
     const dataSelecionada = new Date(ano, mes, dia);
     const isDiaFuturo = dataSelecionada >= new Date(dataAtual.getFullYear(), dataAtual.getMonth(), dataAtual.getDate());
+    const isDiaNoPeriodo = isDiaNoPeriodoKit(dia);
+    const isDiaBloqueado = isDiaIndisponivel(dia);
     
-    if (!isDiaFuturo || !isDiaDisponivel(dia)) return false;
+    if (!isDiaFuturo || !isDiaNoPeriodo || isDiaBloqueado) return false;
     
     switch(disponibilidade) {
       case 'dias-uteis':
@@ -96,39 +142,29 @@ function DiasContainer({
   );
 }
 
-// =============================================
 // Componente Calendario
-// =============================================
-
-function Calendario({ 
-  onDiaSelecionado, 
-  disponibilidade,
-  diasDisponiveis 
-}) {
+function Calendario({ onDiaSelecionado, disponibilidade }) {
   const dataAtual = new Date();
   const [mesAtual, setMesAtual] = useState(dataAtual.getMonth());
   const [anoAtual, setAnoAtual] = useState(dataAtual.getFullYear());
   const [diaSelecionado, setDiaSelecionado] = useState(null);
   
-  // Verifica se existem dias disponíveis nos próximos meses
-  const existeMesDisponivel = (incremento) => {
-    const proximoMes = new Date(anoAtual, mesAtual + incremento, 1);
-    return diasDisponiveis.some(d => {
-      const dataDisponivel = new Date(d.ano, d.mes - 1, d.dia);
-      return dataDisponivel >= proximoMes;
-    });
-  };
-  
   const mudarMes = (incremento) => {
     const novaData = new Date(anoAtual, mesAtual + incremento, 1);
-    setMesAtual(novaData.getMonth());
-    setAnoAtual(novaData.getFullYear());
-    setDiaSelecionado(null);
+    const dataLimite = new Date(dataAtual.getFullYear() + 1, dataAtual.getMonth(), 1);
+    
+    if (novaData >= new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1) && 
+        novaData <= dataLimite) {
+      setMesAtual(novaData.getMonth());
+      setAnoAtual(novaData.getFullYear());
+      setDiaSelecionado(null);
+    }
   };
   
   const isMesAtual = mesAtual === dataAtual.getMonth() && anoAtual === dataAtual.getFullYear();
-  const temProximoMesDisponivel = existeMesDisponivel(1);
-
+  const atingiuLimiteFuturo = new Date(anoAtual, mesAtual + 1, 1) > 
+                             new Date(dataAtual.getFullYear() + 1, dataAtual.getMonth(), 1);
+  
   return (
     <div className={styles.date_container}>
       <div className={styles.mount_container}>
@@ -143,7 +179,7 @@ function Calendario({
         <button 
           onClick={() => mudarMes(1)} 
           className={styles.btn_mounth_select}
-          disabled={!temProximoMesDisponivel}
+          disabled={atingiuLimiteFuturo}
         >
           <img src="../img/QuadraInfo/seta.png" alt="Próximo" />
         </button>
@@ -155,26 +191,14 @@ function Calendario({
         dataAtual={dataAtual}
         diaSelecionado={diaSelecionado}
         setDiaSelecionado={setDiaSelecionado}
-        diasDisponiveis={diasDisponiveis}
         disponibilidade={disponibilidade}
       />
     </div>
   );
 }
 
-// =============================================
-// Componente Principal ModalSeeHours
-// =============================================
-
-function ModalSeeHours({ 
-  isVisible, 
-  onClose, 
-  disponibilidade = 'todos', 
-  onAgendar,
-  diasDisponiveis = [],  // Nova prop: lista de dias disponíveis
-  horariosReservados = [] 
-}) {
-  // Estados
+// ============= CÓDIGO BASE =============
+function ModalSeeHours({ isVisible, onClose, disponibilidade = 'todos', onAgendar }) {
   const [diaSelecionado, setDiaSelecionado] = useState(null);
   const [mesSelecionado, setMesSelecionado] = useState(null);
   const [anoSelecionado, setAnoSelecionado] = useState(null);
@@ -182,7 +206,6 @@ function ModalSeeHours({
   const [horariosSelecionados, setHorariosSelecionados] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(0);
 
-  // Resetar estados quando o modal abre
   useEffect(() => {
     if (isVisible) {
       const dataAtual = new Date();
@@ -195,7 +218,6 @@ function ModalSeeHours({
     }
   }, [isVisible]);
 
-  // Atualizar horários disponíveis quando seleciona um dia
   useEffect(() => {
     if (diaSelecionado) {
       const hoje = new Date();
@@ -203,8 +225,27 @@ function ModalSeeHours({
       const mesmoDia = dataSelecionada.getDate() === hoje.getDate() && 
                       dataSelecionada.getMonth() === hoje.getMonth() && 
                       dataSelecionada.getFullYear() === hoje.getFullYear();
-  
-      const disponiveis = HORARIOS_PADRAO.filter(horario => {
+
+      // Encontra todos os kits que estão ativos na data selecionada
+      const kitsAtivos = KITS_HORARIOS.filter(kit => 
+        dataSelecionada >= kit.periodo.inicio && 
+        dataSelecionada <= kit.periodo.fim
+      );
+
+      // Gera todos os horários disponíveis com seus preços
+      let todosHorarios = [];
+      kitsAtivos.forEach(kit => {
+        kit.horarios.forEach(horario => {
+          todosHorarios.push({
+            ...horario,
+            preco: kit.preco,
+            kitNome: kit.nome
+          });
+        });
+      });
+
+      // Filtra horários passados se for o dia atual
+      const disponiveis = todosHorarios.filter(horario => {
         if (mesmoDia) {
           const [hora, minuto] = horario.inicio.split(':').map(Number);
           const horarioInicio = new Date();
@@ -214,25 +255,24 @@ function ModalSeeHours({
             return false;
           }
         }
-  
+
         // Verifica se está reservado
-        const estaReservado = horariosReservados.some(reserva => 
+        const estaReservado = HORARIOS_RESERVADOS.some(reserva => 
           reserva.dia === diaSelecionado && 
-          reserva.mes === mesSelecionado + 1 && 
+          reserva.mes === mesSelecionado && 
           reserva.ano === anoSelecionado &&
-          reserva.inicio === horario.inicio
+          reserva.horarioId === horario.id
         );
         
         return !estaReservado;
       });
       
       setHorariosDisponiveis(disponiveis);
-      setPaginaAtual(0); 
-      setHorariosSelecionados([]); 
+      setPaginaAtual(0);
+      setHorariosSelecionados([]);
     }
-  }, [diaSelecionado, mesSelecionado, anoSelecionado, horariosReservados]);
+  }, [diaSelecionado, mesSelecionado, anoSelecionado]);
 
-  // Handlers
   const handleDiaSelecionado = (dia, mes, ano) => {
     setDiaSelecionado(dia);
     setMesSelecionado(mes);
@@ -242,18 +282,22 @@ function ModalSeeHours({
   const handleSelecionarHorario = (horario) => {
     setHorariosSelecionados(prev => {
       const alreadySelected = prev.some(h => h.id === horario.id);
-      return alreadySelected 
-        ? prev.filter(h => h.id !== horario.id) 
-        : [...prev, horario];
+      if (alreadySelected) {
+        return prev.filter(h => h.id !== horario.id);
+      } else {
+        return [...prev, horario];
+      }
     });
   };
 
   const handlePaginarHorarios = (direcao) => {
     const totalPaginas = Math.ceil(horariosDisponiveis.length / HORARIOS_POR_PAGINA);
     setPaginaAtual(prev => {
-      return direcao === 'proximo' 
-        ? Math.min(prev + 1, totalPaginas - 1) 
-        : Math.max(prev - 1, 0);
+      if (direcao === 'proximo') {
+        return prev < totalPaginas - 1 ? prev + 1 : prev;
+      } else {
+        return prev > 0 ? prev - 1 : prev;
+      }
     });
   };
 
@@ -266,7 +310,7 @@ function ModalSeeHours({
     const dadosAgendamento = {
       data: {
         dia: diaSelecionado,
-        mes: mesSelecionado + 1, 
+        mes: mesSelecionado + 1, // +1 porque meses são 0-indexed
         ano: anoSelecionado
       },
       horarios: horariosSelecionados,
@@ -277,7 +321,6 @@ function ModalSeeHours({
     onClose();
   };
 
-  // Calcula horários visíveis na paginação atual
   const horariosVisiveis = horariosDisponiveis.slice(
     paginaAtual * HORARIOS_POR_PAGINA,
     (paginaAtual + 1) * HORARIOS_POR_PAGINA
@@ -298,8 +341,7 @@ function ModalSeeHours({
           <h1>Agende seu Horário</h1>
           <Calendario 
             onDiaSelecionado={handleDiaSelecionado} 
-            disponibilidade={disponibilidade}
-            diasDisponiveis={diasDisponiveis}
+            disponibilidade={disponibilidade} 
           />
         </div>
       </div>
