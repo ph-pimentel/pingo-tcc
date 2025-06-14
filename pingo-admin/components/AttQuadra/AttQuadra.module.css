@@ -1,8 +1,8 @@
 @import url(../../styles/variables.css);
 .add{
     width: 100vw;
-    height:  92.5vh;
-    position: absolute;
+    height: 100vh;
+    position: fixed;
     top:0;
     left: 0;
     background-color: hsla(0, 0%, 0%, 0.87);
@@ -73,11 +73,11 @@
 
 @media screen and (max-width: 1400px){
     .add{
-    height: 92.4vh;
+    height: 95.4vh;
     }
 }
 @media screen and (max-width: 768px){
     .add{
-        height: 92.4vh;
+        height: 95.4vh;
     }
 }

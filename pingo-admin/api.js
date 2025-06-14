@@ -265,13 +265,32 @@ export const atualizarPerfil = async (id, Nome, Email) => {
 
 //Verifica se é Proprietario
 export const checkProprietario = async (id) => {
-    try{
+    try {
         const response = await axios.get(`${API_URL}/login-proprietario/${id}`);
+
+        if (response.data.error) {
+            throw new Error(response.data.error + (response.data.details ? ` (${response.data.details})` : ''));
+        }
+
         return response.data;
     } catch (error) {
-        console.error("Erro ao verificar proprietário:", error);
-    throw error;
-  }
+        console.error("Erro ao verificar proprietário:", error)
+    
+        let errorMessage = 'Erro ao verificar o ID';
+
+        if (error.response) {
+            //Erro por trás do backend
+            errorMessage = error.response.data.error || errorMessage;
+            if (error.response.data.details) {
+                errorMessage += `: ${error.response.data.details}`;
+            }
+        } else if (error.response) {
+            //Não houve resposta do servidor
+            errorMessage = "Sem resposta do servidor. Verifique sua conexão.";
+        }
+
+        throw new Error(errorMessage);
+    }
 };
 
 
@@ -452,3 +471,71 @@ export const atualizarFotoQuadra = async (id, file) => {
       }
     }
   };
+
+
+/// Gráficos
+
+//Gráfico de Pizza com contagem por tipo de usuarios
+export const getUsuariosPorTipo = async () => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${API_URL}/dashboard/users-type`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao obter dados de usuários por tipo:", error);
+        throw error; 
+    }
+}
+
+// Obtém dados para o gráfico de quadras públicas
+export const getQuadrasPublicasData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${API_URL}/dashboard/quadras-publicas`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao obter dados de quadras públicas:", error);
+      throw error;
+    }
+};
+
+// Obtém dados para o gráfico de quadras públicas
+export const getQuadrasPrivData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${API_URL}/dashboard/quadras-privadas`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao obter dados de quadras públicas:", error);
+      throw error;
+    }
+};
+
+
+export const getTotalUsuariosData = async () => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${API_URL}/dashboard/total-usuarios`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    }catch (error) {
+    console.error("Erro ao obter dados de usuários:", error);
+    throw error;
+}
+};
+

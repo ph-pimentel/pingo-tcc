@@ -1,0 +1,203 @@
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .titulo {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tab {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-bottom: 3px solid transparent;
+  }
+  
+  .tab.ativo {
+    border-bottom: 3px solid #3498db;
+    color: #3498db;
+    font-weight: bold;
+  }
+  
+  .tabelaContainer {
+    overflow-x: auto;
+  }
+  
+  .tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .tabela th, .tabela td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tabela th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+  }
+  
+  .tabela tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .botaoEditar, .botaoDeletar {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .botaoEditar {
+    display: flex;
+  }
+  
+  .botaoDeletar {
+    display: flex;
+  }
+  .buttons{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+  }
+  
+  .formGroup {
+    margin-bottom: 15px;
+  }
+  
+  .formGroup label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .formGroup input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .quadrasCheckbox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .quadrasCheckbox label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .modalBotoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .botaoCancelar {
+    padding: 8px 15px;
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .botaoSalvar {
+    padding: 8px 15px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .paginacao {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 5px;
+  }
+  
+  .pagina {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .pagina:hover {
+    background: #f0f0f0;
+  }
+  
+  .paginaAtiva {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+  }
+  
+  .erro {
+    color: #e74c3c;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: block;
+  }
+  
+  .inputMoeda {
+    display: flex;
+    align-items: center;
+  }
+  
+  .inputMoeda span {
+    background: #f0f0f0;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .inputMoeda input {
+    flex: 1;
+    border-radius: 0 4px 4px 0;
+    border-left: none;
+  }

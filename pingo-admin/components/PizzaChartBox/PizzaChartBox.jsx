@@ -1,15 +1,41 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import styles from "./PizzaChartBox.module.css";
-
-const data = [
-    { name: "Usuarios",value: 500, color: "#297EFF"},
-    { name: "Proprietarios",value: 100, color: "green"},
-    { name: "Admins",value: 15, color: "yellow"}
-]
-
-import React from 'react'
+import { useEffect, useState } from "react";
+import { getUsuariosPorTipo } from "../../api";
 
 const PizzaChartBox = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const chartData = await getUsuariosPorTipo();
+        setData(chartData);
+      } catch (err) {
+        console.error("Erro ao carregar dados do gráfico:", err);
+        setError("Erro ao carregar dados");
+        setData([
+          { name: "Usuarios", value: 0, color: "#297EFF" },
+          { name: "Proprietarios", value: 0, color: "green" },
+          { name: "Admins", value: 0, color: "yellow" }
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div className={styles.pizzaChartBox}>Carregando dados...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.pizzaChartBox}>{error}</div>;
+  }
+
   return (
     <div className={styles.pizzaChartBox}>
         <h1>Total Usuários</h1>
@@ -27,7 +53,11 @@ const PizzaChartBox = () => {
           dataKey="value"
         >
           {data.map((item) => (
-            <Cell key={item.name} fill={item.color} stroke="grey" strokeWidth={0.5}/>
+            <Cell 
+            key={item.name} 
+            fill={item.color} 
+            stroke="grey" 
+            strokeWidth={0.5}/>
           ))}
         </Pie>
       </PieChart>

@@ -1,41 +1,100 @@
 .container{
+    height: 500px;
+    width: 500px;
+    display: flex;
+    align-items: center;
+}
+
+
+.formContainer{
+    max-width: auto;
+    
+    background-color: #fff;
+    padding: 3em 2em;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+    border-radius: 0.8em;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.084), 0px 2px 3px rgba(0, 0, 0, 0.168);
+}
+.title{
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+}
+
+.formGrup{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.formGrup label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.formGrup input {
+    width: 100%;
+    padding: 1em;
+    border-radius: 0.6em;
+    border: 1px solid #ccc;
+}
+
+.formGrup input:focus{
+    outline: none;
+    border-color: var(--quintiary-color);
+}
+
+.btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+    width: auto;
+    font-weight: bold;
+    background-color: var(--tertiary-color);
+    color: white;
+    padding: 1em;
+    border: none;
+    border-radius: .6em;
+    cursor: pointer;
+    gap: 8px;
+    margin: 12px 0;
 }
-.loginContainer{
-    background-color: rgb(255, 255, 255);
-    border-radius: 8px;
-    width: 400px;
-    height: 40%;
+.btn:hover{
+    background-color: var(--quintiary-color);
 }
-.loginContainer h1{
-   border-bottom: 1px solid hsla(0, 0%, 0%, 0.37);
-   text-align: center;
-   margin-bottom: 6%;
-   padding: 20px;
+.btn:active{
+    background-color: #3a71c4;
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
-.inputGroup{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.inputGroup input{
-    text-align: left;
-    width: 37%;
-    padding: 2px;
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid black;
-    text-align: center;
-}
-.inputGroup button{
-    width: 15%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid black;
+
+.error{
+    color: red;
     background-color: transparent;
+    padding: 15px;
+    border: 1px solid red;
+    border-radius: 8px;
+    position: absolute;
+    top: 200px;
+    width: 400px;
+}
+
+.validation {
+    color: green;
+    background-color: transparent;
+    padding: 15px;
+    border: 1px solid green;
+    border-radius: 8px;
+    position: absolute;
+    top: 200px;
+    width: 400px;
+    text-align: center;
 }

@@ -155,9 +155,14 @@ const SinglePageQuadraPriv = () => {
       <div className={styles.view}>
         <div className={styles.info}>
           <div className={styles.principalInfo}>
-            <img src={quadra.Foto} alt="" />
+            <img src={quadra.Foto || "../src/assets/icons/menu/quadra-2.png"} alt="" />
             <h1>{quadra.NomeQuadra}</h1>
-            <button onClick={() => setOpen(true)}>Atualizar Quadra</button>
+            <button 
+            onClick={() => 
+              setOpen(true)
+            }
+            className={styles.btn}>Atualizar Quadra</button>
+
             <div className={styles.quadraImage}>
               <input
                 type="file"
@@ -167,6 +172,7 @@ const SinglePageQuadraPriv = () => {
                 style={{ display: "none" }}
               />
               <button
+                className={styles.btn}
                 onClick={triggerFileInput}
                 disabled={mensagemFoto === "Processando imagem..."}
               >

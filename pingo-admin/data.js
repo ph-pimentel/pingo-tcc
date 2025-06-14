@@ -38,18 +38,38 @@ export const topDealUsers = [
   {
     id: 6,
     img: "https://media.istockphoto.com/id/1364917563/pt/foto/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=U8JPP2jR5ibSuE_t0JrWgm0iQEfuMHHGMGTwEIMzNq0=",
-    username: "Steve Mine",
-    email: "steveMine@gmail.com",
-    amount: "500",
-  },
-  {
-    id: 7,
-    img: "https://media.istockphoto.com/id/1364917563/pt/foto/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=U8JPP2jR5ibSuE_t0JrWgm0iQEfuMHHGMGTwEIMzNq0=",
-    username: "Leornado",
-    email: "leornado@gmail.com",
-    amount: "400",
+    username: "Roberto Steve",
+    email: "roberto@gmail.com",
+    amount: "800",
   },
 ];
+
+export const recentReservas = [
+  {
+    id: 1,
+    img: "https://media.istockphoto.com/id/1364917563/pt/foto/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=U8JPP2jR5ibSuE_t0JrWgm0iQEfuMHHGMGTwEIMzNq0=",
+    username: "Stevan Goggins ",
+    email: "Quadra 1",
+    amount: "12:00",
+    days: "17/06/2008",
+  },
+  {
+    id: 2,
+    img: "https://media.istockphoto.com/id/1364917563/pt/foto/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=U8JPP2jR5ibSuE_t0JrWgm0iQEfuMHHGMGTwEIMzNq0=",
+    username: "Goggins Steve",
+    email: "Quadra 1",
+    amount: "14:00",
+    days: "17/06/2008",
+  },
+  {
+    id: 3,
+    img: "https://media.istockphoto.com/id/1364917563/pt/foto/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=U8JPP2jR5ibSuE_t0JrWgm0iQEfuMHHGMGTwEIMzNq0=",
+    username: "Vanessa James",
+    email: "Quadra 1",
+    amount: "15:30",
+    days: "17/06/2008",
+  }
+]
 
 export const chartBoxQuadra = {
   color: "#297EFF",
@@ -106,6 +126,20 @@ export const barChartBoxLucro = {
     { name: "Abr", lucro: 500 },
     { name: "Mai", lucro: 700 },
     { name: "Jun", lucro: 300 },
+  ],
+};
+
+export const barChartBoxHorarios = {
+  icon: "../src/assets/icons/graficos/clock.png",
+  title: "Horários de maior alocação",
+  color: "#297EFF",
+  dataKey: "reservas",
+  chartData: [
+    { name: "15:00", reservas: 300 },
+    { name: "17:00", reservas: 100 },
+    { name: "18:00", reservas: 150 },
+    { name: "19:00", reservas: 500 },
+    { name: "21:00", reservas: 700 },
   ],
 };
 

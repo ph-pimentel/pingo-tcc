@@ -11,14 +11,41 @@
     
 }
 .logo{
-display: flex;
-align-items: center;
-cursor: pointer;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 20px;
 }
+
+.imageMenu{
+   width: 30px;
+   height: 30px;
+   user-select: none;
+   
+}
+.menu{
+    width: auto;
+    height: auto;
+    background-color: hsl(0, 0%, 95%);
+    border: 2px solid hsla(0, 0%, 0%, 0.74);
+    border-radius: 19px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropMenu{
+    position: absolute;
+    left: 0;
+    top: 80px;
+    left: 10px;
+    z-index: 2;
+}
+
 .icons{
- display: flex;
-align-items: center;
-gap: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 .notification{
     position: relative;
@@ -37,10 +64,10 @@ gap: 30px;
     justify-content: center;
 }
 .user {
-display: flex;
-align-items: center;
-gap: 15px;
-font-size: 17px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 17px;
 }
     .user img {
     width: 40px;
@@ -50,7 +77,8 @@ font-size: 17px;
     }
 
 .icon{
-    cursor: pointer ;
+    cursor: pointer;
+    
 }
 
 .dropdown {
@@ -84,3 +112,27 @@ font-size: 17px;
     height: 20px; 
 }
 
+.listItem{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 15px;
+}
+.listItem:hover{
+    background-color: var(--tertiary-color);
+}
+
+@media screen and (max-width: 1024px){
+    .title{
+        display: none;
+    }
+    .listItemTitle{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .user span{
+        display: none;
+    }
+}

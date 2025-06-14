@@ -5,7 +5,7 @@ import styles from './SingleQuadraPub.module.css'
 const SingleQuadraPub = () => {
   return (
     <div>
-      <SinglePageQuadraPub {...singleQuadraPub}/>
+      <SinglePageQuadraPub/>
 
       </div>
   )

@@ -43,15 +43,24 @@
     margin-bottom: 30px;
 }
 
-.buttonImage {
+.btnImage {
     width: 100%;
-    padding: 10px;
-    border: none;
-    background: #007bff;
+    font-weight: bold;
+    background-color: var(--tertiary-color);
     color: white;
-    border-radius: 5px;
+    padding: 1em;
+    border: none;
+    border-radius: .6em;
     cursor: pointer;
     gap: 100px;
+}
+.btnImage:hover{
+    background-color: var(--quintiary-color);
+}
+.btnimage:active{
+    background-color: #3a71c4;
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Inputs de senha */
@@ -79,16 +88,25 @@
     justify-content: end;
     gap: 20px;
 }
-/* Botão de senha */
-.buttonPassword {
+/* Button Right */
+.btn {
     width: auto;
-    padding: 10px;
-    background: #007bff;
+    font-weight: bold;
+    background-color: var(--tertiary-color);
     color: white;
+    padding: 1em;
     border: none;
-    border-radius: 5px;
+    border-radius: .6em;
     cursor: pointer;
     align-items: right;
+}
+.btn:hover{
+    background-color: var(--quintiary-color);
+}
+.btn:active{
+    background-color: #3a71c4;
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Lado direito (detalhes do usuário) */
@@ -153,3 +171,5 @@
         flex-direction: column;
     }
 }
+
+

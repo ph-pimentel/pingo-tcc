@@ -85,9 +85,9 @@ const SinglePageUser = () => {
             <div className={styles.principalInfo}>
               <img src={usuario.FotoUsuario} alt="" />
               <h1>{usuario.NomeUsuario}</h1>
-              <button onClick={handleUpdateProp}>Virar Proprietario</button>
-              <button onClick={handleUpdateAdmin}>Virar Admin</button>
-              <button onClick={handleUpdateComum}>Virar Usuário Comum</button>
+              <button className={styles.btn} onClick={handleUpdateProp}>Virar Proprietario</button>
+              <button className={styles.btn} onClick={handleUpdateAdmin}>Virar Admin</button>
+              <button className={styles.btn} onClick={handleUpdateComum}>Virar Usuário Comum</button>
             </div>
             <hr/>
             <h2>Informações do Usuário</h2>

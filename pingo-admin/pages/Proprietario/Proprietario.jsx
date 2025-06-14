@@ -12,7 +12,7 @@ const columns = [
         headerName: 'Foto', 
         width: 120,
         renderCell: (params) => (
-            <img className={styles.img} src={params.row.Foto || "default-image.png"} alt=""/>
+            <img className={styles.img} src={params.row.Foto || "../src/assets/icons/menu/quadra-2.png"} alt=""/>
         ),
     },
     { field: 'NomeQuadra', headerName: 'Nome da Quadra', width: 150 },
@@ -93,7 +93,7 @@ if (error) return <div className={styles.error}>{error}</div>;
     <div className={styles.quadrasPub}>
         <div className={styles.info}>
           <h1>Quadras do Proprietario</h1>
-          <button className={styles.button} onClick={()=>setOpen(true)}>Adicionar Quadra</button>
+          <button className={styles.btn} onClick={()=>setOpen(true)}>Adicionar Quadra</button>
         </div>
       <DataTable 
       slug="quadraspriv" 

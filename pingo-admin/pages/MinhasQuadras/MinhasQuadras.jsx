@@ -12,7 +12,7 @@ const columns = [
         headerName: 'Foto', 
         width: 120,
         renderCell: (params) => (
-            <img className={styles.img} src={params.row.Foto || "default-image.png"} alt=""/>
+            <img className={styles.img} src={params.row.Foto || "../src/assets/icons/menu/quadra-2.png"} alt=""/>
         ),
     },
     { field: 'NomeQuadra', headerName: 'Nome da Quadra', width: 150 },
@@ -108,7 +108,7 @@ if (error) return <div className={styles.error}>{error}</div>;
       path= "quadraspriv"
       deleteFunction={deleteQuadraPriv} onDeleted={(id) => {
         setQuadras((prev) => prev.filter(q => q.id !== id)); }}
-      showActions = {false}
+      showActions = {true}
       />
     </div>
   )

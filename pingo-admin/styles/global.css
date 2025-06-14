@@ -34,15 +34,12 @@ a {
 .menuContainer {
     padding: 10px;
     border-right: 2px solid var(--tertiary-color);
-   
 }
 
 .contentContainer {
     flex: 1;
     padding: 20px;
     overflow-y: auto; /* Caso o conteúdo ultrapasse a altura da tela */
-    
-    
 }
 
 /* Mui Users Config */

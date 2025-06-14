@@ -13,10 +13,21 @@
     margin-bottom: 20px;
 }
 
-.button{
-    padding: 5px;
-    border-radius: 3px;
-    border: 1px solid black;
-    color: white;
+.btn{
+    font-weight: bold;
     background-color: var(--tertiary-color);
+    color: white;
+    padding: 0.6em;
+    border: none;
+    border-radius: .6em;
+    cursor: pointer;
 }
+.btn:hover{
+    background-color: var(--quintiary-color);
+}
+.btn:active{
+    background-color: #3a71c4;
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+

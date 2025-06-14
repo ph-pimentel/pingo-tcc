@@ -1,0 +1,55 @@
+.topBox h1{
+    margin-bottom: 20px;
+}
+.topBox{
+    width: 500px;
+}
+.table{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.header, .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border-bottom: 1px solid #ccc;
+}
+
+.header{
+    font-weight: bold;
+    background-color: grey;
+    padding: 10px;
+    border-top: 1px solid black;
+}
+
+.row{
+    padding: 10px;
+}
+
+.row span {
+    padding: 5px;
+  }
+
+.moreLink{
+    display: flex;
+    padding-top: 30px;
+}
+.blod{
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1400px){
+    .topBox{
+        width: auto;
+    }
+}
+@media screen and (max-width: 480px){
+    .header {
+        display: none;
+    }
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+}
+

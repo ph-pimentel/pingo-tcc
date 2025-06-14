@@ -15,6 +15,7 @@
     "@mui/material": "^6.4.8",
     "@mui/x-data-grid": "^7.28.1",
     "axios": "^1.8.4",
+    "date-fns": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "lodash.debounce": "^4.0.8",

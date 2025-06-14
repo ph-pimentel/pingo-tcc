@@ -2,7 +2,7 @@
 .add{
     width: 100vw;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     top:0;
     left: 0;
     background-color: hsla(0, 0%, 0%, 0.87);
@@ -71,13 +71,9 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 1400px){
-    .add{
-    height: 98.1vh;
-    }
-}
 @media screen and (max-width: 768px){
-    .add{
-        height: 116.2vh;
+    .modal{
+        top: 200px
     }
 }
+

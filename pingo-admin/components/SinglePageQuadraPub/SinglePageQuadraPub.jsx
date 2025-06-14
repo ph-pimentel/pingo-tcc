@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import {
   getSingleQuadrasPub,
@@ -130,11 +130,12 @@ const SinglePageQuadraPub = ({ activities }) => {
       <div className={styles.view}>
         <div className={styles.info}>
           <div className={styles.principalInfo}>
-            <img src={quadra.Foto} alt="" />
+            <img src={quadra.Foto || "../src/assets/icons/menu/quadra-2.png"} alt="" />
             <h1>{quadra.NomeQuadra}</h1>
-            <button onClick={() => setOpen(true)}>Atualizar Quadra</button>
-          </div>
-          <div className="quadrasImage">
+            <div className={styles.btns}>
+              <button onClick={() => setOpen(true)} className={styles.btn}>Atualizar Quadra</button>
+           </div>
+           <div className={styles.btns}>
             <input
               type="file"
               ref={fileInputRef}
@@ -144,6 +145,7 @@ const SinglePageQuadraPub = ({ activities }) => {
             />
             <button
               onClick={triggerFileInput}
+              className={styles.btn}
               disabled={mensagemFoto === "Processando imagem..."}
             >
               {mensagemFoto === "Processando imagem..."
@@ -153,8 +155,10 @@ const SinglePageQuadraPub = ({ activities }) => {
             {mensagemFoto && (
               <div className={styles.mensagemSucesso}>{mensagemFoto} </div>
             )}
-            {erroFoto && <div className={styles.mensagemErro}>{erroFoto}</div>}
+            {erroFoto && <div className={styles.mensagemErro}>{erroFoto}</div>}            
           </div>
+          </div>
+          
           <hr />
           <h2>Informações da Quadra Pública</h2>
           <div className={styles.details}>

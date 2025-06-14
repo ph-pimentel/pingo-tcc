@@ -2,8 +2,13 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import styles from './DataTable.module.css'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { obterUsuario } from '../../api'
 
-const DataTable = ({columns, rows, slug, path,  onDeleted, deleteFunction, entityNameKey, showActions = true}) => {
+const user = obterUsuario();
+const isProprietario = user && (user.TipoUsuario === 'Proprietario');
+
+
+const DataTable = ({columns, rows, path,  onDeleted, deleteFunction, entityNameKey, showActions = true}) => {
   const handleDelete = async (id, entityNameKey) =>{
     if(confirm(`Tem certeza que deseja deletar ${entityNameKey ? 'o(a) ' + entityNameKey : 'este item'}`)) {
       try {
@@ -19,13 +24,18 @@ const DataTable = ({columns, rows, slug, path,  onDeleted, deleteFunction, entit
   const actionColumn = {
    field: "action",
    headerName: "Ações",
-   width: 100,
+   width: isProprietario ? 150 : 100,
     renderCell:(params)=>{
      return( 
         <div className={styles.action}>
           <Link to={`/${path}/${params.row.id}`}>
             <img src="../src/assets/table/action.svg" alt="" />
           </Link>
+          {isProprietario && (
+            <Link to={'/datas-reservas'}>
+            <img src="../src/assets/table/calendar.svg" alt="" />
+          </Link>
+          )}
           <div className={styles.delete} onClick={() => handleDelete(params.row.id, params.row[entityNameKey])}>
             <img src="../src/assets/table/delete.svg" alt="" />
           </div>
@@ -35,6 +45,7 @@ const DataTable = ({columns, rows, slug, path,  onDeleted, deleteFunction, entit
     };
     //Faz update da lista de columns
     const updatedColumns = showActions ? [...columns, actionColumn] : columns;
+
 
   return (
     <div className={styles.dataTable}>

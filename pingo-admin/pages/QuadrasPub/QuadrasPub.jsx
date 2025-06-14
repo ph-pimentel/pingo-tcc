@@ -13,7 +13,7 @@ const columns = [
     {
     field: 'Foto', headerName: 'Foto', width:120,
         renderCell: (params)=>{
-            return <img className={styles.img}src={params.row.Foto || "../src/assets/icons/menu/perfil.png"} alt=""/>
+            return <img className={styles.img}src={params.row.Foto || "../src/assets/icons/menu/quadra-2.png"} alt=""/>
         },
     },
     {
@@ -99,7 +99,7 @@ const QuadrasPub = () => {
             <div className={styles.quadrasPub}>
                 <div className={styles.info}>
                     <h1>Quadras Publicas</h1>
-                    <button className={styles.button} onClick={()=>setOpen(true)}>Adicionar Quadra</button>
+                    <button className={styles.btn} onClick={()=>setOpen(true)}>Adicionar Quadra</button>
                 </div>
                 <DataTable 
                 slug="quadraspub" 

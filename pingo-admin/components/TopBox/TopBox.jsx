@@ -14,7 +14,11 @@ const TopBox = () => {
                     <span className={styles.email}>{user.email}</span>           
                 </div>
             </div>
-            <span className={styles.amount}>R${user.amount}</span>
+            <div className={styles.userTexts}>
+            <span className={styles.reservas}>Reservas</span>
+            <span className={styles.number}>{user.amount}</span>
+            </div>
+            
            </div>
           ))}
         </div>

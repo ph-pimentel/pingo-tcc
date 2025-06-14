@@ -131,11 +131,11 @@ const Perfil = () => {
           style={{display: 'none'}}
         />
           <button 
-            className={styles.buttonImage} 
+            className={styles.btnImage} 
             onClick={triggerFileInput}
             disabled={mensagem === 'Processando imagem...'}
             >
-            {mensagem === 'Processando imagem...' ? 'Enviando...' : 'Alterar Imagem'}
+            {mensagem === 'Processando imagem...' ? 'Enviando...' : 'Alterar Foto'}
             </button>
         </div>
     </div>
@@ -168,8 +168,8 @@ const Perfil = () => {
           </div>
         </div>
         <div className={styles.divButton}>
-          <button className={styles.buttonPassword} onClick={() => setOpenPerfil(true)}>Mudar Configurações</button>
-          <button className={styles.buttonPassword} onClick={() => setOpenSenha(true)}>Mudar Senha</button>
+          <button className={styles.btn} onClick={() => setOpenPerfil(true)}>Mudar Configurações</button>
+          <button className={styles.btn} onClick={() => setOpenSenha(true)}>Mudar Senha</button>
         </div>
         
     </div>

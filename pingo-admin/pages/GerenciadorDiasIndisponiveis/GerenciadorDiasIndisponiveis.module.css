@@ -1,0 +1,301 @@
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #2c3e50;
+}
+
+.subTitle {
+    font-size: 1.3em;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    padding-bottom: 1px;
+    border-bottom: 2px solid #3498db;
+    
+}
+
+.containerDate,
+.containerTimes,
+.containerPrice {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.containerTimes p{
+    margin-top: 20px;
+}
+
+.activeStep {
+    border-left: 5px solid #3498db;
+    padding-left: 15px;
+}
+
+.dateRange {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.dateRange div {
+    display: flex;
+    flex-direction: column;
+}
+
+.dateRange label {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.dateRange input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.selectedPeriod {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #e8f4fc;
+    border-radius: 4px;
+    border-left: 3px solid #3498db;
+}
+
+.timesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.timeOption {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.timeOption:hover {
+    background-color: #e9ecef;
+}
+
+.timeOption input {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.nextButton,
+.submit {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s;
+}
+
+.nextButton {
+    background-color: #3498db;
+    margin-top: 15px;
+}
+
+.submit {
+    background-color: #2ecc71;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+}
+
+.nextButton:hover {
+    background-color: #2980b9;
+}
+
+.submit:hover {
+    background-color: #27ae60;
+}
+
+.selectedInfo {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.selectedSlotsList {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.selectedSlotsList li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.priceInput {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.priceInput label {
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.priceInput input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    max-width: 200px;
+}
+
+.intervalButtons {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.intervalButton {
+    padding: 8px 15px;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.2s;
+}
+
+.intervalButton:hover {
+    background-color: #d0d0d0;
+}
+
+.activeInterval {
+    background-color: #3498db;
+    color: white;
+}
+
+.activeInterval:hover {
+    background-color: #2980b9;
+}
+
+.modeToggle {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+  
+.modeButton {
+    padding: 10px 20px;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.2s;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+  
+  .modeButton:hover {
+    background-color: #d0d0d0;
+  }
+  
+  .activeMode {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .activeMode:hover {
+    background-color: #2980b9;
+  }
+  
+  .singleDate {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .singleDate input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 200px;
+  }
+
+
+  .containerCourts {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.courtsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.courtOption {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    transition: all 0.2s;
+    border: 1px solid #ddd;
+}
+
+.courtOption:hover {
+    background-color: #e9ecef;
+}
+
+.courtOption input {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .modeToggle {
+        flex-direction: column;
+    }
+    .dateRange {
+        grid-template-columns: 1fr;
+    }
+    
+    .timesGrid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}

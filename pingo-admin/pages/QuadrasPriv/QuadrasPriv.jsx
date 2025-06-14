@@ -13,7 +13,7 @@ const columns = [
     {
     field: 'Foto', headerName: 'Foto', width:120,
         renderCell: (params)=>{
-            return <img className={styles.img}src={params.row.Foto || "../src/assets/icons/menu/perfil.png"} alt=""/>
+            return <img className={styles.img}src={params.row.Foto || "../src/assets/icons/menu/quadra-2.png"} alt=""/>
         },
     },
     {

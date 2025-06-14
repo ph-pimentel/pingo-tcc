@@ -34,16 +34,20 @@
     }
 }
 
-.amount {
-    font-weight: 500;
+.number {
+    font-size: 12px;
 }
 
 @media screen and (max-width: 1400px){
     .topBox{
         font-size: 20px;
     }
-    .amount {
+    .number{
         font-size: 15px;
+    }
+    .reservas{
+        font-size: 14px;
+        font-weight: 500;
     }
 }
 
@@ -52,6 +56,9 @@
         display: none;
     }
     .email {
+        display: none;
+    }
+    .reservas{
         display: none;
     }
 }

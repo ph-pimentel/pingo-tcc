@@ -50,11 +50,23 @@
     margin-right: 10px;
     text-transform: capitalize;
 }
-.principalInfo button{
-    padding: 5px;
-    border-radius: 3px;
+
+.btn{
+    font-weight: bold;
     background-color: var(--tertiary-color);
     color: white;
+    padding: 1em 2em;
+    border: none;
+    border-radius: .6em;
+    cursor: pointer;
+}
+.btn:hover{
+    background-color: var(--quintiary-color);
+}
+.btn:active{
+    background-color: #3a71c4;
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 .info hr {
     border: none;
@@ -66,6 +78,15 @@
 @media screen and (max-width: 768px){
     .details{
         grid-template-columns: repeat(2, 2fr);
+    }
+    .btns{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .principalInfo{
+        flex-direction: column;
+        align-items: center
     }
     
 }
