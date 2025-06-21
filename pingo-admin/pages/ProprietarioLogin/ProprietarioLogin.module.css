@@ -1,14 +1,12 @@
 .container{
     height: 500px;
-    width: 500px;
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
-
-
 .formContainer{
     max-width: auto;
-    
     background-color: #fff;
     padding: 3em 2em;
     font-size: 14px;
@@ -82,9 +80,7 @@
     padding: 15px;
     border: 1px solid red;
     border-radius: 8px;
-    position: absolute;
-    top: 200px;
-    width: 400px;
+
 }
 
 .validation {
@@ -93,8 +89,9 @@
     padding: 15px;
     border: 1px solid green;
     border-radius: 8px;
-    position: absolute;
-    top: 200px;
-    width: 400px;
     text-align: center;
+}
+
+@media screen and (max-width: 360){
+    
 }

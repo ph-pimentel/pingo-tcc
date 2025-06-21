@@ -10,7 +10,8 @@ import ChartBoxTotalUsuarios from '../../graficos/ChartBoxUsuarios/ChartBoxTotal
 import ChartBoxQuadrasPrivadas from '../../graficos/ChartBoxQuadrasPrivadas/ChartBoxQuadrasPrivadas'
 import TopBoxReservas from '../../graficos/TopBoxReservas/TopBoxReservas'
 import BarChartBoxHorarios from '../../graficos/BarChartBoxHorarios/BarChartBoxHorarios'
-
+import ChartBoxBestQuadra from '../../graficos/ChartBoxBestQuadra/ChartBoxBestQuadra'
+import PizzaChartBoxVisitantes from '../../graficos/PizzaChartBoxVisitantes/PizzaChartBoxVisitantes'
 
 const Home = () => {
     const user = obterUsuario()
@@ -58,15 +59,15 @@ const Home = () => {
             url="/reserva"
             />, className: styles.box7},
             { id: 9, component: <BarChartBoxHorarios {...barChartBoxHorarios} />, className: styles.box8},
-            { id: 8, component: <PizzaChartBox />, className: styles.box9 },
+            { id: 8, component: <PizzaChartBoxVisitantes />, className: styles.box9 },
             { id: 10, component: <BarChartBox {...barChartBoxLucro} />, className: styles.box10 },
             { id: 11, component: 
-                <ChartBoxQuadrasPrivadas
+                <ChartBoxBestQuadra
                 color="#297EFF"
                 icon="../src/assets/icons/menu/quadras.png"
-                title="Total Quadras Privadas"
-                dataKey="quadras"
-                url="/quadraspriv"
+                title="Melhor Quadra"
+                dataKey="reservas"
+                url="/minhas-quadras"
                 />, className: styles.box11 },
             
     ]

@@ -5,43 +5,32 @@ import { useEffect, useState } from 'react';
 
 
 const columns = [
-    { 
-    field: 'id',
-    headerName: 'ID', 
-    width: 90 
-    },
-    {
-    field: 'Foto', headerName: 'Foto', width:120,
-        renderCell: (params)=>{
-            return <img className={styles.img}src={params.row.Foto || "../src/assets/icons/menu/quadra-2.png"} alt=""/>
-        },
-    },
-    {
-      field: 'NomeQuadra',
-      headerName: 'Nome',
-      width: 150,
-    }, 
-    {
-        field: 'Cidade',
-        headerName: 'Cidade',
-        width: 150,
-    },
-    {
-        field: 'Bairro',
-        headerName: 'Bairro',
-        width: 150,
-    },
-    {
-        field: "EnderecoQuadra",
-        headerName: 'Endereço',
-        width: 200,
-    },
-    {
-      field: "DataCriacao",
-      headerName: 'Criado Em',
-      width: 200,
+  { field: 'id', headerName: 'ID', width: 90 },
+  {
+    field: 'Foto', 
+    headerName: 'Foto', 
+    width: 120,
+    renderCell: (params) => (
+      <img className={styles.img} src={params.row.Foto || "../src/assets/icons/menu/quadra-2.png"} alt=""/>
+    ),
   },
-  ];
+  { field: 'NomeQuadra', headerName: 'Nome da Quadra', width: 150 },
+  { field: 'Cidade', headerName: 'Cidade', width: 150 },
+  { field: 'Bairro', headerName: 'Bairro', width: 150 },
+  { field: 'Regiao', headerName: 'Região', width: 150 },
+  { field: 'TipoQuadraFisica', headerName: 'Tipo de Quadra', width: 150 },
+  {
+    field: 'Esporte',
+    headerName: 'Esporte',
+    width: 120,
+    renderCell: (params) => {
+      return params.row.Esporte || 'Não especificado';
+    },
+  },
+  { field: 'EnderecoQuadra', headerName: 'Endereço', width: 200 },
+  { field: 'NomeProprietario', headerName: 'Proprietário', width: 200 },
+  { field: 'DataCriacao', headerName: 'Data de Criação', width: 150 }
+];
   
 
 const QuadrasPriv = () => {
@@ -80,7 +69,11 @@ const QuadrasPriv = () => {
             EnderecoQuadra: quadra.EnderecoQuadra,
             Cidade: quadra.Cidade,
             Bairro: quadra.Bairro,
+            Regiao: quadra.Regiao,
+            TipoQuadraFisica: quadra.TipoQuadraFisica,
             Foto: quadra.Foto,
+            NomeProprietario: quadra.NomeProprietario,
+            Esporte: quadra.Esporte,
             DataCriacao: new Date(quadra.DataCriacao).toLocaleDateString('pt-BR'), // Formato BR
           }));
 

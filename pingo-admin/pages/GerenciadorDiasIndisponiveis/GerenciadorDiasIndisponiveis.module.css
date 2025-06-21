@@ -62,6 +62,12 @@
     font-weight: 500;
 }
 
+.singleDate label {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
 .dateRange input {
     padding: 10px;
     border: 1px solid #ddd;
@@ -104,37 +110,25 @@
     cursor: pointer;
 }
 
-.nextButton,
-.submit {
-    padding: 10px 20px;
-    background-color: #3498db;
+.nextButton, .submit {
+    background: #4e94ff;
     color: white;
     border: none;
+    padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.2s;
-}
+  }
+  
+  .nextButton:hover, .submit:hover {
+    background: #3a7bd5;
+  }
+  
+  .nextButton:disabled, .submit:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+  }
+  
 
-.nextButton {
-    background-color: #3498db;
-    margin-top: 15px;
-}
-
-.submit {
-    background-color: #2ecc71;
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px;
-}
-
-.nextButton:hover {
-    background-color: #2980b9;
-}
-
-.submit:hover {
-    background-color: #27ae60;
-}
 
 .selectedInfo {
     margin-bottom: 20px;
@@ -227,7 +221,7 @@
   }
   
   .activeMode {
-    background-color: #3498db;
+    background-color: #4e94ff;
     color: white;
   }
   
@@ -285,6 +279,43 @@
     width: 18px;
     height: 18px;
     cursor: pointer;
+}
+
+.backButton {
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .backButton:hover {
+    background: #e0e0e0;
+  }
+
+  .quadraSelect select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  .buttonGroup {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .error {
+    color: #d32f2f;
+    background-color: #fde8e8;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
 }
 
 @media (max-width: 768px) {

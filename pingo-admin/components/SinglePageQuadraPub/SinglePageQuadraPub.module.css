@@ -1,6 +1,6 @@
 .single {
     display: flex; 
-    height: 80vh;
+    height: 90vh;
 }
 
 .view {
@@ -33,10 +33,12 @@
 .details{
     font-size: 18px;
     display: grid;
-    grid-template-columns: repeat(2, 3fr);
+    grid-template-columns: repeat(auto-fill, minmax(270px, 3fr));
     background-color: rgb(212, 212, 212);
     border-radius: 10px;
     padding: 2%;
+    gap: 20px;
+    height: 450px;
 }
 .info h2{
     margin-top: 3%;
@@ -75,9 +77,53 @@
     background-color: black;
 }
 
+.descriptionItem {
+    grid-column: 1 / -1; /* Faz ocupar toda a largura */
+  }
+/* Container principal da descrição */
+.descriptionContainer {
+    grid-column: 1 / -1; /* Ocupa toda a largura */
+    margin: 15px 0;
+  }
+  
+  /* Título da descrição */
+  .descriptionTitle {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  /* Caixa de conteúdo da descrição */
+  .descriptionContent {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    max-height: 200px; /* Altura máxima */
+    overflow-y: auto; /* Scroll vertical se necessário */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Texto da descrição */
+  .descriptionText {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.6;
+    margin: 0;
+    color: #495057;
+    font-size: 16px;
+  }
+  
+  /* Mensagem quando não há descrição */
+  .noDescription {
+    color: #6c757d;
+    font-style: italic;
+    font-size: 16px;
+  }
+
 @media screen and (max-width: 768px){
     .details{
-        grid-template-columns: repeat(2, 2fr);
+        grid-template-columns: repeat(1fr);
     }
     .btns{
         display: flex;

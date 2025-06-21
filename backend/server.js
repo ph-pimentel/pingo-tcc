@@ -43,7 +43,13 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //Rota que vai conter os dados das quadras
 app.get("/quadraspub", (req, res) => {
-  db.query("SELECT * FROM Quadra WHERE TipoQuadra = ?", [0], (err, results) => {
+  db.query(`
+    SELECT q.*, e.Nome as Esporte 
+    FROM Quadra q
+    LEFT JOIN QuadraEsportes qe ON q.ID_Quadra = qe.ID_Quadra
+    LEFT JOIN Esportes e ON qe.ID_Esporte = e.ID_Esporte
+    WHERE q.TipoQuadra = 0
+  `, (err, results) => {
     if (err) {
       console.error("Erro ao obter quadras:", err);
       return res.status(500).send("Erro ao obter quadras");
@@ -54,18 +60,22 @@ app.get("/quadraspub", (req, res) => {
 
 // Rota para criar uma nova quadra publica
 app.post("/quadraspub", (req, res) => {
-  const { NomeQuadra, EnderecoQuadra, Bairro, Cidade } = req.body;
+  const { NomeQuadra, EnderecoQuadra, Regiao, TipoQuadraFisica, Descricao, Cidade, Bairro } = req.body;
   db.query(
-    "INSERT INTO Quadra (NomeQuadra, EnderecoQuadra, Bairro, Cidade) VALUES (?,?,?,?)",
-    [NomeQuadra, EnderecoQuadra, Bairro, Cidade],
+    "INSERT INTO Quadra (NomeQuadra, EnderecoQuadra, Regiao, TipoQuadraFisica, Descricao, Cidade, Bairro, TipoQuadra) VALUES (?,?,?,?,?,?,?,?)",
+    [NomeQuadra, EnderecoQuadra, Regiao, TipoQuadraFisica, Descricao, Cidade, Bairro, 0],
     (err, result) => {
       if (err) throw err;
       res.json({
         ID_Quadra: result.insertId,
         NomeQuadra,
         EnderecoQuadra,
-        Bairro,
+        Regiao,
+        TipoQuadraFisica,
+        Descricao,
         Cidade,
+        Bairro,
+        TipoQuadra: 0
       });
     }
   );
@@ -74,11 +84,11 @@ app.post("/quadraspub", (req, res) => {
 //Rota para atualizar uma quadra pública existente
 app.put("/quadraspub/att/:id", (req, res) => {
   const { id } = req.params;
-  const { NomeQuadra, EnderecoQuadra, Bairro, Cidade } = req.body;
+  const { NomeQuadra, EnderecoQuadra, Regiao, TipoQuadraFisica, Descricao, Cidade, Bairro } = req.body;
 
   db.query(
-    "UPDATE Quadra SET NomeQuadra = ?, EnderecoQuadra = ?, Bairro = ?, Cidade = ? WHERE ID_Quadra = ?",
-    [NomeQuadra, EnderecoQuadra, Bairro, Cidade, id],
+    "UPDATE Quadra SET NomeQuadra = ?, EnderecoQuadra = ?, Regiao = ?, TipoQuadraFisica = ?, Descricao = ?, Cidade = ?, Bairro = ? WHERE ID_Quadra = ?",
+    [NomeQuadra, EnderecoQuadra, Regiao, TipoQuadraFisica, Descricao, Cidade, Bairro, id],
     (err, result) => {
       if (err) {
         console.error("Erro ao atualizar quadra:", err);
@@ -92,8 +102,11 @@ app.put("/quadraspub/att/:id", (req, res) => {
         ID_Quadra: id,
         NomeQuadra,
         EnderecoQuadra,
-        Bairro,
+        Regiao,
+        TipoQuadraFisica,
+        Descricao,
         Cidade,
+        Bairro,
         message: "Quadra atualizada com sucesso",
       });
     }
@@ -128,7 +141,18 @@ app.get("/quadraspub/:id", (req, res) => {
 
 //Rota que vai conter os dados das quadras privadas
 app.get("/quadraspriv", (req, res) => {
-  db.query("SELECT * FROM Quadra WHERE TipoQuadra = ?", [1], (err, results) => {
+  db.query(`
+    SELECT 
+      q.*,
+      u.NomeUsuario as NomeProprietario,
+      e.Nome as Esporte
+    FROM Quadra q
+    JOIN QuadraPrivada qp ON q.ID_Quadra = qp.ID_Quadra
+    JOIN Usuario u ON qp.ID_Proprietario = u.ID_Usuario
+    LEFT JOIN QuadraEsportes qe ON q.ID_Quadra = qe.ID_Quadra
+    LEFT JOIN Esportes e ON qe.ID_Esporte = e.ID_Esporte
+    WHERE q.TipoQuadra = 1
+  `, (err, results) => {
     if (err) {
       console.error("Erro ao obter quadras:", err);
       return res.status(500).send("Erro ao obter quadras");
@@ -136,6 +160,7 @@ app.get("/quadraspriv", (req, res) => {
     res.json(results);
   });
 });
+2
 
 //Rota para deletar uma quadra de acordo com o ID
 app.delete("/quadraspriv/delete/:id", (req, res) => {
@@ -149,50 +174,31 @@ app.delete("/quadraspriv/delete/:id", (req, res) => {
   });
 });
 
-// Single Page Quadra Privada
 app.get("/quadraspriv/:id", (req, res) => {
   const { id } = req.params;
-  console.log(`Recebida requisição para quadra privada ID: ${id}`);
-
   db.query(
     `
     SELECT 
-      q.ID_Quadra,
-      q.NomeQuadra,
-      q.EnderecoQuadra,
-      q.Bairro,
-      q.Cidade,
-      q.Foto,
-      q.TipoQuadra,
-      q.DataCriacao,
-      qp.ValorHora,
+      q.*,
+      qp.ContatoTelefone,
+      qp.ContatoEmail,
       qp.HorarioDisponiveis,
-      qp.Contato,
-      qp.ID_Proprietario,
       u.NomeUsuario as NomeProprietario
     FROM Quadra q
     JOIN QuadraPrivada qp ON q.ID_Quadra = qp.ID_Quadra
     JOIN Usuario u ON qp.ID_Proprietario = u.ID_Usuario
     WHERE q.ID_Quadra = ?
-  `,
+    `,
     [id],
     (err, results) => {
       if (err) {
         console.error("Erro ao obter quadra privada:", err);
-        return res.status(500).json({
-          error: "Erro ao obter quadra privada",
-          details: err.message,
-        });
+        return res.status(500).json({ error: "Erro ao obter quadra privada" });
       }
-
       if (results.length === 0) {
-        return res.status(404).json({
-          error: "Quadra não encontrada",
-          requestedId: id,
-        });
+        return res.status(404).json({ error: "Quadra não encontrada" });
       }
-
-      res.json({ results });
+      res.json(results[0]);
     }
   );
 });
@@ -205,46 +211,44 @@ app.put("/quadraspriv/att/:id", (req, res) => {
     EnderecoQuadra,
     Bairro,
     Cidade,
-    ValorHora,
+    Regiao,
+    TipoQuadraFisica,
+    Descricao,
     HorarioDisponiveis,
-    Contato,
+    ContatoTelefone,
+    ContatoEmail
   } = req.body;
-  //First Table Quadra
+
   db.query(
-    "UPDATE Quadra SET NomeQuadra = ?, EnderecoQuadra = ?, Bairro = ?, Cidade = ? WHERE ID_Quadra = ?",
-    [NomeQuadra, EnderecoQuadra, Bairro, Cidade, id],
+    `UPDATE Quadra SET 
+      NomeQuadra = ?, 
+      EnderecoQuadra = ?, 
+      Bairro = ?, 
+      Cidade = ?,
+      Regiao = ?,
+      TipoQuadraFisica = ?,
+      Descricao = ?
+    WHERE ID_Quadra = ?`,
+    [NomeQuadra, EnderecoQuadra, Bairro, Cidade, Regiao, TipoQuadraFisica, Descricao, id],
     (err, result) => {
       if (err) {
         console.error("Erro ao atualizar quadra:", err);
         return res.status(500).json({ error: "Erro ao atualizar quadra" });
       }
-      if (result.affectedRows === 0) {
-        return res.status(404).json({ error: "Quadra não encontrada" });
-      }
 
-      //Second Table QuadraPrivada
       db.query(
-        "UPDATE QuadraPrivada SET ValorHora = ?, HorarioDisponiveis = ?, Contato = ? WHERE ID_Quadra = ?",
-        [ValorHora, HorarioDisponiveis, Contato, id],
+        `UPDATE QuadraPrivada SET 
+          HorarioDisponiveis = ?, 
+          ContatoTelefone = ?, 
+          ContatoEmail = ?
+        WHERE ID_Quadra = ?`,
+        [HorarioDisponiveis, ContatoTelefone, ContatoEmail, id],
         (err, result) => {
           if (err) {
             console.error("Erro ao atualizar quadra privada:", err);
-            return res
-              .status(500)
-              .json({ error: "Erro ao atualizar quadra privada" });
+            return res.status(500).json({ error: "Erro ao atualizar quadra privada" });
           }
-
-          res.json({
-            ID_Quadra: id,
-            NomeQuadra,
-            EnderecoQuadra,
-            Bairro,
-            Cidade,
-            ValorHora,
-            HorarioDisponiveis,
-            Contato,
-            message: "Quadra atualizada com sucesso",
-          });
+          res.json({ message: "Quadra atualizada com sucesso" });
         }
       );
     }
@@ -257,16 +261,27 @@ app.post("/quadrapriv/registre", (req, res) => {
     EnderecoQuadra,
     Bairro,
     Cidade,
-    ValorHora,
+    Regiao,
+    TipoQuadraFisica,
+    Descricao,
     HorarioDisponiveis,
-    Contato,
-    ID_Proprietario,
+    ContatoTelefone,
+    ContatoEmail,
+    ID_Proprietario
   } = req.body;
 
-  //First create quadra in table Quadra
   db.query(
-    "INSERT INTO Quadra (NomeQuadra, EnderecoQuadra, Bairro, Cidade, TipoQuadra) VALUES (?,?,?,?,1)",
-    [NomeQuadra, EnderecoQuadra, Bairro, Cidade],
+    `INSERT INTO Quadra (
+      NomeQuadra, 
+      EnderecoQuadra, 
+      Bairro, 
+      Cidade,
+      Regiao,
+      TipoQuadraFisica,
+      Descricao,
+      TipoQuadra
+    ) VALUES (?,?,?,?,?,?,?,1)`,
+    [NomeQuadra, EnderecoQuadra, Bairro, Cidade, Regiao, TipoQuadraFisica, Descricao],
     (err, result) => {
       if (err) {
         console.error("Erro ao criar quadra:", err);
@@ -274,28 +289,21 @@ app.post("/quadrapriv/registre", (req, res) => {
       }
 
       const quadraId = result.insertId;
-
-      //Second create QuadraPrivada
       db.query(
-        "INSERT INTO QuadraPrivada (ID_Quadra, HorarioDisponiveis, ValorHora, Contato, ID_Proprietario ) VALUES (?,?,?,?,?)",
-        [quadraId, HorarioDisponiveis, ValorHora, Contato, ID_Proprietario],
+        `INSERT INTO QuadraPrivada (
+          ID_Quadra, 
+          HorarioDisponiveis, 
+          ContatoTelefone, 
+          ContatoEmail, 
+          ID_Proprietario
+        ) VALUES (?,?,?,?,?)`,
+        [quadraId, HorarioDisponiveis, ContatoTelefone, ContatoEmail, ID_Proprietario],
         (err, result) => {
           if (err) {
             console.error("Erro ao criar quadra privada:", err);
             return res.status(500).send("Erro ao criar quadra privada");
           }
-
-          res.json({
-            ID_Quadra: quadraId,
-            NomeQuadra,
-            EnderecoQuadra,
-            Bairro,
-            Cidade,
-            ValorHora,
-            HorarioDisponiveis,
-            Contato,
-            ID_Proprietario,
-          });
+          res.json({ message: "Quadra privada criada com sucesso", ID_Quadra: quadraId });
         }
       );
     }
@@ -589,10 +597,18 @@ app.get("/login-proprietario/:id", async (req, res) => {
 app.get("/quadras-proprietario/:proprietarioId", (req, res) => {
   const { proprietarioId } = req.params;
   db.query(
-    `SELECT q.*, qp.ValorHora, qp.HorarioDisponiveis, qp.Contato, u.NomeUsuario as NomeProprietario 
+    `SELECT 
+      q.*,
+      qp.ContatoTelefone,
+      qp.ContatoEmail,
+      qp.HorarioDisponiveis,
+      u.NomeUsuario as NomeProprietario,
+      e.Nome as Esporte 
     FROM Quadra q
     JOIN QuadraPrivada qp ON q.ID_Quadra = qp.ID_Quadra
     JOIN Usuario u ON qp.ID_Proprietario = u.ID_Usuario
+    LEFT JOIN QuadraEsportes qe ON q.ID_Quadra = qe.ID_Quadra
+    LEFT JOIN Esportes e ON qe.ID_Esporte = e.ID_Esporte
     WHERE qp.ID_Proprietario = ?`,
     [proprietarioId],
     (err, results) => {
@@ -1322,13 +1338,40 @@ app.get("/dashboard/total-usuarios", (req, res) => {
   );
 });
 
-
-// Horários Quadras
+/// -> Horários Quadras
 
 // Rota para salvar configurações de horários
-app.post('/quadra/horarios', (req, res) => {
-  const { quadraId, startDate, endDate, timeSlots, price, timeInterval, proprietarioId} =
-  req.body;
+app.post("/quadra/horarios", (req, res) => {
+  const {
+    quadraId,
+    startDate,
+    endDate,
+    timeSlots,
+    price,
+    timeInterval,
+    proprietarioId,
+  } = req.body;
+
+  db.query(
+    `SELECT 1 FROM DiasIndisponiveis 
+     WHERE ID_Quadra = ? 
+     AND (
+         (DataInicio BETWEEN ? AND ?) 
+         OR (DataFim BETWEEN ? AND ?) 
+         OR (? BETWEEN DataInicio AND DataFim) 
+         OR (? BETWEEN DataInicio AND DataFim)
+     )`,
+    [quadraId, startDate, endDate, startDate, endDate, startDate, endDate],
+    (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: "Erro ao verificar dias indisponíveis" });
+        }
+        
+        if (results.length > 0) {
+            return res.status(400).json({ 
+                error: "Existem dias indisponíveis no período selecionado. Remova-os primeiro." 
+            });
+        }
 
   // Verifica se o usário é o proprietário da quadra
   db.query(
@@ -1337,23 +1380,25 @@ app.post('/quadra/horarios', (req, res) => {
     [quadraId, proprietarioId],
     (err, results) => {
       if (err) {
-        console.error('Erro ao verificar proprietário:', err);
-        return res.status(500).json({ error: 'Erro ao verificar proprietário' });
+        console.error("Erro ao verificar proprietário:", err);
+        return res
+          .status(500)
+          .json({ error: "Erro ao verificar proprietário" });
       }
 
       if (results.length === 0) {
-        return res.status(403).json({ error: 'Acesso não autorizado' });
+        return res.status(403).json({ error: "Acesso não autorizado" });
       }
 
       // Validação do preço
       if (price === undefined || price === null) {
-        return res.status(400).json({ error: 'O preço é obrigatório' });
+        return res.status(400).json({ error: "O preço é obrigatório" });
       }
 
       // Converter para número
       const precoNumerico = Number(price);
       if (isNaN(precoNumerico)) {
-        return res.status(400).json({ error: 'Preço inválido' });
+        return res.status(400).json({ error: "Preço inválido" });
       }
 
       // Insere a configuração no BD
@@ -1361,11 +1406,18 @@ app.post('/quadra/horarios', (req, res) => {
         `INSERT INTO HorariosQuadra
         (ID_Quadra, DataInicio, DataFim, Horarios, Preco, Intervalo)
         VALUES (?, ?, ?, ?, ?, ?)`,
-        [quadraId, startDate, endDate, JSON.stringify(timeSlots), precoNumerico, timeInterval],
+        [
+          quadraId,
+          startDate,
+          endDate,
+          JSON.stringify(timeSlots),
+          precoNumerico,
+          timeInterval,
+        ],
         (err, result) => {
           if (err) {
-            console.error('Erro ao salvar horários:', err);
-            return res.status(500).json({ error: 'Erro ao salvar horários' });
+            console.error("Erro ao salvar horários:", err);
+            return res.status(500).json({ error: "Erro ao salvar horários" });
           }
 
           // Atualiza os horários disponíveis na tabela QuadraPrivada
@@ -1376,13 +1428,275 @@ app.post('/quadra/horarios', (req, res) => {
             [JSON.stringify(timeSlots), quadraId],
             (updateErr) => {
               if (updateErr) {
-                console.error('Erro ao atualizar horários:', updateErr);
+                console.error("Erro ao atualizar horários:", updateErr);
                 // Não falha, apenas registra o erro pois a configuração principal foi salva
               }
 
               res.json({
-                message: 'Horários configurados com sucesso',
-                configId: result.insertId
+                message: "Horários configurados com sucesso",
+                configId: result.insertId,
+              });
+            }
+          );
+        }
+      );
+    }
+  );
+});
+
+// Rota para obter as configurações de horários de uma quadra
+app.get("/quadra/horarios/:quadraId", (req, res) => {
+  const { quadraId } = req.params;
+
+  db.query(
+    "SELECT * FROM HorariosQuadra WHERE ID_Quadra = ? ORDER BY DataInicio DESC",
+    [quadraId],
+    (err, results) => {
+      if (err) {
+        console.error("Erro ao obter horários:", err);
+        return res.status(500).json({ error: "Erro ao obter horários" });
+      }
+
+      // Formata os resultados
+      const parsedResults = results.map((config) => {
+        // Converte as datas para objetos Date
+        const dataInicio = new Date(config.DataInicio);
+        const dataFim = new Date(config.DataFim);
+
+        // Formata as datas para 'dd/MM/yyyy'
+        const formatarData = (date) => {
+          const dia = date.getDate().toString().padStart(2, "0");
+          const mes = (date.getMonth() + 1).toString().padStart(2, "0");
+          const ano = date.getFullYear();
+          return `${dia}/${mes}/${ano}`;
+        };
+
+        // Formata o intervalo para texto amigável
+        const formatarIntervalo = (intervalo) => {
+          switch (intervalo) {
+            case "30min":
+              return "30 minutos";
+            case "1h":
+              return "1 hora";
+            case "2h":
+              return "2 horas";
+            default:
+              return intervalo;
+          }
+        };
+
+        return {
+          ...config,
+          DataInicioFormatada: formatarData(dataInicio),
+          DataFimFormatada: formatarData(dataFim),
+          Horarios: JSON.parse(config.Horarios),
+          IntervaloFormatado: formatarIntervalo(config.Intervalo),
+        };
+      });
+
+      res.json(parsedResults);
+    }
+  );
+}
+)
+});
+
+// Nova rota para verificar horários ocupados
+app.get("/quadra/horarios/ocupados/:quadraId", (req, res) => {
+  const { quadraId } = req.params;
+  const { startDate, endDate } = req.query;
+
+  if (!startDate || !endDate) {
+    return res
+      .status(400)
+      .json({ error: "Datas de início e fim são obrigatórias" });
+  }
+
+  db.query(
+    `SELECT Horarios FROM HorariosQuadra 
+     WHERE ID_Quadra = ? 
+     AND (
+       (DataInicio BETWEEN ? AND ?) 
+       OR (DataFim BETWEEN ? AND ?) 
+       OR (? BETWEEN DataInicio AND DataFim) 
+       OR (? BETWEEN DataInicio AND DataFim)
+     )`,
+    [quadraId, startDate, endDate, startDate, endDate, startDate, endDate],
+    (err, results) => {
+      if (err) {
+        console.error("Erro ao buscar horários ocupados:", err);
+        return res
+          .status(500)
+          .json({ error: "Erro ao buscar horários ocupados" });
+      }
+
+      // Extrai todos os horários ocupados
+      const occupiedSlots = results.flatMap((config) =>
+        JSON.parse(config.Horarios)
+      );
+
+      res.json({ occupiedSlots });
+    }
+  );
+});
+
+
+//// -> Sessão de esportes
+
+// Obter todos os esportes disponíveis
+app.get("/esportes", (req, res) => {
+  db.query("SELECT * FROM Esportes", (err, results) => {
+    if (err) {
+      console.error("Erro ao obter esportes:", err);
+      return res.status(500).send("Erro ao obter esportes");
+    }
+    res.json(results);
+  });
+});
+
+// Obter esporte de uma quadra específica
+app.get("/quadraspub/:id/esporte", (req, res) => {
+  const { id } = req.params;
+  db.query(`
+    SELECT e.Nome 
+    FROM QuadraEsportes qe
+    JOIN Esportes e ON qe.ID_Esporte = e.ID_Esporte
+    WHERE qe.ID_Quadra = ?
+  `, [id], (err, results) => {
+    if (err) {
+      console.error("Erro ao obter esporte da quadra:", err);
+      return res.status(500).send("Erro ao obter esporte da quadra");
+    }
+    res.json(results[0] || null);
+  });
+});
+
+// Atualizar esporte de uma quadra
+app.put("/quadraspub/:id/esporte", (req, res) => {
+  const { id } = req.params;
+  const { ID_Esporte } = req.body;
+
+  // Primeiro remove qualquer associação existente
+  db.query("DELETE FROM QuadraEsportes WHERE ID_Quadra = ?", [id], (err) => {
+    if (err) {
+      console.error("Erro ao remover esportes da quadra:", err);
+      return res.status(500).json({ error: "Erro ao atualizar esporte" });
+    }
+
+    // Se foi fornecido um novo esporte, adiciona a associação
+    if (ID_Esporte) {
+      db.query(
+        "INSERT INTO QuadraEsportes (ID_Quadra, ID_Esporte) VALUES (?, ?)",
+        [id, ID_Esporte],
+        (err) => {
+          if (err) {
+            console.error("Erro ao adicionar esporte à quadra:", err);
+            return res.status(500).json({ error: "Erro ao atualizar esporte" });
+          }
+          res.json({ message: "Esporte atualizado com sucesso" });
+        }
+      );
+    } else {
+      res.json({ message: "Esporte removido com sucesso" });
+    }
+  });
+});
+
+
+/// -> Sessão Dias Indisponíveis
+
+// Rota para adicionar dias indisponíveis
+app.post('/quadra/dias-indisponiveis', (req, res) => {
+  const { quadraId, startDate, endDate, motivo, proprietarioId } = req.body;
+
+  // Validações básicas melhoradas
+  if (!quadraId || !startDate || !endDate || !proprietarioId) {
+    return res.status(400).json({ 
+      error: "Dados incompletos",
+      requiredFields: ["quadraId", "startDate", "endDate", "proprietarioId"]
+    });
+  }
+
+  // Verifica formato das datas
+  if (isNaN(new Date(startDate)) || isNaN(new Date(endDate))) {
+    return res.status(400).json({ error: "Formato de data inválido" });
+  }
+
+  // Verifica se a data de início é anterior à data de término
+  if (new Date(startDate) > new Date(endDate)) {
+    return res.status(400).json({ 
+      error: "Data de início não pode ser posterior à data de término",
+      startDate,
+      endDate
+    });
+  }
+
+  // Verifica se o usuário é o proprietário da quadra
+  db.query(
+    `SELECT 1 FROM QuadraPrivada 
+     WHERE ID_Quadra = ? AND ID_Proprietario = ?`,
+    [quadraId, proprietarioId],
+    (err, results) => {
+      if (err) {
+        console.error("Erro ao verificar proprietário:", err);
+        return res.status(500).json({ 
+          error: "Erro ao verificar permissões",
+          details: process.env.NODE_ENV === 'development' ? err.message : undefined
+        });
+      }
+
+      if (results.length === 0) {
+        return res.status(403).json({ 
+          error: "Acesso não autorizado",
+          message: "Você não tem permissão para configurar esta quadra"
+        });
+      }
+
+      // Verifica conflitos com agendamentos existentes
+      db.query(
+        `SELECT 1 FROM Agendamento 
+         WHERE ID_Quadra = ? 
+         AND DataAgendamento BETWEEN ? AND ?`,
+        [quadraId, startDate, endDate],
+        (err, agendamentos) => {
+          if (err) {
+            console.error("Erro ao verificar agendamentos:", err);
+            return res.status(500).json({ 
+              error: "Erro ao verificar agendamentos existentes",
+              details: process.env.NODE_ENV === 'development' ? err.message : undefined
+            });
+          }
+
+          if (agendamentos.length > 0) {
+            return res.status(409).json({ 
+              error: "Conflito com agendamentos existentes",
+              message: "Existem agendamentos neste período. Cancele-os primeiro.",
+              count: agendamentos.length
+            });
+          }
+
+          // Insere a indisponibilidade no BD
+          db.query(
+            `INSERT INTO DiasIndisponiveis 
+            (ID_Quadra, DataInicio, DataFim, Motivo, ID_Proprietario)
+            VALUES (?, ?, ?, ?, ?)`,
+            [quadraId, startDate, endDate, motivo || null, proprietarioId],
+            (err, result) => {
+              if (err) {
+                console.error("Erro ao salvar dias indisponíveis:", err);
+                return res.status(500).json({ 
+                  error: "Erro ao salvar configuração",
+                  details: process.env.NODE_ENV === 'development' ? err.message : undefined,
+                  sqlError: process.env.NODE_ENV === 'development' ? err.sqlMessage : undefined
+                });
+              }
+
+              res.json({
+                success: true,
+                message: "Dias indisponíveis configurados com sucesso",
+                indisponibilidadeId: result.insertId,
+                quadraId,
+                periodo: `${startDate} até ${endDate}`
               });
             }
           );
@@ -1393,29 +1707,352 @@ app.post('/quadra/horarios', (req, res) => {
 });
 
 
-// Rota para obter as configurações de horários de uma quadra
-app.get('/quadra/horarios/:quadraId', (req, res) => {
-  const {quadraId} = req.params;
+app.post('/quadra/verificar-indisponibilidade/:quadraId', (req, res) => {
+  const { quadraId } = req.params;
+  const { startDate, endDate } = req.body;
+
+  if (!startDate || !endDate) {
+    return res.status(400).json({ error: "Datas são obrigatórias" });
+  }
+
+  // Verifica sobreposição com dias indisponíveis existentes
+  db.query(
+    `SELECT 1 FROM DiasIndisponiveis 
+     WHERE ID_Quadra = ? 
+     AND (
+       (? BETWEEN DataInicio AND DataFim) OR
+       (? BETWEEN DataInicio AND DataFim) OR
+       (DataInicio BETWEEN ? AND ?) OR
+       (DataFim BETWEEN ? AND ?)
+     )`,
+    [quadraId, startDate, endDate, startDate, endDate, startDate, endDate],
+    (err, results) => {
+      if (err) {
+        console.error("Erro ao verificar indisponibilidade:", err);
+        return res.status(500).json({ error: "Erro ao verificar disponibilidade" });
+      }
+
+      res.json({ 
+        existeIndisponibilidade: results.length > 0,
+        mensagem: results.length > 0 ? "Já existe indisponibilidade para este período" : "Período disponível"
+      });
+    }
+  );
+});
+
+app.get('/quadra/dias-indisponiveis/:quadraId', (req, res) => {
+  const { quadraId } = req.params;
+
+  // Validação do ID da quadra
+  if (!quadraId || isNaN(quadraId)) {
+    return res.status(400).json({ error: "ID da quadra inválido" });
+  }
 
   db.query(
-    'SELECT * FROM HorariosQuadra WHERE ID_Quadra = ? ORDER BY DataInicio DESC',
+    `SELECT di.*, q.NomeQuadra 
+     FROM DiasIndisponiveis di
+     JOIN Quadra q ON di.ID_Quadra = q.ID_Quadra
+     WHERE di.ID_Quadra = ? 
+     ORDER BY di.DataInicio DESC`,
     [quadraId],
     (err, results) => {
       if (err) {
-        console.error('Erro ao obter horários:', err);
-        return res.status(500).json({ error: 'Erro ao obter horários' });
+        console.error("Erro ao obter dias indisponíveis:", err);
+        return res.status(500).json({ 
+          error: "Erro no servidor ao buscar dias indisponíveis",
+          details: process.env.NODE_ENV === 'development' ? err.message : undefined
+        });
       }
 
-      // Parse os horários que estão como JSON string
-      const parsedResults = results.map(config => ({
-        ...config,
-        Horarios: JSON.parse(config.Horarios)
-      }));  
+      try {
+        // Formata os resultados
+        const parsedResults = results.map(config => ({
+          ...config,
+          DataInicioFormatada: formatDateToBR(config.DataInicio),
+          DataFimFormatada: formatDateToBR(config.DataFim),
+          NomeQuadra: config.NomeQuadra
+        }));
+
+        res.json(parsedResults);
+      } catch (formatError) {
+        console.error("Erro ao formatar resultados:", formatError);
+        res.status(500).json({ error: "Erro ao processar dados" });
+      }
+    }
+  );
+});
+
+
+
+// Rota para verificar conflitos de agendamento
+app.get('/quadra/verificar-disponibilidade/:quadraId', (req, res) => {
+  const { quadraId } = req.params;
+  const { data } = req.query;
+
+  if (!data) {
+      return res.status(400).json({ error: "Data é obrigatória" });
+  }
+
+  // Primeiro verifica dias indisponíveis (prioridade máxima)
+  db.query(
+      `SELECT 1 FROM DiasIndisponiveis 
+       WHERE ID_Quadra = ? 
+       AND ? BETWEEN DataInicio AND DataFim`,
+      [quadraId, data],
+      (err, indisponivelResults) => {
+          if (err) {
+              console.error("Erro ao verificar disponibilidade:", err);
+              return res.status(500).json({ error: "Erro ao verificar disponibilidade" });
+          }
+
+          if (indisponivelResults.length > 0) {
+              return res.json({ 
+                  disponivel: false,
+                  motivo: "Dia marcado como indisponível pelo proprietário"
+              });
+          }
+
+          // Se não estiver indisponível, verifica agendamentos
+          db.query(
+              `SELECT 1 FROM Agendamento 
+               WHERE ID_Quadra = ? 
+               AND DATE(DataAgendamento) = ?`,
+              [quadraId, data],
+              (err, agendamentoResults) => {
+                  if (err) {
+                      console.error("Erro ao verificar agendamentos:", err);
+                      return res.status(500).json({ error: "Erro ao verificar agendamentos" });
+                  }
+
+                  res.json({ 
+                      disponivel: agendamentoResults.length === 0,
+                      motivo: agendamentoResults.length > 0 ? "Já existem agendamentos neste dia" : null
+                  });
+              }
+          );
+      }
+  );
+});
+
+
+// Função auxiliar para formatar data
+function formatDateToBR(dateString) {
+  const date = new Date(dateString);
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
+
+/// -> Rotas para Controle de Horarios e Dias Indisponiveis
+
+// Rota para deletar horários disponíveis
+app.delete("/quadra/horarios/:configId", (req, res) => {
+  const { configId } = req.params;
+  const { proprietarioId } = req.body;
+
+  // Verifica se o usuário é o proprietário
+  db.query(
+    `SELECT qp.ID_Proprietario 
+     FROM HorariosQuadra hq
+     JOIN QuadraPrivada qp ON hq.ID_Quadra = qp.ID_Quadra
+     WHERE hq.ID_Config = ?`,
+    [configId],
+    (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: "Erro ao verificar permissões" });
+      }
+
+      if (results.length === 0 || results[0].ID_Proprietario != proprietarioId) {
+        return res.status(403).json({ error: "Acesso não autorizado" });
+      }
+
+      // Deleta o registro
+      db.query(
+        `DELETE FROM HorariosQuadra WHERE ID_Config = ?`,
+        [configId],
+        (err, result) => {
+          if (err) {
+            return res.status(500).json({ error: "Erro ao deletar configuração" });
+          }
+
+          res.json({ success: true, message: "Configuração deletada com sucesso" });
+        }
+      );
+    }
+  );
+});
+
+// Rota para deletar dias indisponíveis
+app.delete("/quadra/dias-indisponiveis/:indisponibilidadeId", (req, res) => {
+  const { indisponibilidadeId } = req.params;
+  const { proprietarioId } = req.body;
+
+  // Verifica se o usuário é o proprietário
+  db.query(
+    `SELECT ID_Proprietario FROM DiasIndisponiveis WHERE ID_Indisponibilidade = ?`,
+    [indisponibilidadeId],
+    (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: "Erro ao verificar permissões" });
+      }
+
+      if (results.length === 0 || results[0].ID_Proprietario != proprietarioId) {
+        return res.status(403).json({ error: "Acesso não autorizado" });
+      }
+
+      // Deleta o registro
+      db.query(
+        `DELETE FROM DiasIndisponiveis WHERE ID_Indisponibilidade = ?`,
+        [indisponibilidadeId],
+        (err, result) => {
+          if (err) {
+            return res.status(500).json({ error: "Erro ao deletar dia indisponível" });
+          }
+
+          res.json({ success: true, message: "Dia indisponível deletado com sucesso" });
+        }
+      );
+    }
+  );
+});
+
+// Rota para obter todas as configurações de horários (para o gerenciador)
+app.get("/quadra/horarios-admin", (req, res) => {
+  const { proprietarioId } = req.query;
+
+  if (!proprietarioId) {
+    return res.status(400).json({ error: "ID do proprietário é obrigatório" });
+  }
+
+  db.query(
+    `SELECT hq.*, q.NomeQuadra 
+     FROM HorariosQuadra hq
+     JOIN QuadraPrivada qp ON hq.ID_Quadra = qp.ID_Quadra
+     JOIN Quadra q ON hq.ID_Quadra = q.ID_Quadra
+     WHERE qp.ID_Proprietario = ?
+     ORDER BY hq.DataInicio DESC`,
+    [proprietarioId],
+    (err, results) => {
+      if (err) {
+        console.error("Erro ao obter horários:", err);
+        return res.status(500).json({ error: "Erro ao obter horários" });
+      }
+
+      // Formata os resultados
+      const parsedResults = results.map((config) => {
+        return {
+          ...config,
+          DataInicioFormatada: formatDateToBR(config.DataInicio),
+          DataFimFormatada: formatDateToBR(config.DataFim),
+          Horarios: typeof config.Horarios === 'string' ? 
+                   JSON.parse(config.Horarios) : 
+                   config.Horarios,
+          PrecoFormatado: new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+          }).format(config.Preco)
+        };
+      });
 
       res.json(parsedResults);
     }
   );
 });
+
+
+// Rota para obter todos os dias indisponíveis (para o gerenciador admin)
+app.get("/quadra/dias-indisponiveis-admin", (req, res) => {
+  const { proprietarioId } = req.query;
+
+  if (!proprietarioId) {
+    return res.status(400).json({ error: "ID do proprietário é obrigatório" });
+  }
+
+  db.query(
+    `SELECT di.*, q.NomeQuadra 
+     FROM DiasIndisponiveis di
+     JOIN QuadraPrivada qp ON di.ID_Quadra = qp.ID_Quadra
+     JOIN Quadra q ON di.ID_Quadra = q.ID_Quadra
+     WHERE qp.ID_Proprietario = ?
+     ORDER BY di.DataInicio DESC`,
+    [proprietarioId],
+    (err, results) => {
+      if (err) {
+        console.error("Erro ao obter dias indisponíveis:", err);
+        return res.status(500).json({ error: "Erro ao obter dias indisponíveis" });
+      }
+
+      // Formata os resultados
+      const parsedResults = results.map((item) => ({
+        ...item,
+        DataInicioFormatada: formatDateToBR(item.DataInicio),
+        DataFimFormatada: formatDateToBR(item.DataFim),
+        NomeQuadra: item.NomeQuadra || `Quadra ${item.ID_Quadra}`
+      }));
+
+      res.json(parsedResults);
+    }
+  );
+});
+
+
+/// Sessão Reservas
+// Backend - ajuste a rota para retornar campos separados
+app.get('/proprietario/agendamentos/:proprietarioId', (req, res) => {
+  const { proprietarioId } = req.params;
+
+  db.query(`
+      SELECT 
+          a.ID_Agendamento as id,
+          u.NomeUsuario as name,
+          q.NomeQuadra as quadra,
+          q.EnderecoQuadra as endereco,
+          DATE(a.DataHoraInicio) as dia,
+          TIME(a.DataHoraInicio) as horario_inicio,
+          TIME(a.DataHoraFim) as horario_fim,
+          a.Preco,
+          sp.StatusPagamento as status
+      FROM Agendamento a
+      JOIN Quadra q ON a.ID_Quadra = q.ID_Quadra
+      JOIN QuadraPrivada qp ON q.ID_Quadra = qp.ID_Quadra
+      JOIN Usuario u ON a.ID_Usuario = u.ID_Usuario
+      JOIN StatusPagamento sp ON a.ID_StatusPagamento = sp.ID_StatusPagamento
+      WHERE qp.ID_Proprietario = ?
+      ORDER BY a.DataHoraInicio DESC
+  `, [proprietarioId], (err, results) => {
+      if (err) {
+          console.error("Erro ao buscar agendamentos:", err);
+          return res.status(500).json({ error: "Erro ao buscar agendamentos" });
+      }
+
+      // Formatar datas e preços
+      const formattedResults = results.map(agendamento => ({
+          ...agendamento,
+          dia: formatDate(agendamento.dia),
+          horario_inicio: formatTime(agendamento.horario_inicio),
+          horario_fim: formatTime(agendamento.horario_fim),
+          Preco: new Intl.NumberFormat('pt-BR', { 
+              style: 'currency', 
+              currency: 'BRL' 
+          }).format(agendamento.Preco)
+      }));
+
+      res.json(formattedResults);
+  });
+});
+
+// Funções auxiliares atualizadas
+function formatDate(dateStr) {
+  const [year, month, day] = dateStr.split('-');
+  return `${day}/${month}/${year}`;
+}
+
+function formatTime(timeStr) {
+  return timeStr.substring(0, 5); // Retorna apenas HH:MM
+}
+
 
 //Inicia o servidor
 app.listen(port, () => {

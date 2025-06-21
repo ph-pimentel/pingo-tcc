@@ -22,6 +22,24 @@ const columns = [
       width: 150,
     }, 
     {
+      field: 'TipoQuadraFisica',
+      headerName: 'Tipo Quadra',
+      width: 120,
+    },
+    {
+      field: 'Esporte',
+      headerName: 'Esporte',
+      width: 120,
+      renderCell: (params) => {
+        return params.row.Esporte || 'Não especificado';
+      },
+    },
+    {
+      field: 'Regiao',
+      headerName: 'Região',
+      width: 120,
+    },
+    {
         field: 'Cidade',
         headerName: 'Cidade',
         width: 150,
@@ -78,10 +96,13 @@ const QuadrasPub = () => {
           const quadras = data.map((quadra) => ({
             id: quadra.ID_Quadra, // id: = field da biblioteca ; quadra.ID_Quadra = do DB
             NomeQuadra: quadra.NomeQuadra,
+            TipoQuadraFisica: quadra.TipoQuadraFisica,
+            Regiao: quadra.Regiao,
             EnderecoQuadra: quadra.EnderecoQuadra,
             Cidade: quadra.Cidade,
             Bairro: quadra.Bairro,
             Foto: quadra.Foto,
+            Esporte: quadra.Esporte,
             DataCriacao: new Date(quadra.DataCriacao).toLocaleDateString('pt-BR'), // Formato BR
           }));
 
@@ -98,7 +119,7 @@ const QuadrasPub = () => {
     return (
             <div className={styles.quadrasPub}>
                 <div className={styles.info}>
-                    <h1>Quadras Publicas</h1>
+                    <h1>Quadras Públicas</h1>
                     <button className={styles.btn} onClick={()=>setOpen(true)}>Adicionar Quadra</button>
                 </div>
                 <DataTable 

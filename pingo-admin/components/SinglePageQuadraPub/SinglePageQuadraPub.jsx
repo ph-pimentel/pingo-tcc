@@ -4,6 +4,7 @@ import {
   getSingleQuadrasPub,
   updateQuadrasPub,
   atualizarFotoQuadra,
+  getQuadraEsporte
 } from "../../api";
 import styles from "./SinglePageQuadraPub.module.css";
 import AttQuadra from "../AttQuadra/AttQuadra";
@@ -15,6 +16,7 @@ const SinglePageQuadraPub = ({ activities }) => {
   const [open, setOpen] = useState(false);
   const [mensagemFoto, setMensagemFoto] = useState("");
   const [erroFoto, setErroFoto] = useState("");
+  const [esporte, setEsporte] = useState(null);
   const fileInputRef = useRef(null);
 
   const triggerFileInput = () => {
@@ -67,6 +69,9 @@ const SinglePageQuadraPub = ({ activities }) => {
       try {
         const data = await getSingleQuadrasPub(id);
         setQuadra(data.results[0]);
+
+        const esporteData = await getQuadraEsporte(id);
+      setEsporte(esporteData?.Nome || 'Não especificado');
       } catch (error) {
         console.error("Erro ao buscar quadra:", error);
       } finally {
@@ -82,16 +87,16 @@ const SinglePageQuadraPub = ({ activities }) => {
         id,
         formData.NomeQuadra || quadra.NomeQuadra,
         formData.EnderecoQuadra || quadra.EnderecoQuadra,
+        formData.Regiao || quadra.Regiao,
+        formData.TipoQuadraFisica || quadra.TipoQuadraFisica,
+        formData.Descricao || quadra.Descricao,
         formData.Bairro || quadra.Bairro,
         formData.Cidade || quadra.Cidade
       );
       //Atualiza os dados locais
       setQuadra((prev) => ({
         ...prev,
-        NomeQuadra: formData.NomeQuadra || prev.NomeQuadra,
-        EnderecoQuadra: formData.EnderecoQuadra || prev.EnderecoQuadra,
-        Bairro: formData.Bairro || prev.Bairro,
-        Cidade: formData.Cidade || prev.Cidade,
+        ...formData
       }));
       setOpen(false);
     } catch (error) {
@@ -106,6 +111,9 @@ const SinglePageQuadraPub = ({ activities }) => {
   const columns = [
     { field: "NomeQuadra", headerName: "Nome da Quadra", type: "text" },
     { field: "EnderecoQuadra", headerName: "Endereço", type: "text" },
+    { field: "Regiao", headerName: "Região", type: "text" },
+    { field: "TipoQuadraFisica", headerName: "Tipo de Quadra", type: "text" },
+    { field: "Descricao", headerName: "Descrição", type: "text" },
     { field: "Bairro", headerName: "Bairro", type: "text" },
     { field: "Cidade", headerName: "Cidade", type: "text" },
   ];
@@ -117,12 +125,16 @@ const SinglePageQuadraPub = ({ activities }) => {
           columns={columns}
           slug="Quadra"
           setOpen={setOpen}
-          onSubmit={handleUpdate} // Adicionamos uma prop para o submit
+          onSubmit={handleUpdate}
           initialData={{
+            id: quadra.ID_Quadra,
             NomeQuadra: quadra.NomeQuadra,
             EnderecoQuadra: quadra.EnderecoQuadra,
+            Regiao: quadra.Regiao,
+            TipoQuadraFisica: quadra.TipoQuadraFisica,
+            Descricao: quadra.Descricao,
             Bairro: quadra.Bairro,
-            Cidade: quadra.Cidade,
+            Cidade: quadra.Cidade
           }}
         />
       )}
@@ -167,17 +179,39 @@ const SinglePageQuadraPub = ({ activities }) => {
               <span className={styles.itemValue}>{quadra.NomeQuadra}</span>
             </div>
             <div className={styles.item}>
-              <span className={styles.itemTitle}>Endereço da Quadra:</span>
-              <span className={styles.itemValue}>{quadra.EnderecoQuadra}</span>
+                <span className={styles.itemTitle}>Região:</span>
+                <span className={styles.itemValue}>{quadra.Regiao}</span>
             </div>
             <div className={styles.item}>
-              <span className={styles.itemTitle}>Cidade:</span>
-              <span className={styles.itemValue}>{quadra.Cidade}</span>
+                <span className={styles.itemTitle}>Tipo de Quadra:</span>
+                <span className={styles.itemValue}>{quadra.TipoQuadraFisica}</span>
+            </div>
+            <div className={styles.item}>
+              <span className={styles.itemTitle}>Esporte:</span>
+              <span className={styles.itemValue}>{esporte}</span>
+            </div>
+            <div className={styles.item}>
+              <span className={styles.itemTitle}>Endereço da Quadra:</span>
+              <span className={styles.itemValue}>{quadra.EnderecoQuadra}</span>
             </div>
             <div className={styles.item}>
               <span className={styles.itemTitle}>Bairro:</span>
               <span className={styles.itemValue}>{quadra.Bairro}</span>
             </div>
+            <div className={styles.item}>
+              <span className={styles.itemTitle}>Cidade:</span>
+              <span className={styles.itemValue}>{quadra.Cidade}</span>
+            </div>
+            
+            <div className={styles.item}>
+                <span className={styles.itemTitle}>Descrição:</span>
+                <div className={styles.descriptionContent}>
+                {quadra.Descricao ? (
+                  <p className={styles.descriptionText}>{quadra.Descricao}</p>
+                ) : (
+                  <p className={styles.noDescription}>Nenhuma descrição fornecida</p>
+                )}
+              </div>            </div>
           </div>
         </div>
       </div>

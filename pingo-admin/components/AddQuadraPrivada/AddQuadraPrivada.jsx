@@ -28,22 +28,26 @@ const AddQuadraPrivada = ({columns, slug, setOpen, onSubmit, initialData}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await createQuadrasPriv(
-                formData.NomeQuadra,
-                formData.EnderecoQuadra,
-                formData.Bairro,
-                formData.Cidade,
-                formData.ValorHora,
-                formData.HorarioDisponiveis,
-                formData.Contato,
-                proprietarioId
-            );
-            setOpen(false);
-            navigate(0); //Recarrega a Pagina Atual
-        }catch (error) {
-            console.error('Erro ao criar quadra:', error)
+          await createQuadrasPriv(
+            formData.NomeQuadra,
+            formData.EnderecoQuadra,
+            formData.Bairro,
+            formData.Cidade,
+            formData.Regiao,
+            formData.TipoQuadraFisica,
+            formData.Descricao,
+            formData.HorarioDisponiveis,
+            formData.ContatoTelefone,
+            formData.ContatoEmail,
+            proprietarioId
+          );
+          setOpen(false);
+          navigate(0);
+        } catch (error) {
+          console.error('Erro ao criar quadra:', error);
         }
-    }
+      };
+    
 
   return (
     <div className={styles.add}>

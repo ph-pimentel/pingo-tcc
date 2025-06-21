@@ -4,6 +4,7 @@ import {
   atualizarFotoQuadra,
   getSingleQuadrasPriv,
   updateQuadrasPriv,
+  getQuadraEsporte,
 } from "../../api";
 import styles from "./SinglePageQuadraPriv.module.css";
 import AttQuadra from "../AttQuadra/AttQuadra";
@@ -15,6 +16,7 @@ const SinglePageQuadraPriv = () => {
   const [open, setOpen] = useState(false);
   const [mensagemFoto, setMensagemFoto] = useState("");
   const [erroFoto, setErroFoto] = useState("");
+  const [esporte, setEsporte] = useState(null);
   const fileInputRef = useRef(null);
 
   const triggerFileInput = () => {
@@ -70,6 +72,10 @@ const SinglePageQuadraPriv = () => {
         const data = await getSingleQuadrasPriv(id);
         console.log("Dados recebidos da API:", data.results[0]);
         setQuadra(data.results[0]);
+
+        // Carrega o esporte da quadra
+        const esporteData = await getQuadraEsporte(id);
+        setEsporte(esporteData?.Nome || 'Não especificado');
       } catch (error) {
         console.error("Erro ao buscar quadra:", error);
       } finally {
@@ -79,40 +85,33 @@ const SinglePageQuadraPriv = () => {
     fetchQuadra();
   }, [id]);
 
-  const handleUpdate = async (formData) => {
-    try {
-      await updateQuadrasPriv(
-        id,
-        formData.NomeQuadra || quadra.NomeQuadra,
-        formData.EnderecoQuadra || quadra.EnderecoQuadra,
-        formData.Bairro || quadra.Bairro,
-        formData.Cidade || quadra.Cidade,
-        formData.ValorHora ||
-          quadra.ValorHora.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-          }) ||
-          "Não informado.",
-        formData.HorarioDisponiveis || quadra.HorarioDisponiveis,
-        formData.Contato || quadra.Contato
-      );
-      //Atualiza os dados locais
-      setQuadra((prev) => ({
-        ...prev,
-        NomeQuadra: formData.NomeQuadra || prev.NomeQuadra,
-        EnderecoQuadra: formData.EnderecoQuadra || prev.EnderecoQuadra,
-        Bairro: formData.Bairro || prev.Bairro,
-        Cidade: formData.Cidade || prev.Cidade,
-        ValorHora: formData.ValorHora || prev.ValorHora,
-        HorarioDisponiveis:
-          formData.HorarioDisponiveis || prev.HorarioDisponiveis,
-        Contato: formData.Contato || prev.Contato,
-      }));
-      setOpen(false);
-    } catch (error) {
-      console.error("Erro ao atualizar quadra:", error);
-    }
-  };
+  
+// Atualize o handleUpdate para incluir os novos campos
+const handleUpdate = async (formData) => {
+  try {
+    await updateQuadrasPriv(
+      id,
+      formData.NomeQuadra || quadra.NomeQuadra,
+      formData.EnderecoQuadra || quadra.EnderecoQuadra,
+      formData.Bairro || quadra.Bairro,
+      formData.Cidade || quadra.Cidade,
+      formData.Regiao || quadra.Regiao,
+      formData.TipoQuadraFisica || quadra.TipoQuadraFisica,
+      formData.Descricao || quadra.Descricao,
+      formData.HorarioDisponiveis || quadra.HorarioDisponiveis,
+      formData.ContatoTelefone || quadra.ContatoTelefone,
+      formData.ContatoEmail || quadra.ContatoEmail
+    );
+    
+    setQuadra((prev) => ({
+      ...prev,
+      ...formData
+    }));
+    setOpen(false);
+  } catch (error) {
+    console.error("Erro ao atualizar quadra:", error);
+  }
+};
 
   if (loading) return <p>Carregando..</p>;
   if (!quadra) return <p>Quadra não encontrada</p>;
@@ -123,13 +122,12 @@ const SinglePageQuadraPriv = () => {
     { field: "EnderecoQuadra", headerName: "Endereço", type: "text" },
     { field: "Bairro", headerName: "Bairro", type: "text" },
     { field: "Cidade", headerName: "Cidade", type: "text" },
-    { field: "ValorHora", headerName: "Valor por Hora", type: "number" },
-    {
-      field: "HorarioDisponiveis",
-      headerName: "Horários Disponíveis",
-      type: "text",
-    },
-    { field: "Contato", headerName: "Contato", type: "text" },
+    { field: "Regiao", headerName: "Região", type: "text" },
+    { field: "TipoQuadraFisica", headerName: "Tipo de Quadra", type: "text" },
+    { field: "Descricao", headerName: "Descrição", type: "text" },
+    { field: "HorarioDisponiveis", headerName: "Horários Disponíveis", type: "text" },
+    { field: "ContatoTelefone", headerName: "Telefone", type: "text" },
+    { field: "ContatoEmail", headerName: "Email", type: "email" }
   ];
 
   return (
@@ -141,13 +139,16 @@ const SinglePageQuadraPriv = () => {
           setOpen={setOpen}
           onSubmit={handleUpdate} // Adicionamos uma prop para o submit
           initialData={{
+            id: quadra.ID_Quadra,
             NomeQuadra: quadra.NomeQuadra,
             EnderecoQuadra: quadra.EnderecoQuadra,
             Bairro: quadra.Bairro,
             Cidade: quadra.Cidade,
-            ValorHora: quadra.ValorHora,
-            HorarioDisponiveis: quadra.HorarioDisponiveis,
-            Contato: quadra.Contato,
+            Regiao: quadra.Regiao,
+            TipoQuadraFisica: quadra.TipoQuadraFisica,
+            Descricao: quadra.Descricao,
+            ContatoTelefone: quadra.ContatoTelefone,
+            ContatoEmail: quadra.ContatoEmail
           }}
         />
       )}
@@ -200,26 +201,32 @@ const SinglePageQuadraPriv = () => {
               <span className={styles.itemValue}>{quadra.EnderecoQuadra}</span>
             </div>
             <div className={styles.item}>
-              <span className={styles.itemTitle}>Cidade:</span>
-              <span className={styles.itemValue}>{quadra.Cidade}</span>
-            </div>
-            <div className={styles.item}>
               <span className={styles.itemTitle}>Bairro:</span>
               <span className={styles.itemValue}>{quadra.Bairro}</span>
             </div>
             <div className={styles.item}>
-              <span className={styles.itemTitle}>Valor por Hora:</span>
-              <span className={styles.itemValue}>R$ {quadra.ValorHora}</span>
+              <span className={styles.itemTitle}>Cidade:</span>
+              <span className={styles.itemValue}>{quadra.Cidade}</span>
             </div>
             <div className={styles.item}>
-              <span className={styles.itemTitle}>Horários Disponíveis:</span>
-              <span className={styles.itemValue}>
-                {quadra.HorarioDisponiveis}
-              </span>
+              <span className={styles.itemTitle}>Região:</span>
+              <span className={styles.itemValue}>{quadra.Regiao}</span>
             </div>
             <div className={styles.item}>
-              <span className={styles.itemTitle}>Contato:</span>
-              <span className={styles.itemValue}>{quadra.Contato}</span>
+              <span className={styles.itemTitle}>Tipo Quadra:</span>
+              <span className={styles.itemValue}>{quadra.TipoQuadraFisica}</span>
+            </div>
+            <div className={styles.item}>
+              <span className={styles.itemTitle}>Esporte:</span>
+              <span className={styles.itemValue}>{esporte}</span>
+            </div>
+            <div className={styles.item}>
+              <span className={styles.itemTitle}>Telefone:</span>
+              <span className={styles.itemValue}>{quadra.ContatoTelefone}</span>
+            </div>
+            <div className={styles.item}>
+              <span className={styles.itemTitle}>Email:</span>
+              <span className={styles.itemValue}>{quadra.ContatoEmail}</span>
             </div>
             <div className={styles.item}>
               <span className={styles.itemTitle}>Proprietario:</span>
@@ -227,6 +234,15 @@ const SinglePageQuadraPriv = () => {
                 {quadra.NomeProprietario}
               </span>
             </div>
+            <div className={styles.item}>
+                <span className={styles.itemTitle}>Descrição:</span>
+                <div className={styles.descriptionContent}>
+                {quadra.Descricao ? (
+                  <p className={styles.descriptionText}>{quadra.Descricao}</p>
+                ) : (
+                  <p className={styles.noDescription}>Nenhuma descrição fornecida</p>
+                )}
+              </div>            </div>
             <div className={styles.item}>
               <span className={styles.itemTitle}>Data Criacao:</span>
               <span className={styles.itemValue}>

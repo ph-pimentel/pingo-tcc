@@ -20,6 +20,8 @@ create table MenuItems (
 	primary key (ID_MenuItem)
 );
 
+select * from MenuItems;
+
 create table Quadra(
 	ID_Quadra int auto_increment,
     NomeQuadra varchar(50) not null,
@@ -30,7 +32,7 @@ create table Quadra(
     Foto varchar(255), -- Armazena imagem
     Cidade varchar(50),
     Bairro varchar(50),
-    DataCriacao date default current_date, -- Salva a data a partir da criacao
+    DataCriacao date default (current_date), -- Salva a data a partir da criacao
     TipoQuadra boolean default 0, -- Se for 1 é Proprietario
     primary key (ID_Quadra),
     foreign key (ID_Esporte) references Esportes(ID_Esporte)
@@ -50,6 +52,51 @@ create table QuadraPrivada(
 
 select * from QuadraPrivada;
 
+/* create table Quadra(
+	ID_Quadra int auto_increment,
+    NomeQuadra varchar(50) not null,
+    EnderecoQuadra varchar(50) not null,
+    ContatoTelefone varchar(11) null,
+    Regiao varchar(255) not null,
+    TipoQuadraFisica varchar(255) not null, -- Ex: "Campo", "Salão", "Areia"
+	ContatoEmail varchar(255) null,
+    ID_Esporte int,
+    Acessos int default 0,
+    Descricao text,
+    Foto varchar(500) null, -- Armazena imagem
+    Cidade varchar(50),
+    Bairro varchar(50),
+    DataCriacao date default (current_date), -- Salva a data a partir da criacao,
+    TipoQuadra boolean default 0, -- Se for 1 é Proprietario
+    primary key (ID_Quadra)
+); */
+/* 
+	create table QuadraPublica (
+    ID_QuadraPublica int auto_increment,
+    NomeQuadra varchar(50) not null,
+    EnderecoQuadra varchar(50) not null,
+    Regiao varchar(255) not null,
+    TipoQuadraFisica varchar(255) not null,
+    Acessos int default 0,
+    Descricao text,
+    Foto varchar(500) null, 
+    Cidade varchar(50),
+    Bairro varchar(50),
+    DataCriacao date default (current_date), 
+    TipoQuadraPublica boolean default 1, 
+    primary key (ID_QuadraPublica)
+);
+
+create table QuadraEsportes (
+    ID_Quadra int,
+    ID_Esporte int,
+    PRIMARY KEY (ID_Quadra, ID_Esporte),
+    FOREIGN KEY (ID_Quadra) REFERENCES Quadra(ID_Quadra),
+    FOREIGN KEY (ID_Esporte) REFERENCES Esportes(ID_Esporte)
+);
+
+*/
+
 
 create table Usuario(
 	ID_Usuario int auto_increment,
@@ -61,7 +108,7 @@ create table Usuario(
     Google_ID varchar(255) unique null,
     TipoUsuario varchar(20) not null 
     check (TipoUsuario in ('Proprietario', 'Funcionario', 'Admin', 'Usuario')),
-    DataCriacao date default current_date,
+    DataCriacao date default (current_date),
     primary key (ID_Usuario) 
 );
 
@@ -177,7 +224,7 @@ VALUES ('Campo de Futebol Society Bom de Bola', 'Avenida Brasil, 456', 'Excelent
 -- Obtem o ID da última quadra criada
 set @quadra_id = LAST_INSERT_ID();
 INSERT INTO QuadraPrivada (ID_Quadra, HorarioDisponiveis, ValorHora, ID_Proprietario , Contato)
-VALUES (@quadra_id, 'Seg-Sex: 08:00-23:00, Sáb-Dom: 09:00-20:00', 180.00, 1, '11323323222' )
+VALUES (@quadra_id, 'Seg-Sex: 08:00-23:00, Sáb-Dom: 09:00-20:00', 180.00, 1, '11323323222' );
 
 
 INSERT INTO Usuario (NomeUsuario, Senha, TipoUsuario, Email, FotoUsuario)

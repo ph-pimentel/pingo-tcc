@@ -7,22 +7,29 @@ import { getMinhasQuadras, obterUsuario } from '../../api';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
-    {
-        field: 'Foto', 
-        headerName: 'Foto', 
-        width: 120,
-        renderCell: (params) => (
-            <img className={styles.img} src={params.row.Foto || "../src/assets/icons/menu/quadra-2.png"} alt=""/>
-        ),
+  {
+    field: 'Foto', 
+    headerName: 'Foto', 
+    width: 120,
+    renderCell: (params) => (
+      <img className={styles.img} src={params.row.Foto || "../src/assets/icons/menu/quadra-2.png"} alt=""/>
+    ),
+  },
+  { field: 'NomeQuadra', headerName: 'Nome da Quadra', width: 150 },
+  { field: 'Cidade', headerName: 'Cidade', width: 150 },
+  { field: 'Bairro', headerName: 'Bairro', width: 150 },
+  { field: 'Regiao', headerName: 'Região', width: 150 },
+  { field: 'TipoQuadraFisica', headerName: 'Tipo de Quadra', width: 150 },
+  {
+    field: 'Esporte',
+    headerName: 'Esporte',
+    width: 120,
+    renderCell: (params) => {
+      return params.row.Esporte || 'Não especificado';
     },
-    { field: 'NomeQuadra', headerName: 'Nome da Quadra', width: 150 },
-    { field: 'Cidade', headerName: 'Cidade', width: 150 },
-    { field: 'Bairro', headerName: 'Bairro', width: 150 },
-    { field: 'ValorHora', headerName: 'Valor por Hora', width: 120 },
-    { field: 'HorarioDisponiveis', headerName: 'Horários', width: 200 },
-    { field: 'Contato', headerName: 'Contato', width: 200 },
-    { field: 'EnderecoQuadra', headerName: 'Endereço Quadra', width: 200 }
-  ];
+  },
+  { field: 'EnderecoQuadra', headerName: 'Endereço', width: 200 },
+];
 
 const MinhasQuadras = () => {
   const [open,setOpen] = useState(false)
@@ -57,9 +64,9 @@ const MinhasQuadras = () => {
     return usuario.ID_Usuario;
   };
 
-useEffect(() => {
-  const fetchQuadras = async () => {
-    try {
+  useEffect(() => {
+    const fetchQuadras = async () => {
+      try {
         const id = getProprietarioIdFromToken();
         if (!id) {
           setError('ID do proprietário não encontrado no token');
@@ -70,29 +77,31 @@ useEffect(() => {
         setProprietarioId(id);
         const data = await getMinhasQuadras(id);
         const quadras = data.map(quadra => ({
-            id: quadra.ID_Quadra,
-            NomeQuadra: quadra.NomeQuadra,
-            EnderecoQuadra: quadra.EnderecoQuadra,
-            Cidade: quadra.Cidade,
-            Bairro: quadra.Bairro,
-            Foto: quadra.Foto,
-            Contato: quadra.Contato,
-            ValorHora: quadra.ValorHora.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) || 'Não informado.',
-            HorarioDisponiveis: quadra.HorarioDisponiveis || 'Não informado.',
+          id: quadra.ID_Quadra,
+          NomeQuadra: quadra.NomeQuadra,
+          EnderecoQuadra: quadra.EnderecoQuadra,
+          Cidade: quadra.Cidade,
+          Bairro: quadra.Bairro,
+          Regiao: quadra.Regiao,
+          TipoQuadraFisica: quadra.TipoQuadraFisica,
+          Descricao: quadra.Descricao,
+          Foto: quadra.Foto,
+          ContatoTelefone: quadra.ContatoTelefone,
+          ContatoEmail: quadra.ContatoEmail,
+          Esporte: quadra.Esporte
         }));
 
         setQuadras(quadras);
-    } catch (error) {
-      console.error('Erro ao buscar as quadras:', error);
-      setError('Erro ao carregar quadras. Tente novamente.');
-    } finally {
-      setLoading(false);
-    }
-  };
+      } catch (error) {
+        console.error('Erro ao buscar as quadras:', error);
+        setError('Erro ao carregar quadras. Tente novamente.');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchQuadras();
-  
-}, []);
+    fetchQuadras();
+  }, []);
 if (loading) return <div>Carregando...</div>;
 if (error) return <div className={styles.error}>{error}</div>;
 

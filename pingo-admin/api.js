@@ -15,17 +15,21 @@ export const getQuadrasPub = async () => {
     }
 };
 
-export const createQuadrasPub = async (NomeQuadra, EnderecoQuadra, Bairro, Cidade) => {
+export const createQuadrasPub = async (NomeQuadra, EnderecoQuadra, Regiao, TipoQuadraFisica, Descricao, Cidade, Bairro) => {
     try{
         const response = await axios.post(`${API_URL}/quadraspub`, {
             NomeQuadra, 
-            EnderecoQuadra, 
-            Bairro, 
-            Cidade
+            EnderecoQuadra,
+            Regiao,
+            TipoQuadraFisica,
+            Descricao,
+            Cidade, 
+            Bairro
         });
         return response.data;
     } catch (error) {
-        console.error('Erro ao criar reserva:', error);
+        console.error('Erro ao criar reserva:', error);;
+        throw error;
     }
 };
 
@@ -40,11 +44,14 @@ export const deleteQuadraPub = async (id) => {
 };
 
 
-export const updateQuadrasPub = async (id, NomeQuadra, EnderecoQuadra, Bairro, Cidade) => {
+export const updateQuadrasPub = async (id, NomeQuadra, EnderecoQuadra, Regiao, TipoQuadraFisica, Descricao, Bairro, Cidade ) => {
     try{
         const response = await axios.put(`${API_URL}/quadraspub/att/${id}`, {
             NomeQuadra,
             EnderecoQuadra,
+            Regiao,
+            TipoQuadraFisica,
+            Descricao,
             Bairro,
             Cidade
         });
@@ -85,83 +92,124 @@ export const deleteQuadraPriv = async (id) => {
         throw error;
     }
 };
-
 export const getSingleQuadrasPriv = async (id) => {
     try {
-        console.log(`Fetching quadra with ID: ${id}`)
+        console.log(`Fetching quadra privada com ID: ${id}`);
         const response = await axios.get(`${API_URL}/quadraspriv/${id}`);
         
-        console.log('API Response:', response.data)
+        console.log('API Response:', response.data);
 
-        if (response.data.results && response.data.results.length === 0) {
+        // Verifica se a resposta contém dados (a estrutura mudou para retornar o objeto diretamente)
+        if (!response.data) {
             throw new Error('Quadra não encontrada');
         }
 
-        const quadraData = response.data.results[0];
+        const quadraData = response.data;
 
-            return {
-                results: [{
-                    ...quadraData,
-                    ValorHora: parseFloat(quadraData.ValorHora) || 0,
-                    HorarioDisponiveis: quadraData.HorarioDisponiveis || 'Não informado',
-                    Contato: quadraData.Contato || 'Não informado',
-                    DataCriacao: quadraData.DataCriacao || new Date().toISOString()
-                }]
-            };
-        } catch (error) {
-            console.error('Erro detalhado ao obter a quadra privada:', {
-                message: error.message,
-                response: error.response?.data,
-                status: error.response?.status
-        });
-        throw error;
-    }
-};
-
-
-
-export const updateQuadrasPriv = async (id, NomeQuadra, EnderecoQuadra, Bairro, Cidade, ValorHora, HorarioDisponiveis, Contato) => {
-  const response = await fetch(`http://localhost:5000/quadraspriv/att/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      NomeQuadra,
-      EnderecoQuadra,
-      Bairro,
-      Cidade,
-      ValorHora,
-      HorarioDisponiveis,
-      Contato
-    }),
-  });
-  
-  if (!response.ok) {
-    throw new Error('Erro ao atualizar quadra');
-  }
-  
-  return await response.json();
-};
-
-export const createQuadrasPriv = async (NomeQuadra, EnderecoQuadra, Bairro, Cidade, ValorHora, HorarioDisponiveis, Contato, ID_Proprietario) => {
-    try {
-        const response = await axios.post(`${API_URL}/quadrapriv/registre`, {
-            NomeQuadra,
-            EnderecoQuadra,
-            Bairro,
-            Cidade,
-            ValorHora,
-            HorarioDisponiveis,
-            Contato,
-            ID_Proprietario
-        });
-        return response.data;
+        // Formata os dados para manter compatibilidade com o frontend
+        return {
+            results: [{
+                ...quadraData,
+                // Mantemos esses campos para compatibilidade com componentes existentes
+                // Você pode remover esses mapeamentos quando atualizar todos os componentes
+                Contato: quadraData.ContatoTelefone || 'Não informado',
+                // Campos formatados
+                HorarioDisponiveis: quadraData.HorarioDisponiveis || 'Não informado',
+                DataCriacao: quadraData.DataCriacao || new Date().toISOString(),
+                // Adicionando os novos campos
+                Regiao: quadraData.Regiao || 'Não informado',
+                TipoQuadraFisica: quadraData.TipoQuadraFisica || 'Não informado',
+                Descricao: quadraData.Descricao || 'Sem descrição',
+                // Formatando contatos
+                ContatoTelefone: quadraData.ContatoTelefone || 'Não informado',
+                ContatoEmail: quadraData.ContatoEmail || 'Não informado'
+            }]
+        };
     } catch (error) {
-        console.error('Erro ao criar quadra privada:', error);
+        console.error('Erro detalhado ao obter a quadra privada:', {
+            message: error.message,
+            response: error.response?.data,
+            status: error.response?.status
+        });
         throw error;
     }
 };
+
+
+
+export const updateQuadrasPriv = async (
+    id,
+    NomeQuadra,
+    EnderecoQuadra,
+    Bairro,
+    Cidade,
+    Regiao,
+    TipoQuadraFisica,
+    Descricao,
+    HorarioDisponiveis,
+    ContatoTelefone,
+    ContatoEmail
+  ) => {
+    const response = await fetch(`http://localhost:5000/quadraspriv/att/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        NomeQuadra,
+        EnderecoQuadra,
+        Bairro,
+        Cidade,
+        Regiao,
+        TipoQuadraFisica,
+        Descricao,
+        HorarioDisponiveis,
+        ContatoTelefone,
+        ContatoEmail
+      }),
+    });
+    
+    if (!response.ok) {
+      throw new Error('Erro ao atualizar quadra');
+    }
+    
+    return await response.json();
+  };
+
+  export const createQuadrasPriv = async (
+    NomeQuadra,
+    EnderecoQuadra,
+    Bairro,
+    Cidade,
+    Regiao,
+    TipoQuadraFisica,
+    Descricao,
+    HorarioDisponiveis,
+    ContatoTelefone,
+    ContatoEmail,
+    ID_Proprietario
+  ) => {
+    try {
+      const response = await axios.post(`${API_URL}/quadrapriv/registre`, {
+        NomeQuadra,
+        EnderecoQuadra,
+        Bairro,
+        Cidade,
+        Regiao,
+        TipoQuadraFisica,
+        Descricao,
+        HorarioDisponiveis,
+        ContatoTelefone,
+        ContatoEmail,
+        ID_Proprietario
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao criar quadra privada:', error);
+      throw error;
+    }
+  };
+  
 
 
 //Sessão Usuarios BackEnd
@@ -539,3 +587,51 @@ export const getTotalUsuariosData = async () => {
 }
 };
 
+/// -> Sessão Esporte
+
+export const getEsportes = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/esportes`);
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao obter esportes:', error);
+      throw error;
+    }
+  };
+  
+  export const getQuadraEsporte = async (id) => {
+    try {
+      const response = await axios.get(`${API_URL}/quadraspub/${id}/esporte`);
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao obter esporte da quadra:', error);
+      throw error;
+    }
+  };
+  
+  export const updateQuadraEsporte = async (id, ID_Esporte) => {
+    try {
+      const response = await axios.put(`${API_URL}/quadraspub/${id}/esporte`, { ID_Esporte });
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao atualizar esporte da quadra:', error);
+      throw error;
+    }
+  };
+
+
+// Reservas
+export const getAgendamentosProprietario = async (proprietarioId) => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${API_URL}/proprietario/agendamentos/${proprietarioId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao obter agendamentos:", error);
+        throw error;
+    }
+};

@@ -24,10 +24,13 @@ const AddQuadra = ({columns, slug, setOpen, onSubmit, initialData}) => {
         e.preventDefault();
         try {
             await createQuadrasPub(
-                formData.NomeQuadra,
+                formData.NomeQuadra, 
                 formData.EnderecoQuadra,
-                formData.Bairro,
-                formData.Cidade
+                formData.Regiao,
+                formData.TipoQuadraFisica,
+                formData.Descricao,
+                formData.Cidade, 
+                formData.Bairro
             );
             setOpen(false);
             navigate(0); //Recarrega a Pagina Atual
@@ -44,9 +47,14 @@ const AddQuadra = ({columns, slug, setOpen, onSubmit, initialData}) => {
             <h1>Adicionar {slug}</h1>
             <form onSubmit={handleSubmit}>
                 {columns
-                .filter((item) => item.field !== "id" 
-                && item.field !== "Foto"
-                && item.field !== "DataCriacao")
+                .filter((item) => 
+                item.field !== "id" && 
+                item.field !== "Foto" && 
+                item.field !== "DataCriacao" && 
+                item.field !== "Acessos" && 
+                item.field !== "TipoQuadra" &&
+                item.field !== "Esporte"
+                )
                 .map((column) =>(
                     <div className={styles.item} key={column.field}>
                         <label>{column.headerName}</label>
